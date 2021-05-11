@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Admission Form",
+    "description": "Admission Form",
+    "type": "object",
+
+    "properties": {
+        "id": {
+            "description": "Admission ID",
+            "type": "string"
+        },
+        "name": {
+            "description": "Name",
+            "type": "string"
+        },
+        "age": {
+            "description": "Age",
+            "type": "integer"
+        },
+        "sex": {
+            "description": "Sex",
+            "type": "string",
+            "enum": ["male", "female", "others"]
+        },
+        "date": {
+            "description": "Date of Admission",
+            "type": "string",
+            "format": "date"
+        },
+        "ward": {
+            "description": "Ward Number",
+            "type": "string"
+        },
+        "bed": {
+            "description": "Bed Number",
+            "type": "string"
+        },
+        "status": {
+            "description": "Status",
+            "type": "string",
+            "enum": ["admitted","discharged","expired"]
+        }
+    },
+    "required": ["id"]
+}

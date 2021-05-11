@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "LFT",
+    "description": "Liver Function Test",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "tbr": {
+            "description": "Total Bilirubin",
+            "type": "number"
+        },
+        "cbr": {
+            "description": "Conjugated Bilirubin",
+            "type": "number"
+        },
+        "alb": {
+            "description": "Albumin",
+            "type": "number"
+        },
+        "glob": {
+            "description": "Globulin",
+            "type": "number"
+        },
+        "sgot": {
+            "description": "SGOT",
+            "type": "number"
+        },
+        "sgpt": {
+            "description": "SGPT",
+            "type": "number"
+        },
+        "alp": {
+            "description": "Alkaline Phosphatase",
+            "type": "number"
+        }
+    },
+    "required": []
+}

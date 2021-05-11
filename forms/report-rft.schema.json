@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "RFT",
+    "description": "Renal Function Test",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "urea": {
+            "description": "Urea",
+            "type": "number"
+        },
+        "creat": {
+            "description": "Creatinine",
+            "type": "number"
+        },
+        "na": {
+            "description": "Sodium",
+            "type": "number"
+        },
+        "k": {
+            "description": "Potassium",
+            "type": "number"
+        }
+    },
+    "required": []
+}

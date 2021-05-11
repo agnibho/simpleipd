@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Complete Hemogram",
+    "description": "Complete Hemogram",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "hb": {
+            "description": "Hemoglobin",
+            "type": "number"
+        },
+        "mcv": {
+            "description": "MCV",
+            "type": "number"
+        },
+        "mch": {
+            "description": "MCH",
+            "type": "number"
+        },
+        "mchc": {
+            "description": "MCHC",
+            "type": "number"
+        },
+        "rbc": {
+            "description": "RBC",
+            "type": "number"
+        },
+        "wbc": {
+            "description": "WBC",
+            "type": "number"
+        },
+        "n": {
+            "description": "Neutrophil",
+            "type": "number"
+        },
+        "l": {
+            "description": "Lymphocyte",
+            "type": "number"
+        },
+        "e": {
+            "description": "Eosinophil",
+            "type": "number"
+        },
+        "m": {
+            "description": "Monocyte",
+            "type": "number"
+        },
+        "b": {
+            "description": "Basophil",
+            "type": "number"
+        },
+        "plt": {
+            "description": "Platelet",
+            "type": "number"
+        }
+    },
+    "required": []
+}
