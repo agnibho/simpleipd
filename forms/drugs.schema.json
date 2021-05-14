@@ -5,7 +5,7 @@
     "type": "object",
 
     "properties": {
-        "name": {
+        "drug": {
             "description": "Name",
             "type": "string"
         },

@@ -11,8 +11,8 @@ if(!empty($_GET["pid"])){
   if(!empty($_POST["omit"])){
     $db->omitDrug($_POST["omit"]);
   }
-  elseif(!empty($_POST["name"])){
-    $db->addDrug($pid, $_POST["name"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra-note"]);
+  elseif(!empty($_POST["drug"])){
+    $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra-note"]);
   }
   $list=$db->getDrugs($pid);
   $view="<form method='post' id='omitter'></form>";
@@ -31,7 +31,7 @@ if(!empty($_GET["pid"])){
         }
       } catch(TypeError $e){}
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["name"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit.">Omit</button></td></tr>";
+    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit.">Omit</button></td></tr>";
   }
   $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
