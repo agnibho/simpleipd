@@ -25,5 +25,6 @@ if(isSet($_GET["pid"])){
         </div>
       </div>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

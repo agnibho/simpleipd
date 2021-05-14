@@ -6,7 +6,7 @@ $clinical=[];
 $reports=[];
 if(isSet($_GET["pid"])){
   $pid=$_GET["pid"];
-  $status="<div class='card'><div class='card-body'>Status: ".$db->getStatus($pid)->fetchArray()["status"]."</div></div>";
+  $status=$db->getStatus($pid)->fetchArray()["status"];
   $info=viewData($db->getAdmission($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
   $clinicalArray=$db->getAllData($pid, "clinical");
@@ -28,38 +28,45 @@ if(isSet($_GET["pid"])){
   <body>
     <div class="container">
       <h1>Patient Data</h1>
+      <div class="card">
+        <div class="card-body">
+            <a class="mb-3 btn btn-secondary" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
+            <a class="mb-3 btn btn-secondary" href="history.php?pid=<?php echo $pid;?>">Edit History</a>
+            <a class="mb-3 btn btn-secondary" href="clinical.php?pid=<?php echo $pid;?>">Add Clinical Note</a>
+            <a class="mb-3 btn btn-secondary" href="laboratory.php?pid=<?php echo $pid;?>">Add Laboratory Report</a>
+        </div>
+      </div>
       <div <?php if(empty($pid)) echo "style='display:none'";?>>
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#info">Info</a>
+        <ul class="nav nav-tabs" id="listtabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Info</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#info">History</a>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#clinical">Clinical Notes</a>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="clinical-tab" data-toggle="tab" href="#clinical" role="tab" aria-controls="clinical" aria-selected="false">Clinical Notes</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#report">Lab Reports</a>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">Lab Reports</a>
           </li>
         </ul>
-        <div id="info">
-          <?php echo $status;?>
-          <?php echo $info;?>
-          <a class="mb-3 btn btn-primary" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
+        <div class="tab-content" id="viewtabs">
+          <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <div class='card'><div class='card-body'>Status: <?php echo $status;?></div></div>
+            <?php echo $info;?>
+          </div>
+          <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+            <?php echo $history;?>
+          </div>
+          <div class="tab-pane fade" id="clinical" role="tabpanel" aria-labelledby="clinical-tab">
+            <?php foreach($clinical as $c) echo $c;?>
+          </div>
+          <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
+            <?php foreach($reports as $r) echo $r;?>
+          </div>
         </div>
-        <div id="history">
-          <?php echo $history;?>
-          <a class="mb-3 btn btn-primary" href="history.php?pid=<?php echo $pid;?>">Edit History</a>
-        </div>
-        <div id="clinical">
-          <?php foreach($clinical as $c) echo $c;?>
-          <a class="mb-3 btn btn-primary" href="clinical.php?pid=<?php echo $pid;?>">Add Clinical Note</a>
-        </div>
-        <div id="report">
-          <?php foreach($reports as $r) echo $r;?>
-          <a class="mb-3 btn btn-primary" href="laboratory.php?pid=<?php echo $pid;?>">Add Laboratory Report</a>
-        </div>
+        <hr>
         <div class="row">
           <div class="mb-2 col-md-3" id="treatment" <?php if($info=="") echo "style='display:none'";?>>
             <a class="btn btn-success btn-lg" href="treatment.php?pid=<?php echo $pid;?>">Treatment</a>
@@ -67,10 +74,10 @@ if(isSet($_GET["pid"])){
           <div class="mb-2 col-md-3" id="attachment" <?php if($info=="") echo "style='display:none'";?>>
             <a class="btn btn-primary btn-lg" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
           </div>
-          <div class="mb-2 col-md-3" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
+          <div <?php if($status!="admitted") echo "style='display:none'";?> class="mb-2 col-md-3" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
             <a class="btn btn-warning btn-lg" href="discharge.php?pid=<?php echo $pid;?>">Discharge</a>
           </div>
-          <div class="mb-2 col-md-3" id="death" <?php if($info=="") echo "style='display:none'";?>>
+          <div <?php if($status!="admitted") echo "style='display:none'";?> class="mb-2 col-md-3" id="death" <?php if($info=="") echo "style='display:none'";?>>
             <a class="btn btn-danger btn-lg" href="death.php?pid=<?php echo $pid;?>">Death</a>
           </div>
         </div>
@@ -83,5 +90,6 @@ if(isSet($_GET["pid"])){
         <button class="form-control" type="submit">View</button>
       </form>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

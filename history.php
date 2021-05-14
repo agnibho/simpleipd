@@ -27,5 +27,6 @@ else{
       <?php echo getInfo($pid);?>
       <?php echo $form;?>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

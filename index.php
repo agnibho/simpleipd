@@ -32,5 +32,6 @@ if(!empty($list)){
         </div>
       </div>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

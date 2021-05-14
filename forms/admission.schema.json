@@ -22,6 +22,10 @@
             "type": "string",
             "enum": ["male", "female", "others"]
         },
+        "bw": {
+            "description": "Weight",
+            "type": "integer"
+        },
         "date": {
             "description": "Date of Admission",
             "type": "string",

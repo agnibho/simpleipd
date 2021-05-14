@@ -32,5 +32,6 @@ if(!empty($_GET["pid"])){
       <?php echo getInfo($pid);?>
       <?php echo $form;?>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

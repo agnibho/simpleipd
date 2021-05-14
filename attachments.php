@@ -56,5 +56,6 @@ $error=$error."</p>";
         <input type="submit" value="Upload" class="mt-2 btn btn-primary">
       </form>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>

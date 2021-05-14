@@ -1,0 +1,6 @@
+.omit{
+	text-decoration: line-through;
+}
+.omit>td>button{
+	display: none;
+}

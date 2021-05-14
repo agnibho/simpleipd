@@ -62,14 +62,14 @@ class DB extends SQLite3 {
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
   }
-  function addDrug($pid, $name, $dose, $route, $frequency, $start, $duration, $addl){
+  function addDrug($pid, $name, $dose, $route, $frequency, $date, $time, $duration, $addl){
     $stmt=$this->prepare("INSERT INTO treatment (pid, name, dose, route, frequency, start, duration, omit, addl) VALUES (:pid, :name, :dose, :route, :frequency, :start, :duration, :omit, :addl);");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":name", $name);
     $stmt->bindValue(":dose", $dose);
     $stmt->bindValue(":route", $route);
     $stmt->bindValue(":frequency", $frequency);
-    $stmt->bindValue(":start", $start);
+    $stmt->bindValue(":start", strtotime($date." ".$time));
     $stmt->bindValue(":duration", $duration);
     $stmt->bindValue(":addl", $addl);
     $stmt->bindValue(":omit", false);

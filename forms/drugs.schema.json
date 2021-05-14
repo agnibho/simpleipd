@@ -21,13 +21,19 @@
             "description": "Frequency",
             "type": "string"
         },
-        "start": {
-            "description": "Start",
-            "type": "string"
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
         },
         "duration": {
             "description": "Duration",
-            "type": "string"
+            "type": "integer"
         }
     },
     "required": ["date","name"]

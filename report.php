@@ -36,5 +36,6 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
         </div>
       </div>
     </div>
+    <?php include("lib/foot.php");?>
   </body>
 </html>
