@@ -3,8 +3,13 @@ function schema2form($file, $pid=null, $id=null, $cat=null){
   global $db;
   $schema=json_decode(file_get_contents($file));
 
+  $lockpid="";
   if(!empty($pid) && !empty($id) && !empty($cat)){
     $data=json_decode($db->getData($pid, $id, $cat)->fetchArray()["data"]);
+  }
+  elseif(!empty($pid) && $file=="forms/admission.schema.json"){
+    $data=json_decode($db->getAdmission($pid)->fetchArray()["data"]);
+    $lockpid="readonly";
   }
   else{
     $data=null;
@@ -43,6 +48,9 @@ function schema2form($file, $pid=null, $id=null, $cat=null){
         $form=$form."<option>".$opt."</option>";
       }
       $form=$form."</select>";
+    }
+    elseif($field=="pid"){
+      $form=$form."<input class='form-control' ".$lockpid." ".$req." type='".$type."' name='".$field."' id='".$field."' ".$value.">";
     }
     else{
       $form=$form."<input class='form-control' ".$req." type='".$type."' name='".$field."' id='".$field."' ".$value.">";

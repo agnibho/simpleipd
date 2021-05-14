@@ -4,12 +4,20 @@ class DB extends SQLite3 {
     $this->open("data/data.db");
   }
   function admit($post){
-    $stmt=$this->prepare("INSERT INTO patients (pid, name, age, sex, addl) VALUES (:pid, :name, :age, :sex, :addl);");
+    $quer=$this->prepare("SELECT count(rowid) FROM patients WHERE pid=:pid");
+    $quer->bindValue(":pid", $post["pid"]);
+    $exist=$quer->execute();
+    if($exist->fetchArray()[0]==0){
+      $stmt=$this->prepare("INSERT INTO patients (pid, name, age, sex, data) VALUES (:pid, :name, :age, :sex, :data);");
+    }
+    else{
+      $stmt=$this->prepare("UPDATE patients SET name=:name,age=:age,sex=:sex,data=:data WHERE pid=:pid;");
+    }
     $stmt->bindValue(":pid", $post["pid"]);
     $stmt->bindValue(":name", $post["name"]);
     $stmt->bindValue(":age", $post["age"]);
     $stmt->bindValue(":sex", $post["sex"]);
-    $stmt->bindValue(":addl", json_encode($post));
+    $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
   }
   function updateHistory($post, $pid){
@@ -103,6 +111,12 @@ class DB extends SQLite3 {
       $result=$stmt->execute();
       return($result);
   }
+  function getAdmission($pid){
+      $stmt=$this->prepare("SELECT data FROM patients WHERE pid=:pid;");
+      $stmt->bindValue(":pid", $pid);
+      $result=$stmt->execute();
+      return($result);
+  }
   function getData($pid, $id, $cat){
     if($cat=="clinical"){
       $stmt=$this->prepare("SELECT data FROM clinical WHERE pid=:pid AND rowid=:id;");
@@ -110,6 +124,9 @@ class DB extends SQLite3 {
       $stmt=$this->prepare("SELECT data FROM reports WHERE pid=:pid AND rowid=:id;");
     } elseif($cat=="history"){
       $stmt=$this->prepare("SELECT data FROM patients WHERE pid=:pid AND rowid=:id;");
+    }
+    else{
+      return(false);
     }
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":id", $id);

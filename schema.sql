@@ -20,7 +20,6 @@ name text,
 age int,
 sex text,
 status text,
-addl text,
 data text
 );
 CREATE TABLE reports(

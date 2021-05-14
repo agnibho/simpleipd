@@ -1,12 +1,17 @@
 <?php
 require("lib/functions.php");
 require("lib/db.php");
-if(!empty($_POST["pid"]) && !empty($_POST["name"]) && !empty($_POST["age"]) && !empty($_POST["sex"])){
+if(!empty($_POST["pid"]) && !empty($_POST["name"])){
   $db->admit($_POST);
   //header("Location: view.php?pid=".$_POST["pid"]);
   //exit();
 }
-$form=schema2form("forms/admission.schema.json");
+if(!empty($_GET["pid"])){
+  $form=schema2form("forms/admission.schema.json", $_GET["pid"]);
+}
+else{
+  $form=schema2form("forms/admission.schema.json");
+}
 ?>
 <!DOCTYPE html>
 <html>
