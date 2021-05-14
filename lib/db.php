@@ -3,6 +3,12 @@ class DB extends SQLite3 {
   function __construct(){
     $this->open("data/data.db");
   }
+  function checkUser($username, $password){
+    $stmt=$this->prepare("SELECT hash FROM users WHERE user=:user");
+    $stmt->bindValue(":user", $username);
+    $result=$stmt->execute();
+    return(password_verify($password, $result->fetchArray()[0]));
+  }
   function admit($post){
     $quer=$this->prepare("SELECT count(rowid) FROM patients WHERE pid=:pid");
     $quer->bindValue(":pid", $post["pid"]);
@@ -76,7 +82,8 @@ class DB extends SQLite3 {
     $stmt->execute();
   }
   function omitDrug($id){
-    $stmt=$this->prepare("UPDATE treatment SET omit=:omit WHERE rowid=:id;");
+    $stmt=$this->prepare("UPDATE treatment SET end=:end,omit=:omit WHERE rowid=:id;");
+    $stmt->bindValue(":end", time());
     $stmt->bindValue(":omit", true);
     $stmt->bindValue(":id", $id);
     $stmt->execute();

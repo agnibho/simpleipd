@@ -1,6 +1,16 @@
 <?php
 require("lib/functions.php");
 require("lib/db.php");
+session_start();
+if(empty($_SESSION["user"])){
+  header("Location: login.php");
+  exit();
+}
+session_start();
+if(empty($_SESSION["user"])){
+  header("Location: login.php");
+  exit();
+}
 if(!empty($_POST["pid"]) && !empty($_POST["name"])){
   $db->admit($_POST);
   //header("Location: view.php?pid=".$_POST["pid"]);

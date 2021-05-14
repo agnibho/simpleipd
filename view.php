@@ -1,6 +1,11 @@
 <?php
 require("lib/db.php");
 require("lib/functions.php");
+session_start();
+if(empty($_SESSION["user"])){
+  header("Location: login.php");
+  exit();
+}
 $info="";
 $clinical=[];
 $reports=[];

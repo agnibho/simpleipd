@@ -45,7 +45,15 @@ dose text,
 route text,
 frequency text,
 start int,
+end int,
 duration text,
 omit boolean,
 addl text
+);
+CREATE TABLE users(
+user text,
+usergroup text,
+hash text,
+change boolean,
+last int
 );

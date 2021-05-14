@@ -1,6 +1,11 @@
 <?php
 require("lib/db.php");
 require("lib/functions.php");
+session_start();
+if(empty($_SESSION["user"])){
+  header("Location: login.php");
+  exit();
+}
 $error="<p>";
 $imgs="<div class='card mb-3'><div class='card-body'><div class='row'>";
 $pdfs="<div class='card mb-3'><div class='card-body'>";

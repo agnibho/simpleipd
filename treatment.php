@@ -1,6 +1,11 @@
 <?php
 require("lib/db.php");
 require("lib/functions.php");
+session_start();
+if(empty($_SESSION["user"])){
+  header("Location: login.php");
+  exit();
+}
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["omit"])){
