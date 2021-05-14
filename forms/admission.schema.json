@@ -5,7 +5,7 @@
     "type": "object",
 
     "properties": {
-        "id": {
+        "pid": {
             "description": "Admission ID",
             "type": "string"
         },
@@ -28,7 +28,7 @@
             "format": "date"
         },
         "ward": {
-            "description": "Ward Number",
+            "description": "Ward",
             "type": "string"
         },
         "bed": {
@@ -41,5 +41,5 @@
             "enum": ["admitted","discharged","expired"]
         }
     },
-    "required": ["id"]
+    "required": ["pid", "name", "age", "sex", "date", "ward", "bed", "status"]
 }

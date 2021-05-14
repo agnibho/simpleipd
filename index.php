@@ -1,10 +1,14 @@
 <?php
+require("lib/db.php");
 require("lib/functions.php");
-$list="";
-foreach(glob("data/*") as $id){
-  $data=json_decode(file_get_contents($id."/info.json"));
-  $id=str_replace("data/", "", $id);
-  $list=$list."<tr><td><a href='view.php?id=".$id."'>".$id."</a></td><td>".$data->name."</td><td>".$data->ward." ".$data->bed."</td></tr>";
+$list=$db->getList();
+$show="";
+if(!empty($list)){
+  while($arr=$list->fetchArray()){
+    $pid=$arr["pid"];
+    $name=$db->getName($pid)->fetchArray()["name"];
+    $show=$show."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$name."</td><td> </td></tr>";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ foreach(glob("data/*") as $id){
           <h4 class="card-title">Patient List</h4>
           <table class="table">
             <tr><th>Patient ID</th><th>Name</th><th>Bed Number</th></tr>
-            <?php echo $list;?>
+            <?php echo $show;?>
           </table>
           <a class="btn btn-primary btn-lg" href="admission.php">Add New Patient</a>
         </div>

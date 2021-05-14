@@ -1,22 +1,22 @@
 <?php
-function schema2form($file, $stamp=false, $fill=false){
+function schema2form($file, $pid=null, $id=null, $cat=null){
+  global $db;
   $schema=json_decode(file_get_contents($file));
 
-  if($fill!==false){
-    $data=json_decode(file_get_contents($fill));
+  if(!empty($pid) && !empty($id) && !empty($cat)){
+    $data=json_decode($db->getData($pid, $id, $cat)->fetchArray()["data"]);
   }
-  if($stamp===false){
-    $stamp=time()."-".rand(1000,9999);
+  else{
+    $data=null;
   }
 
   $form="<form method='post'>";
-  $form=$form."<input type='hidden' name='stamp' value='".$stamp."'>";
-  $form=$form."<input type='hidden' name='form' value='".str_replace(["forms/", ".schema.json"], "", $file)."'>";
+  $form=$form."<input type='hidden' name='form' value='".str_replace(["forms/",".schema.json"], "", $file)."'>";
 
   foreach($schema->properties as $field=>$prop){
     if($prop->type == "integer") $prop->type="number";
     if($prop->type == "string") $prop->type="text";
-    if($fill!==false){
+    if(!empty($data)){
       $value="value='".$data->$field."'";
     }
     else{
@@ -56,46 +56,29 @@ function schema2form($file, $stamp=false, $fill=false){
   return $form;
 }
 
-function view_data($file, $edit=false){
-  if(is_file($file)){
-    $data=json_decode(file_get_contents($file));
-  }
-  else{
-    return "";
-  }
+function getInfo($pid){
+  global $db;
+  $info="<table class='table'>";
+  $info=$info."<tr><td>ID</td><td>".$pid."</td></tr>";
+  $info=$info."<tr><td>Name</td><td>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
+  $info=$info."<tr><td>Age</td><td>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
+  $info=$info."<tr><td>Sex</td><td>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
+  $info=$info."</table>";
+  return $info;
+}
+
+function viewData($data, $edit=null){
+  $data=json_decode($data);
+  unset($data->cat);
   $view="<table class='table'>";
   foreach($data as $field=>$value){
     $view=$view."<tr><td>".$field."</td><td>".$value."</td></tr>";
   }
-  if($edit!==false){
-    $view=$view."<tr><td><a href='".$edit."&form=".$data->form."&stamp=".$data->stamp."'>Edit</a>";
+  if(!empty($edit)){
+    $view=$view."<tr><td><a href='".$edit."'>Edit</a>";
   }
   $view=$view."</table>";
   return $view;
-}
-
-function add_drug($file, $drug){
-  if(is_file($file)){
-    $druglist=json_decode(file_get_contents($file));
-  }
-  else{
-    $druglist=[];
-  }
-  $drug["omit"]=false;
-  array_push($druglist, $drug);
-  file_put_contents($file, json_encode($druglist));
-}
-
-function omit_drug($file, $id){
-  if(is_file($file)){
-    $druglist=json_decode(file_get_contents($file));
-    var_dump($druglist);
-    $druglist[$id]->omit=true;
-    file_put_contents($file, json_encode($druglist));
-  }
-  else{
-    echo "boo";
-  }
 }
 
 function view_drug($file){

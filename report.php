@@ -1,24 +1,24 @@
 <?php
+require("lib/db.php");
 require("lib/functions.php");
-if(isSet($_GET["id"]) && isSet($_GET["form"])){
-  if(isSet($_GET["stamp"])){
-    $form=schema2form("forms/".$_GET["form"].".schema.json", $_GET["stamp"], "data/".$_GET["id"]."/report/".$_GET["stamp"].".json");
+if(!empty($_GET["pid"]) && !empty($_GET["form"])){
+  $pid=$_GET["pid"];
+  if(!empty($_POST["date"])){
+    if(!empty($_GET["id"])){
+      $db->editReport($_POST, $pid, $_GET["id"], $_POST["form"]);
+    }
+    else{
+      $db->addReport($_POST, $pid, $_POST["form"]);
+    }
+    //header("Location: view.php?id=".$_GET["id"]);
+    //exit();
+  }
+  if(isSet($_GET["id"])){
+    $form=schema2form("forms/".$_GET["form"].".schema.json", $pid, $_GET["id"], "reports");
   }
   else{
     $form=schema2form("forms/".$_GET["form"].".schema.json");
   }
-}
-else{
-  $form="";
-}
-if(isSet($_GET["id"]) && isSet($_POST["date"])){
-  $data=json_encode($_POST);
-  if(!is_dir("data/".$_GET["id"]."/report")){
-    mkdir("data/".$_GET["id"]."/report");
-  }
-  file_put_contents("data/".$_GET["id"]."/report/".$_POST["stamp"].".json", $data);
-  header("Location: view.php?id=".$_GET["id"]);
-  exit();
 }
 ?>
 <!DOCTYPE html>

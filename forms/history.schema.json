@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "History",
+    "description": "History",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "cc": {
+            "description": "Chief complaint",
+            "type": "string"
+        },
+        "history": {
+            "description": "History",
+            "type": "string"
+        },
+        "comorb": {
+            "description": "Comorbidities",
+            "type": "string"
+        },
+        "oe": {
+            "description": "General Examination",
+            "type": "string"
+        },
+        "bp": {
+            "description": "Blood Pressure",
+            "type": "string"
+        },
+        "pr": {
+            "description": "Pulse",
+            "type": "integer"
+        },
+        "rr": {
+            "description": "Respiratory Rate",
+            "type": "integer"
+        },
+        "spo2": {
+            "description": "SpO2",
+            "type": "integer"
+        },
+        "chest": {
+            "description": "Chest Examination",
+            "type": "string"
+        },
+        "abdomen": {
+            "description": "Abdominal Examination",
+            "type": "string"
+        }
+    },
+    "required": ["date","time", "cc"]
+}

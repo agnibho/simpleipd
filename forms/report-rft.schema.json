@@ -33,5 +33,5 @@
             "type": "number"
         }
     },
-    "required": []
+    "required": ["date"]
 }

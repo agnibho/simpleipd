@@ -1,20 +1,12 @@
 <?php
 require("lib/functions.php");
-if(isSet($_POST["id"])){
-  $data=json_encode($_POST);
-  if(!is_dir("data/".$_POST["id"])){
-    mkdir("data/".$_POST["id"]);
-  }
-  file_put_contents("data/".$_POST["id"]."/info.json", $data);
-  header("Location: view.php?id=".$_POST["id"]);
-  exit();
+require("lib/db.php");
+if(!empty($_POST["pid"]) && !empty($_POST["name"]) && !empty($_POST["age"]) && !empty($_POST["sex"])){
+  $db->admit($_POST);
+  //header("Location: view.php?pid=".$_POST["pid"]);
+  //exit();
 }
-if(isSet($_GET["id"])){
-  $form=schema2form("forms/admission.schema.json", "data/".$_GET["id"]."/info.json");
-}
-else{
-  $form=schema2form("forms/admission.schema.json");
-}
+$form=schema2form("forms/admission.schema.json");
 ?>
 <!DOCTYPE html>
 <html>

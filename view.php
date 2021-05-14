@@ -1,19 +1,21 @@
 <?php
+require("lib/db.php");
 require("lib/functions.php");
-if(isSet($_GET["id"])){
-  $id=$_GET["id"];
-}
-else{
-  $id=false;
-}
-$info=view_data("data/".$id."/info.json");
+$info="";
 $clinical=[];
-foreach(glob("data/".$id."/clinical/*.json") as $f){
-  array_push($clinical, view_data($f, "clinical.php?id=".$_GET["id"]));
-}
-$report=[];
-foreach(glob("data/".$id."/report/*.json") as $f){
-  array_push($report, view_data($f, "report.php?id=".$_GET["id"]));
+$reports=[];
+if(isSet($_GET["pid"])){
+  $pid=$_GET["pid"];
+  $info=getInfo($pid);
+  $clinicalArray=$db->getAllData($pid, "clinical");
+  while($c=$clinicalArray->fetchArray()){
+    array_push($clinical, viewData($c["data"], "clinical.php?pid=".$pid."&id=".$c["rowid"]));
+  }
+  $reportsArray=$db->getAllData($pid, "reports");
+  while($r=$reportsArray->fetchArray()){
+    var_dump($r);
+    array_push($reports, viewData($r["data"], "report.php?pid=".$pid."&id=".$r["rowid"]."&form=".$db->getForm($r["rowid"])->fetchArray()["form"]));
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -25,38 +27,40 @@ foreach(glob("data/".$id."/report/*.json") as $f){
   <body>
     <div class="container">
       <h1>Patient Data</h1>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#info">Info</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#clinical">Clinical Notes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#report">Lab Reports</a>
-        </li>
-      </ul>
-      <div id="info">
-        <?php echo $info;?>
-        <a class="mb-3 btn btn-primary" href="admission.php?id=<?php echo $id;?>">Edit Information</a>
-        <div id="clinical">
-          <?php foreach($clinical as $c) echo $c;?>
-          <a class="mb-3 btn btn-primary" href="clinical.php?id=<?php echo $id;?>">Add Clinical Note</a>
+      <div <?php if(empty($pid)) echo "style='display:none'";?>>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#info">Info</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#clinical">Clinical Notes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#report">Lab Reports</a>
+          </li>
+        </ul>
+        <div id="info">
+          <?php echo $info;?>
+          <a class="mb-3 btn btn-primary" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
+          <div id="clinical">
+            <?php foreach($clinical as $c) echo $c;?>
+            <a class="mb-3 btn btn-primary" href="clinical.php?pid=<?php echo $pid;?>">Add Clinical Note</a>
+          </div>
+          <div id="report">
+            <?php foreach($reports as $r) echo $r;?>
+            <a class="mb-3 btn btn-primary" href="laboratory.php?pid=<?php echo $pid;?>">Add Laboratory Report</a>
+          </div>
+          <div id="treatment" <?php if($info=="") echo "style='display:none'";?>>
+            <a class="btn btn-success btn-lg" href="treatment.php?pid=<?php echo $pid;?>">Treatment</a>
+          </div>
         </div>
-        <div id="report">
-          <?php foreach($report as $r) echo $r;?>
-          <a class="mb-3 btn btn-primary" href="laboratory.php?id=<?php echo $id;?>">Add Laboratory Report</a>
-        </div>
-        <div id="treatment" <?php if($info=="") echo "style='display:none'";?>>
-          <a class="btn btn-success btn-lg" href="treatment.php?id=<?php echo $id;?>">Treatment</a>
-        </div>
-        <div <?php if($info!="") echo "style='display:none'";?>>
-          <h1>Please enter a valid patient ID</h1>
-          <form>
-            <input name="id">
-            <button type="submit">View</button>
-          </form>
-        </div>
+      </div>
+      <div <?php if(!empty($pid)) echo "style='display:none'";?>>
+        <h1>Please enter a valid patient ID</h1>
+        <form>
+          <input class="form-control" name="pid">
+          <button class="form-control" type="submit">View</button>
+        </form>
       </div>
     </div>
   </body>

@@ -1,10 +1,10 @@
 <?php
 require("lib/functions.php");
 $list="";
-if(isSet($_GET["id"])){
+if(isSet($_GET["pid"])){
   foreach(glob("forms/report*.json") as $file){
     $form=json_decode(file_get_contents($file));
-    $list=$list."<li class='list-group-item'><a href='report.php?id=".$_GET["id"]."&form=".str_replace(["forms/",".schema.json"], "", $file)."'>".$form->description."</a></li>";
+    $list=$list."<li class='list-group-item'><a href='report.php?pid=".$_GET["pid"]."&form=".str_replace(["forms/",".schema.json"], "", $file)."'>".$form->description."</a></li>";
   }
 }
 ?>
