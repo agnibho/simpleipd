@@ -1,5 +1,5 @@
 <?php
-function schema2form($file, $pid=null, $id=null, $cat=null){
+function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
   global $db;
   $schema=json_decode(file_get_contents($file));
 
@@ -11,8 +11,9 @@ function schema2form($file, $pid=null, $id=null, $cat=null){
     $data=json_decode($db->getAdmission($pid)->fetchArray()["data"]);
     $lockpid="readonly";
   }
-  else{
-    $data=null;
+  elseif(!empty($pid) && $file=="forms/history.schema.json"){
+    $data=json_decode($db->getHistory($pid)->fetchArray()["history"]);
+    $lockpid="readonly";
   }
 
   $form="<form method='post'>";
@@ -21,7 +22,7 @@ function schema2form($file, $pid=null, $id=null, $cat=null){
   foreach($schema->properties as $field=>$prop){
     if($prop->type == "integer") $prop->type="number";
     if($prop->type == "string") $prop->type="text";
-    if(!empty($data)){
+    if(!empty($data->$field)){
       $value="value='".$data->$field."'";
     }
     else{
@@ -71,22 +72,39 @@ function getInfo($pid){
   $info=$info."<tr><td>Name</td><td>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
   $info=$info."<tr><td>Age</td><td>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
   $info=$info."<tr><td>Sex</td><td>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
+  $info=$info."<tr><td>Bed</td><td>".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"]."</td></tr>";
+  $info=$info."<tr><td>Diagnosis</td><td>".$db->getDiagnosis($pid)->fetchArray()["diagnosis"]."</td></tr>";
   $info=$info."</table>";
   return $info;
 }
 
 function viewData($data, $edit=null){
-  $data=json_decode($data);
-  unset($data->cat);
-  $view="<table class='table'>";
-  foreach($data as $field=>$value){
-    $view=$view."<tr><td>".$field."</td><td>".$value."</td></tr>";
+  if(!empty($data)){
+    $data=json_decode($data);
+    if(!empty($data->form)){
+      $schema=json_decode(file_get_contents("forms/".$data->form.".schema.json"));
+    }
+    unset($data->cat);
+    $view="<table class='table'>";
+    foreach($data as $field=>$value){
+      if($field!="form"){
+        if(!empty($schema->properties->$field)){
+          $view=$view."<tr><td>".$schema->properties->$field->description."</td><td>".$value."</td></tr>";
+        }
+        else{
+          $view=$view."<tr><td>".$field."</td><td>".$value."</td></tr>";
+        }
+      }
+    }
+    if(!empty($edit)){
+      $view=$view."<tr><td><a href='".$edit."'>Edit</a>";
+    }
+    $view=$view."</table>";
+    return $view;
   }
-  if(!empty($edit)){
-    $view=$view."<tr><td><a href='".$edit."'>Edit</a>";
+  else{
+    return "";
   }
-  $view=$view."</table>";
-  return $view;
 }
 
 function view_drug($file){

@@ -7,7 +7,8 @@ if(!empty($list)){
   while($arr=$list->fetchArray()){
     $pid=$arr["pid"];
     $name=$db->getName($pid)->fetchArray()["name"];
-    $show=$show."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$name."</td><td> </td></tr>";
+    $bed=$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"];
+    $show=$show."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$bed."</td><td>".$name."</td></tr>";
   }
 }
 ?>
@@ -24,7 +25,7 @@ if(!empty($list)){
         <div class="card-body">
           <h4 class="card-title">Patient List</h4>
           <table class="table">
-            <tr><th>Patient ID</th><th>Name</th><th>Bed Number</th></tr>
+            <tr><th>Patient ID</th><th>Bed Number</th><th>Name</th></tr>
             <?php echo $show;?>
           </table>
           <a class="btn btn-primary btn-lg" href="admission.php">Add New Patient</a>

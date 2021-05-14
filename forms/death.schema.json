@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Death Note",
+    "description": "Death Note",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "diagnosis": {
+            "description": "Diagnosis",
+            "type": "string"
+        },
+        "cause1": {
+            "description": "Cause of Death 1",
+            "type": "string"
+        },
+        "cause2": {
+            "description": "Cause of Death 2",
+            "type": "string"
+        },
+        "cause3": {
+            "description": "Cause of Death 3",
+            "type": "string"
+        }
+    },
+    "required": ["date","time","diagnosis"]
+}

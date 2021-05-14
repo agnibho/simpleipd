@@ -4,13 +4,13 @@ require("lib/functions.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["cc"])){
-    $db->history($_POST, $pid);
+    $db->updateHistory($_POST, $pid);
     //header("Location: view.php?pid=".$pid);
     //exit();
   }
 }
-if(isSet($_GET["stamp"])){
-    $form=schema2form("forms/clinical.schema.json", $_GET["stamp"], "data/".$_GET["id"]."/clinical/".$_GET["stamp"].".json");
+if(!empty($_GET["pid"])){
+  $form=schema2form("forms/history.schema.json", $_GET["pid"]);
 }
 else{
   $form=schema2form("forms/history.schema.json");

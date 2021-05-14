@@ -35,10 +35,13 @@
             "description": "Bed Number",
             "type": "string"
         },
-        "status": {
-            "description": "Status",
-            "type": "string",
-            "enum": ["admitted","discharged","expired"]
+        "diagnosis": {
+            "description": "Diagnosis",
+            "type": "string"
+        },
+        "summary": {
+            "description": "Summary",
+            "type": "string"
         }
     },
     "required": ["pid", "name", "age", "sex", "date", "ward", "bed", "status"]
