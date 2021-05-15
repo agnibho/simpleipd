@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Lipid Profile",
+    "description": "Lipid Profile",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "ldl": {
+            "description": "LDL",
+            "type": "number"
+        },
+        "hdl": {
+            "description": "HDL",
+            "type": "number"
+        },
+        "tgl": {
+            "description": "Triglyceride",
+            "type": "number"
+        },
+        "chol": {
+            "description": "Cholesterol",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

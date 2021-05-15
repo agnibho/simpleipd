@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Urine RE",
+    "description": "Urine RE",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "description": {
+            "description": "Description",
+            "type": "string"
+        },
+        "albumin": {
+            "description": "Albumin",
+            "type": "string"
+        },
+        "ketone": {
+            "description": "Ketone Body",
+            "type": "string"
+        },
+        "rbc": {
+            "description": "RBC cells",
+            "type": "string"
+        },
+        "pus": {
+            "description": "Pus cells",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Stool for Ova",
+    "description": "Stool for Ova",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "description": {
+            "description": "Description",
+            "type": "string"
+        },
+        "ova": {
+            "description": "Ova",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

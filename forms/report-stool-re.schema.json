@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Stool RE",
+    "description": "Stool RE",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "description": {
+            "description": "Description",
+            "type": "string"
+        },
+        "obt": {
+            "description": "OBT",
+            "type": "string"
+        },
+        "opc": {
+            "description": "Ova Parasite Cyst",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

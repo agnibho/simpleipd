@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "D-Dimer",
+    "description": "D-Dimer",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "ddimer": {
+            "description": "D-Dimer",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

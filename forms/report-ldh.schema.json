@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "LDH",
+    "description": "LDH",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "ldh": {
+            "description": "LDH",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

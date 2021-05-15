@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Glycemic Status",
+    "description": "Glycemic Status",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+
+        "fbs": {
+            "description": "FBS",
+            "type": "number"
+        },
+        "ppbs": {
+            "description": "PPBS",
+            "type": "number"
+        },
+        "hba1c": {
+            "description": "HbA1C",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

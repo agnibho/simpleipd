@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "ABG",
+    "description": "ABG",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "ph": {
+            "description": "pH",
+            "type": "number"
+        },
+        "pao2": {
+            "description": "PaO2",
+            "type": "number"
+        },
+        "paco2": {
+            "description": "PaCO2",
+            "type": "number"
+        },
+        "hco3": {
+            "description": "HCO3",
+            "type": "number"
+        },
+        "na": {
+            "description": "Na",
+            "type": "number"
+        },
+        "k": {
+            "description": "K",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

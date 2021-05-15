@@ -9,6 +9,10 @@
             "description": "Admission ID",
             "type": "string"
         },
+        "srfid": {
+            "description": "SRF ID",
+            "type": "string"
+        },
         "name": {
             "description": "Name",
             "type": "string"

@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Fluid Study",
+    "description": "Fluid Study",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "fluid": {
+            "description": "Fluid",
+            "type": "string",
+            "enum": ["pleural fluid", "ascitic fluid", "csf", "other"]
+        },
+        "cellCount": {
+            "description": "Cell Count",
+            "type": "integer"
+        },
+        "cellType": {
+            "description": "Cell Type",
+            "type": "string"
+        },
+        "protein": {
+            "description": "Protein",
+            "type": "integer"
+        },
+        "sugar": {
+            "description": "Sugar",
+            "type": "integer"
+        },
+        "ldh": {
+            "description": "LDH",
+            "type": "integer"
+        },
+        "gram": {
+            "description": "Gram Stain",
+            "type": "string"
+        },
+        "afb": {
+            "description": "AFB Stain",
+            "type": "string"
+        },
+        "fungal": {
+            "description": "Fungal Stain",
+            "type": "string"
+        },
+        "cs": {
+            "description": "Culture/Sensitivity",
+            "type": "string"
+        },
+        "cbnaat": {
+            "description": "CBNAAT",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}
