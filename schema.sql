@@ -1,8 +1,4 @@
-CREATE TABLE clinical(
-pid int,
-time int,
-data text
-);
+
 CREATE TABLE death(
 pid int,
 time int,
@@ -16,6 +12,11 @@ route text,
 frequency text,
 duration text,
 addl text
+);
+CREATE TABLE nursing(
+pid int,
+time int,
+data text
 );
 CREATE TABLE patients(
 pid int unique,
@@ -31,6 +32,11 @@ ward text,
 bed int,
 data text,
 history text
+);
+CREATE TABLE physician(
+pid int,
+time int,
+data text
 );
 CREATE TABLE reports(
 pid int,

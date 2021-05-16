@@ -43,15 +43,30 @@ class DB extends SQLite3 {
     $stmt->bindValue(":pid", $pid);
     $stmt->execute();
   }
-  function addClinical($post, $pid){
-    $stmt=$this->prepare("INSERT INTO clinical (pid, time, data) VALUES (:pid, :time, :data);");
+  function addPhysician($post, $pid){
+    $stmt=$this->prepare("INSERT INTO physician (pid, time, data) VALUES (:pid, :time, :data);");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
   }
-  function editClinical($post, $pid, $id){
-    $stmt=$this->prepare("UPDATE clinical SET time=:time,data=:data WHERE pid=:pid AND rowid=:id;");
+  function editPhysician($post, $pid, $id){
+    $stmt=$this->prepare("UPDATE physician SET time=:time,data=:data WHERE pid=:pid AND rowid=:id;");
+    $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":id", $id);
+    $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    $stmt->bindValue(":data", json_encode($post));
+    $stmt->execute();
+  }
+  function addNursing($post, $pid){
+    $stmt=$this->prepare("INSERT INTO nursing (pid, time, data) VALUES (:pid, :time, :data);");
+    $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    $stmt->bindValue(":data", json_encode($post));
+    $stmt->execute();
+  }
+  function editNursing($post, $pid, $id){
+    $stmt=$this->prepare("UPDATE nursing SET time=:time,data=:data WHERE pid=:pid AND rowid=:id;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":id", $id);
     $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
@@ -203,8 +218,10 @@ class DB extends SQLite3 {
       return($result);
   }
   function getData($pid, $id, $cat){
-    if($cat=="clinical"){
-      $stmt=$this->prepare("SELECT data FROM clinical WHERE pid=:pid AND rowid=:id;");
+    if($cat=="physician"){
+      $stmt=$this->prepare("SELECT data FROM physician WHERE pid=:pid AND rowid=:id;");
+    } elseif($cat=="nursing"){
+      $stmt=$this->prepare("SELECT data FROM nursing WHERE pid=:pid AND rowid=:id;");
     } elseif($cat=="reports"){
       $stmt=$this->prepare("SELECT data FROM reports WHERE pid=:pid AND rowid=:id;");
     } else{
@@ -216,8 +233,10 @@ class DB extends SQLite3 {
     return($result);
   }
   function getAllData($pid, $cat){
-    if($cat=="clinical"){
-      $stmt=$this->prepare("SELECT rowid,data FROM clinical WHERE pid=:pid;");
+    if($cat=="physician"){
+      $stmt=$this->prepare("SELECT rowid,data FROM physician WHERE pid=:pid;");
+    } elseif($cat=="nursing"){
+      $stmt=$this->prepare("SELECT rowid,data FROM nursing WHERE pid=:pid;");
     } elseif($cat=="reports"){
       $stmt=$this->prepare("SELECT rowid,data FROM reports WHERE pid=:pid;");
     } elseif($cat=="info"){

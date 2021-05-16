@@ -10,19 +10,19 @@ if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["date"]) && !empty($_POST["time"])){
     if(!empty($_GET["id"])){
-      $db->editClinical($_POST, $pid, $_GET["id"]);
+      $db->editNursing($_POST, $pid, $_GET["id"]);
     }
     else{
-      $db->addClinical($_POST, $pid);
+      $db->addNursing($_POST, $pid);
     }
     //header("Location: view.php?id=".$_GET["id"]);
     //exit();
   }
   if(isSet($_GET["id"])){
-    $form=schema2form("forms/clinical.schema.json", $pid, $_GET["id"], "clinical");
+    $form=schema2form("forms/nursing.schema.json", $pid, $_GET["id"], "clinical");
   }
   else{
-    $form=schema2form("forms/clinical.schema.json");
+    $form=schema2form("forms/nursing.schema.json");
   }
 }
 ?>
@@ -30,7 +30,7 @@ if(!empty($_GET["pid"])){
 <html>
   <head>
     <?php include("lib/head.php");?>
-    <title>Clinical Notes</title>
+    <title>Nursing Notes</title>
   </head>
   <body>
     <div class="container">

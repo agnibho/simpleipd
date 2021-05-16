@@ -7,16 +7,21 @@ if(empty($_SESSION["user"])){
   exit();
 }
 $info="";
-$clinical=[];
+$physician=[];
+$nursing=[];
 $reports=[];
 if(isSet($_GET["pid"])){
   $pid=$_GET["pid"];
   $status=$db->getStatus($pid)->fetchArray()["status"];
   $info=viewData($db->getAdmission($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
-  $clinicalArray=$db->getAllData($pid, "clinical");
-  while($c=$clinicalArray->fetchArray()){
-    array_push($clinical, viewData($c["data"], "clinical.php?pid=".$pid."&id=".$c["rowid"]));
+  $physicianArray=$db->getAllData($pid, "physician");
+  while($c=$physicianArray->fetchArray()){
+    array_push($physician, viewData($c["data"], "physician.php?pid=".$pid."&id=".$c["rowid"]));
+  }
+  $nursingArray=$db->getAllData($pid, "nursing");
+  while($c=$nursingArray->fetchArray()){
+    array_push($nursing, viewData($c["data"], "nursing.php?pid=".$pid."&id=".$c["rowid"]));
   }
   $reportsArray=$db->getAllData($pid, "reports");
   while($r=$reportsArray->fetchArray()){
@@ -37,7 +42,8 @@ if(isSet($_GET["pid"])){
         <div class="card-body">
             <a class="mb-3 btn btn-secondary" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
             <a class="mb-3 btn btn-secondary" href="history.php?pid=<?php echo $pid;?>">Edit History</a>
-            <a class="mb-3 btn btn-secondary" href="clinical.php?pid=<?php echo $pid;?>">Add Clinical Note</a>
+            <a class="mb-3 btn btn-secondary" href="physician.php?pid=<?php echo $pid;?>">Add Physician Note</a>
+            <a class="mb-3 btn btn-secondary" href="nursing.php?pid=<?php echo $pid;?>">Add Nursing Note</a>
             <a class="mb-3 btn btn-secondary" href="laboratory.php?pid=<?php echo $pid;?>">Add Laboratory Report</a>
         </div>
       </div>
@@ -50,7 +56,10 @@ if(isSet($_GET["pid"])){
             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="clinical-tab" data-toggle="tab" href="#clinical" role="tab" aria-controls="clinical" aria-selected="false">Clinical Notes</a>
+            <a class="nav-link" id="physician-tab" data-toggle="tab" href="#physician" role="tab" aria-controls="physician" aria-selected="false">Physician Notes</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="nursing-tab" data-toggle="tab" href="#nursing" role="tab" aria-controls="clinical" aria-selected="false">Nursing Notes</a>
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">Lab Reports</a>
@@ -64,8 +73,11 @@ if(isSet($_GET["pid"])){
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
           </div>
-          <div class="tab-pane fade" id="clinical" role="tabpanel" aria-labelledby="clinical-tab">
-            <?php foreach($clinical as $c) echo $c;?>
+          <div class="tab-pane fade" id="physician" role="tabpanel" aria-labelledby="physician-tab">
+            <?php foreach($physician as $p) echo $p;?>
+          </div>
+          <div class="tab-pane fade" id="nursing" role="tabpanel" aria-labelledby="nursing-tab">
+            <?php foreach($nursing as $n) echo $n;?>
           </div>
           <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
             <?php foreach($reports as $r) echo $r;?>

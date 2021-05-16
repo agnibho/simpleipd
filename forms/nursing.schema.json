@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "Clinical Notes",
+    "description": "Clinical Notes",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "status": {
+            "description": "Status",
+            "type": "string"
+        },
+        "intake": {
+            "description": "Intake",
+            "type": "string"
+        },
+        "output": {
+            "description": "Output",
+            "type": "string"
+        },
+        "bp": {
+            "description": "Blood Pressure",
+            "type": "string"
+        },
+        "pr": {
+            "description": "Pulse",
+            "type": "integer"
+        },
+        "rr": {
+            "description": "Respiratory Rate",
+            "type": "integer"
+        },
+        "spo2": {
+            "description": "SpO2",
+            "type": "integer"
+        }
+    },
+    "required": ["date","time"]
+}
