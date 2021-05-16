@@ -52,5 +52,5 @@
             "type": "string"
         }
     },
-    "required": ["pid", "name", "age", "sex", "date", "ward", "bed", "status"]
+    "required": ["pid", "name", "age", "sex", "date"]
 }

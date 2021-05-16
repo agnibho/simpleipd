@@ -1,0 +1,24 @@
+#! /bin/env php
+<?php
+$db=new SQLite3("data/data.db");
+if(!empty($_SERVER["argv"][1]) && !empty($_SERVER["argv"][2]) && !empty($_SERVER["argv"][3])){
+  $stmt=$db->prepare("SELECT * FROM users WHERE user=:user");
+  $stmt->bindValue(":user",$_SERVER["argv"][1]);
+  if($stmt->execute()->fetchArray()){
+    $stmt=$db->prepare("UPDATE users SET usergroup=:usergroup,hash=:hash WHERE user=:user");
+    $stmt->bindValue(":user", $_SERVER["argv"][1]);
+    $stmt->bindValue(":hash", password_hash($_SERVER["argv"][3], PASSWORD_DEFAULT));
+    $stmt->execute();
+  }
+  else{
+    $stmt=$db->prepare("INSERT INTO users (user,usergroup,hash) VALUES (:user,:usergroup,:hash)");
+    $stmt->bindValue(":user", $_SERVER["argv"][1]);
+    $stmt->bindValue(":usergroup", $_SERVER["argv"][2]);
+    $stmt->bindValue(":hash", password_hash($_SERVER["argv"][3], PASSWORD_DEFAULT));
+    $stmt->execute();
+  }
+}
+else{
+  echo "Plese enter an username and password for entry into the DB\n";
+}
+?>

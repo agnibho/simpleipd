@@ -40,7 +40,7 @@ data text
 );
 CREATE TABLE treatment(
 pid int,
-name text,
+drug text,
 dose text,
 route text,
 frequency text,
@@ -51,7 +51,7 @@ omit boolean,
 addl text
 );
 CREATE TABLE users(
-user text,
+user text unique,
 usergroup text,
 hash text,
 change boolean,

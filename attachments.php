@@ -7,22 +7,17 @@ if(empty($_SESSION["user"])){
   exit();
 }
 $error="<p>";
-$imgs="<div class='card mb-3'><div class='card-body'><div class='row'>";
+$imgs="<div class='card mb-3 w-100'><div class='card-body'><div class='row'>";
 $pdfs="<div class='card mb-3'><div class='card-body'>";
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_FILES)){
-    if($_FILES["upload"]["size"]<8000000){
-      if(in_array($_FILES["upload"]["type"], ["image/jpeg", "image/jpg", "image/png", "image/gif", "application/pdf"])){
-        $fname=str_replace("/", "", $pid)."-".time()."-".rand(1000,9999).".".pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
-        move_uploaded_file($_FILES["upload"]["tmp_name"], "data/attachments/".$fname);
-      }
-      else{
-        $error=$error."Only jpg, png, gif, pdf files are supported.";
-      }
+    if(in_array($_FILES["upload"]["type"], ["image/jpeg", "image/jpg", "image/png", "image/gif", "application/pdf"])){
+      $fname=str_replace("/", "", $pid)."-".time()."-".rand(1000,9999).".".pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
+      move_uploaded_file($_FILES["upload"]["tmp_name"], "data/attachments/".$fname);
     }
     else{
-        $error=$error."Maximum filesize exceeded. File upload failed";
+      $error=$error."Only jpg, png, gif, pdf files are supported.";
     }
   }
 
@@ -32,7 +27,7 @@ if(!empty($_GET["pid"])){
     }
     else{
       preg_match("/-([0-9]+)-/", pathinfo($attach, PATHINFO_FILENAME), $orig);
-      $imgs=$imgs."<div class='col-md-6'><figure><img class='w-100' src='".$attach."'><figcaption>Uploaded on: ".date("M d, Y h:i a", $orig[1])."</figcaption></figure></div>";
+      $imgs=$imgs."<div class='col-md-6'><figure><a href='".$attach."'><img class='w-100' src='".$attach."'></a><figcaption>Uploaded on: ".date("M d, Y h:i a", $orig[1])."</figcaption></figure></div>";
     }
   }
 }
@@ -57,6 +52,7 @@ $error=$error."</p>";
       </div>
       <?php echo $error;?>
       <form method="post" enctype="multipart/form-data">
+        <label for="upload">Select file to upload. JPG, PNG, GIF and PDF files are supported. Size limit: <span id="size-limit"><?php echo str_replace("M", "MB", ini_get("upload_max_filesize"));?></span><span id="upload-error"></span></label>
         <input type="file" name="upload" id="upload" class="form-control">
         <input type="submit" value="Upload" class="mt-2 btn btn-primary">
       </form>

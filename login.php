@@ -3,7 +3,7 @@ require("lib/db.php");
 require("lib/functions.php");
 session_start();
 $error="";
-if($_GET["action"]=="logout"){
+if(!empty($_GET["action"]) && $_GET["action"]=="logout"){
   $_SESSION["user"]=null;
 }
 if(!empty($_POST["username"]) && !empty($_POST["password"])){

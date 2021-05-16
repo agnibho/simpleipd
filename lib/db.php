@@ -7,7 +7,13 @@ class DB extends SQLite3 {
     $stmt=$this->prepare("SELECT hash FROM users WHERE user=:user");
     $stmt->bindValue(":user", $username);
     $result=$stmt->execute();
-    return(password_verify($password, $result->fetchArray()[0]));
+    $hash=$result->fetchArray();
+    if($hash){
+      return(password_verify($password, $hash["hash"]));
+    }
+    else{
+      return(false);
+    }
   }
   function admit($post){
     $quer=$this->prepare("SELECT count(rowid) FROM patients WHERE pid=:pid");
@@ -68,10 +74,10 @@ class DB extends SQLite3 {
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
   }
-  function addDrug($pid, $name, $dose, $route, $frequency, $date, $time, $duration, $addl){
-    $stmt=$this->prepare("INSERT INTO treatment (pid, name, dose, route, frequency, start, duration, omit, addl) VALUES (:pid, :name, :dose, :route, :frequency, :start, :duration, :omit, :addl);");
+  function addDrug($pid, $drug, $dose, $route, $frequency, $date, $time, $duration, $addl){
+    $stmt=$this->prepare("INSERT INTO treatment (pid, drug, dose, route, frequency, start, duration, omit, addl) VALUES (:pid, :drug, :dose, :route, :frequency, :start, :duration, :omit, :addl);");
     $stmt->bindValue(":pid", $pid);
-    $stmt->bindValue(":name", $name);
+    $stmt->bindValue(":drug", $drug);
     $stmt->bindValue(":dose", $dose);
     $stmt->bindValue(":route", $route);
     $stmt->bindValue(":frequency", $frequency);
