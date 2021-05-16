@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "D-Dimer",
+    "title": "d_dimer",
     "description": "D-Dimer",
     "type": "object",
 

@@ -15,6 +15,9 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
     else{
       $db->addReport($_POST, $pid, $_POST["form"]);
     }
+    if(!empty($_GET["req"])){
+      $db->omitRequisition($_GET["req"]);
+    }
     //header("Location: view.php?id=".$_GET["id"]);
     //exit();
   }

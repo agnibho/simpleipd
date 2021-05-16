@@ -15,9 +15,7 @@ if(!empty($_GET["pid"])){
     $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra-note"]);
   }
   $list=$db->getDrugs($pid);
-  $view="<form method='post' id='omitter'></form>";
-  $view=$view."<table class='table'>";
-  $view=$view."<tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th></tr>";
+  $view="";
   while($drug=$list->fetchArray()){
     if($drug["omit"]){
       $omit="omit";
@@ -31,7 +29,7 @@ if(!empty($_GET["pid"])){
         }
       } catch(TypeError $e){}
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit.">Omit</button></td></tr>";
+    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button type='submit' class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit.">Omit</button></td></tr>";
   }
   $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
@@ -48,7 +46,11 @@ if(!empty($_GET["pid"])){
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">Medicine List</h4>
-          <?php echo $view;?>
+          <form method='post' id='omitter'></form>
+          <table class="table">
+            <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th></th></tr>
+            <?php echo $view;?>
+          </table>
         </div>
       </div>
       <?php echo $form;?>

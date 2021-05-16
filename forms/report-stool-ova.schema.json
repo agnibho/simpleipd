@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Stool for Ova",
+    "title": "stool_ova",
     "description": "Stool for Ova",
     "type": "object",
 

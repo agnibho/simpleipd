@@ -44,6 +44,15 @@ time int,
 form text,
 data text
 );
+CREATE TABLE requisition(
+pid int,
+test text,
+time int,
+room text,
+sample text,
+form text,
+status text
+);
 CREATE TABLE treatment(
 pid int,
 drug text,

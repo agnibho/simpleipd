@@ -45,6 +45,7 @@ if(isSet($_GET["pid"])){
             <a class="mb-3 btn btn-secondary" href="physician.php?pid=<?php echo $pid;?>">Add Physician Note</a>
             <a class="mb-3 btn btn-secondary" href="nursing.php?pid=<?php echo $pid;?>">Add Nursing Note</a>
             <a class="mb-3 btn btn-secondary" href="laboratory.php?pid=<?php echo $pid;?>">Add Laboratory Report</a>
+            <a class="mb-3 btn btn-secondary" href="requisition.php?pid=<?php echo $pid;?>">Add Requisition</a>
         </div>
       </div>
       <div <?php if(empty($pid)) echo "style='display:none'";?>>

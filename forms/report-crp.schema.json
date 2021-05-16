@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "CRP",
+    "title": "crp",
     "description": "CRP",
     "type": "object",
 

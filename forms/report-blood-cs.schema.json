@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Blood CS",
+    "title": "blood_cs",
     "description": "Blood CS",
     "type": "object",
 

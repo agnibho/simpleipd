@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Clinical Notes",
-    "description": "Clinical Notes",
+    "title": "nursing",
+    "description": "Nursing Notes",
     "type": "object",
 
     "properties": {

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Sputum ME",
+    "title": "sputum_me",
     "description": "Sputum ME",
     "type": "object",
 

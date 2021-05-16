@@ -2,19 +2,28 @@
 require("lib/db.php");
 require("lib/functions.php");
 session_start();
+var_dump($_SESSION);
 if(empty($_SESSION["user"])){
   header("Location: login.php");
   exit();
 }
-$list=$db->getList();
-$show="";
-if(!empty($list)){
-  while($arr=$list->fetchArray()){
-    $pid=$arr["pid"];
-    $name=$db->getName($pid)->fetchArray()["name"];
-    $bed=$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"];
-    $show=$show."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$bed."</td><td>".$name."</td></tr>";
+$list=$db->getPatientList();
+$showList="";
+while($arr=$list->fetchArray()){
+  $pid=$arr["pid"];
+  $showList=$showList."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$arr["ward"]."-".$arr["bed"]."</td><td>".$arr["name"]."</td><td>".$arr["diagnosis"]."</tr>";
+}
+$reqs=$db->getRequisitionList();
+$showReqs="";
+while($arr=$reqs->fetchArray()){
+  $pid=$arr["pid"];
+  if(!empty($arr["form"])){
+    $test="<a href='report.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."'>".$arr["test"]."</a>";
   }
+  else{
+    $test="<a href='report.php?pid=".$pid."&form=report-other&req=".$arr["rowid"]."'>".$arr["test"]."</a>";
+  }
+  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["room"]."</td><td>".date("M j, Y", $arr["time"])."</td><td><a href='view.php?pid=".$pid."'>".$pid."</a></td></tr>";
 }
 ?>
 <!DOCTYPE html>
@@ -30,10 +39,19 @@ if(!empty($list)){
         <div class="card-body">
           <h4 class="card-title">Patient List</h4>
           <table class="table">
-            <tr><th>Patient ID</th><th>Bed Number</th><th>Name</th></tr>
-            <?php echo $show;?>
+            <tr><th>Patient ID</th><th>Bed Number</th><th>Name</th><th>Diagnosis</th></tr>
+            <?php echo $showList;?>
           </table>
           <a class="btn btn-primary btn-lg" href="admission.php">Add New Patient</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Requisition List</h4>
+          <table class="table">
+            <tr><th>Test Needed</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
+            <?php echo $showReqs;?>
+          </table>
         </div>
       </div>
     </div>

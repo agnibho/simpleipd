@@ -109,14 +109,13 @@ class DB extends SQLite3 {
     $stmt->bindValue(":id", $id);
     $stmt->execute();
   }
-  function addRequisition($pid, $test, $date, $time, $room, $form){
-    $stmt=$this->prepare("INSERT INTO requisition (pid, test, time, room, form, status) VALUES (:pid, :test, :time, :room, :form, :status);");
+  function addRequisition($pid, $test, $date, $time, $room){
+    $stmt=$this->prepare("INSERT INTO requisition (pid, test, time, room, sample, status) VALUES (:pid, :test, :time, :room, :sample, :status);");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":test", $test);
     $stmt->bindValue(":time", strtotime($date." ".$time));
     $stmt->bindValue(":room", $room);
-    $stmt->bindValue(":form", $form);
-    $stmt->bindValue(":status", "active");
+    $stmt->bindValue(":status", "sent");
     $stmt->execute();
   }
   function omitRequisition($id){
@@ -163,9 +162,8 @@ class DB extends SQLite3 {
     return($result);
   }
   function getRequisitions($pid){
-    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid AND status=:status;");
+    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid;");
     $stmt->bindValue(":pid", $pid);
-    $stmt->bindValue(":status", "active");
     $result=$stmt->execute();
     return($result);
   }
@@ -217,14 +215,8 @@ class DB extends SQLite3 {
     $result=$stmt->execute();
     return($result);
   }
-  function getPatientList(){
-    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis FROM patients;");
-    $result=$stmt->execute();
-    return($result);
-  }
-  function getRequisitionList(){
-    $stmt=$this->prepare("SELECT rowid,pid,test,room,time,form FROM requisition WHERE status=:active;");
-    $stmt->bindValue(":active", "active");
+  function getList(){
+    $stmt=$this->prepare("SELECT pid FROM patients;");
     $result=$stmt->execute();
     return($result);
   }

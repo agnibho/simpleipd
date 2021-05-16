@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Admission Form",
+    "title": "admission",
     "description": "Admission Form",
     "type": "object",
 

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Urine CS",
+    "title": "urine_cs",
     "description": "Urine CS",
     "type": "object",
 

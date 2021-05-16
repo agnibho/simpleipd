@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "Stool RE",
+    "title": "stool_re",
     "description": "Stool RE",
     "type": "object",
 
