@@ -1,4 +1,4 @@
-#! /bin/env php
+#! /usr/bin/env php
 <?php
 $db=new SQLite3("data/data.db");
 if(!empty($_SERVER["argv"][1]) && !empty($_SERVER["argv"][2]) && !empty($_SERVER["argv"][3])){
