@@ -13,7 +13,7 @@ $reports=[];
 if(isSet($_GET["pid"])){
   $pid=$_GET["pid"];
   $status=$db->getStatus($pid)->fetchArray()["status"];
-  $info=viewData($db->getAdmission($pid)->fetchArray()["data"]);
+  $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
   $physicianArray=$db->getAllData($pid, "physician");
   while($c=$physicianArray->fetchArray()){

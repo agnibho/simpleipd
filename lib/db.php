@@ -144,6 +144,7 @@ class DB extends SQLite3 {
   function setDischarged($pid){
     $stmt=$this->prepare("UPDATE patients SET status=:discharged WHERE pid=:pid;");
     $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":discharged", "discharged");
     $stmt->execute();
   }
   function setDead($pid, $post){
@@ -235,7 +236,25 @@ class DB extends SQLite3 {
       return($result);
   }
   function getAdmission($pid){
+      $stmt=$this->prepare("SELECT admission FROM patients WHERE pid=:pid;");
+      $stmt->bindValue(":pid", $pid);
+      $result=$stmt->execute();
+      return($result);
+  }
+  function getAdmissionData($pid){
       $stmt=$this->prepare("SELECT data FROM patients WHERE pid=:pid;");
+      $stmt->bindValue(":pid", $pid);
+      $result=$stmt->execute();
+      return($result);
+  }
+  function getDeparture($pid){
+      $stmt=$this->prepare("SELECT departure FROM patients WHERE pid=:pid;");
+      $stmt->bindValue(":pid", $pid);
+      $result=$stmt->execute();
+      return($result);
+  }
+  function getSummary($pid){
+      $stmt=$this->prepare("SELECT summary FROM patients WHERE pid=:pid;");
       $stmt->bindValue(":pid", $pid);
       $result=$stmt->execute();
       return($result);

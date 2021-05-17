@@ -40,6 +40,10 @@ if(!empty($_GET["pid"])){
         </div>
       </div>
       <?php echo $form;?>
+      <form method="post" action="print-discharge.php?pid=<?php echo $pid;?>" class="mt-4">
+        <textarea class="form-control mb-2" id="discharge-note" name="discharge-note"></textarea>
+        <button type="submit" class="btn btn-danger">Discharge Patient</button>
+      </form>
     </div>
     <?php include("lib/foot.php");?>
   </body>

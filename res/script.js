@@ -45,4 +45,9 @@ $(document).ready(function(){
       });
     });
   };
+  if($("#discharge-note").length){
+    $.get("autocomplete/discharge.json", function(data){
+      $("#discharge-note").val(data.note);
+    });
+  }
 });
