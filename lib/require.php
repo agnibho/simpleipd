@@ -15,4 +15,14 @@ if($page!="login.php" && $page!="index.php"){
     exit();
   }
 }
+if(!empty($_GET)){
+  foreach($_GET as $k=>$v){
+    $_GET[$k]=htmlspecialchars($v);
+  }
+}
+if(!empty($_POST)){
+  foreach($_POST as $k=>$v){
+    $_POST[$k]=htmlspecialchars($v);
+  }
+}
 ?>
