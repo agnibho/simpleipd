@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 if(checkAccess("death")!="all"){
   header("Location: error.php");
   exit();
@@ -17,7 +17,7 @@ if(!empty($_GET["pid"])){
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>Death Note</title>
   </head>
   <body>
@@ -25,6 +25,6 @@ if(!empty($_GET["pid"])){
       <?php echo getInfo($pid);?>
       <?php echo str_replace("Save", "Declare Death", $form);?>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

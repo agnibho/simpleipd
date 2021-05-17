@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 $error="<p>";
 $imgs="<div class='card mb-3 w-100'><div class='card-body'><div class='row'>";
 $pdfs="<div class='card mb-3'><div class='card-body'>";
@@ -35,7 +35,7 @@ $error=$error."</p>";
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>Attachments</title>
   </head>
   <body>
@@ -54,6 +54,6 @@ $error=$error."</p>";
       </div>
       <?php echo $error;?>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

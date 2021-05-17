@@ -1,7 +1,7 @@
 <?php
 class DB extends SQLite3 {
   function __construct(){
-    $this->open("data/data.db");
+    $this->open(CONFIG_DB);
   }
   function checkUser($username, $password){
     $stmt=$this->prepare("SELECT hash FROM users WHERE user=:user");

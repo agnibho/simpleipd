@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 if(checkAccess("admission")!="all"){
   header("Location: error.php");
   exit();
@@ -23,7 +23,7 @@ else{
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>Admission</title>
   </head>
   <body>
@@ -42,6 +42,6 @@ else{
         </div>
       </div>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

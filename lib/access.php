@@ -1,6 +1,7 @@
 <?php
 function checkAccess($target, $type="page"){
-  $registry=json_decode(file_get_contents("access.json"));
+  global $config;
+  $registry=json_decode(file_get_contents(CONFIG_ROOT."access.json"));
   $access="none";
   if(!empty($_SESSION["group"])){
     $group=$_SESSION["group"];

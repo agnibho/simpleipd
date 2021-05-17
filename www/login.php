@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 $error="";
 if(!empty($_GET["action"]) && $_GET["action"]=="logout"){
   $_SESSION["user"]=null;
@@ -23,7 +23,7 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>Login</title>
   </head>
   <body>
@@ -35,6 +35,7 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
         <button class="m-2 btn btn-primary" type="submit">Login</button>
       </form>
     </div>
-    <?php include("lib/foot.php");?>
+
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

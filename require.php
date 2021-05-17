@@ -1,4 +1,5 @@
 <?php
+require(__DIR__."/config.php");
 require("lib/access.php");
 require("lib/db.php");
 require("lib/functions.php");

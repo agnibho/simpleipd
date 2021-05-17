@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["omit"])){
@@ -32,7 +32,7 @@ if(!empty($_GET["pid"])){
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>Clinical Notes</title>
   </head>
   <body>
@@ -51,6 +51,6 @@ if(!empty($_GET["pid"])){
         <?php echo $form;?>
       </div>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

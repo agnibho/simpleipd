@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 function json2tex($data){
     $data=json_decode($data);
     if(!empty($data->form)){

@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 $list=$db->getPatientList();
 $showList="";
 while($arr=$list->fetchArray()){
@@ -22,7 +22,7 @@ while($arr=$reqs->fetchArray()){
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>View Info</title>
   </head>
   <body>
@@ -48,6 +48,6 @@ while($arr=$reqs->fetchArray()){
         </div>
       </div>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

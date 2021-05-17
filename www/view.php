@@ -1,5 +1,5 @@
 <?php
-require("lib/require.php");
+require(dirname(__DIR__)."/require.php");
 $info="";
 $physician=[];
 $nursing=[];
@@ -26,7 +26,7 @@ if(isSet($_GET["pid"])){
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include("lib/head.php");?>
+    <?php include(CONFIG_LIB."head.php");?>
     <title>View Info</title>
   </head>
   <body>
@@ -102,6 +102,6 @@ if(isSet($_GET["pid"])){
         <button class="form-control" type="submit">View</button>
       </form>
     </div>
-    <?php include("lib/foot.php");?>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>
