@@ -5,9 +5,12 @@
         "USG W/A"
     ],
     "rooms": [
-        "LabMed",
-        "R-4",
-        "R-19A",
-        "Other"
+        "labmed",
+        "bacteriology",
+        "virology",
+        "protozoology",
+        "mycology",
+        "pathology",
+        "other"
     ]
 }
