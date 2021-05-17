@@ -21,10 +21,14 @@
         },
         "intake": {
             "description": "Intake",
-            "type": "string"
+            "type": "integer"
         },
         "output": {
             "description": "Output",
+            "type": "integer"
+        },
+        "bw": {
+            "description": "Body Weight",
             "type": "string"
         },
         "bp": {

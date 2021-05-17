@@ -17,7 +17,8 @@
         },
         "report": {
             "description": "Report",
-            "type": "string"
+            "type": "string",
+            "format": "textarea"
         }
     },
     "required": ["date"]

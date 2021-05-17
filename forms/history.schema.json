@@ -17,11 +17,13 @@
         },
         "cc": {
             "description": "Chief complaint",
-            "type": "string"
+            "type": "string",
+            "format": "textarea"
         },
         "history": {
             "description": "History",
-            "type": "string"
+            "type": "string",
+            "format": "textarea"
         },
         "comorb": {
             "description": "Comorbidities",
@@ -29,7 +31,8 @@
         },
         "oe": {
             "description": "General Examination",
-            "type": "string"
+            "type": "string",
+            "format": "textarea"
         },
         "bp": {
             "description": "Blood Pressure",

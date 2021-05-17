@@ -35,6 +35,15 @@
             "type": "string",
             "format": "date"
         },
+        "time": {
+            "description": "Time of Admission",
+            "type": "string",
+            "format": "time"
+        },
+        "vp": {
+            "description": "Visiting Physician",
+            "type": "string"
+        },
         "ward": {
             "description": "Ward",
             "type": "string"
@@ -49,7 +58,8 @@
         },
         "summary": {
             "description": "Summary",
-            "type": "string"
+            "type": "string",
+            "format": "textarea"
         }
     },
     "required": ["pid", "name", "age", "sex", "date"]

@@ -50,16 +50,19 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
       }
       $form=$form."</select>";
     }
+    elseif(isSet($prop->format) && $prop->format=="textarea"){
+      $form=$form."<textarea class='form-control' name='".$field."' id='".$field."'>".$value."</textarea>";
+    }
     elseif($field=="pid"){
-      $form=$form."<input class='form-control' ".$lockpid." ".$req." type='".$type."' name='".$field."' id='".$field."' ".$value.">";
+      $form=$form."<input class='form-control' ".$lockpid." ".$req." type='".$type."' step='any' name='".$field."' id='".$field."' ".$value.">";
     }
     else{
-      $form=$form."<input class='form-control' ".$req." type='".$type."' name='".$field."' id='".$field."' ".$value.">";
+      $form=$form."<input class='form-control' ".$req." type='".$type."' step='any' name='".$field."' id='".$field."' ".$value.">";
     }
     $form=$form."</div>";
 
   }
-  $form=$form."<div><label class='form-label' for='extra-note'>Notes</label><textarea class='form-control' name='extra-note' id='extra-note'></textarea></div>";
+  $form=$form."<div><label class='form-label' for='extra-note'>Extra Notes</label><textarea class='form-control' name='extra-note' id='extra-note'></textarea></div>";
   $form=$form."<button class='btn btn-primary mt-3' type='submit'>Save</button>";
   $form=$form."</form>";
   return $form;
@@ -90,6 +93,9 @@ function viewData($data, $edit=null){
       if($field!="form"){
         if(!empty($schema->properties->$field)){
           $view=$view."<tr><td>".$schema->properties->$field->description."</td><td>".$value."</td></tr>";
+        }
+        elseif($field=="extra-note"){
+          $view=$view."<tr><td>Extra Notes</td><td>".$value."</td></tr>";
         }
         else{
           $view=$view."<tr><td>".$field."</td><td>".$value."</td></tr>";
