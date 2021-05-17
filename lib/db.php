@@ -151,7 +151,7 @@ class DB extends SQLite3 {
     $stmt->bindValue(":addl", $addl);
     $stmt->bindValue(":omit", false);
     $stmt->execute();
-    $log->log($post["pid"], "drug_added", json_encode([$drug,$dose,$route,$frequency,$date,$time,$duration,$addl]));
+    $log->log($pid, "drug_added", json_encode([$drug,$dose,$route,$frequency,$date,$time,$duration,$addl]));
   }
   function omitDrug($id){
     global $log;

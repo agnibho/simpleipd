@@ -24,9 +24,11 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
     if($prop->type == "string") $prop->type="text";
     if(!empty($data->$field)){
       $value="value='".$data->$field."'";
+      $value2=$data->$field;
     }
     else{
       $value="";
+      $value2="";
     }
     if(in_array($field, $schema->required)){
       $req="required";
@@ -51,7 +53,7 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
       $form=$form."</select>";
     }
     elseif(isSet($prop->format) && $prop->format=="textarea"){
-      $form=$form."<textarea class='form-control' name='".$field."' id='".$field."'>".$data->$field."</textarea>";
+      $form=$form."<textarea class='form-control' name='".$field."' id='".$field."'>".$value2."</textarea>";
     }
     elseif($field=="pid"){
       $form=$form."<input class='form-control' ".$lockpid." ".$req." type='".$type."' step='any' name='".$field."' id='".$field."' ".$value.">";

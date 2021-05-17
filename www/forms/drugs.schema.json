@@ -36,5 +36,5 @@
             "type": "integer"
         }
     },
-    "required": ["date","name"]
+    "required": ["drug", "dose", "route", "frequency", "date", "time", "duration"]
 }

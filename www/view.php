@@ -35,16 +35,16 @@ if(isSet($_GET["pid"])){
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="mb-2 col-md-3" id="treatment" <?php if($info=="") echo "style='display:none'";?>>
+            <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
               <a class="btn btn-success btn-lg btn-block" href="treatment.php?pid=<?php echo $pid;?>">Treatment</a>
             </div>
-            <div class="mb-2 col-md-3" id="physician" <?php if($info=="") echo "style='display:none'";?>>
+            <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
               <a class="mb-2 btn btn-primary btn-lg btn-block" href="physician.php?pid=<?php echo $pid;?>">Add Physician Note</a>
             </div>
-            <div class="mb-2 col-md-3" id="nursing" <?php if($info=="") echo "style='display:none'";?>>
+            <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
               <a class="mb-2 btn btn-warning btn-lg btn-block" href="nursing.php?pid=<?php echo $pid;?>">Add Nursing Note</a>
             </div>
-            <div class="mb-2 col-md-3" id="requisition" <?php if($info=="") echo "style='display:none'";?>>
+            <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
               <a class="mb-2 btn btn-danger btn-lg btn-block" href="requisition.php?pid=<?php echo $pid;?>">Add Requisition</a>
             </div>
           </div>
