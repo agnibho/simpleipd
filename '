@@ -238,7 +238,7 @@ class DB extends SQLite3 {
   function getRequisitions($pid){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid AND status=:status ORDER BY room;");
+    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid AND status=:status;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":status", "active");
     $result=$stmt->execute();
@@ -375,13 +375,13 @@ class DB extends SQLite3 {
     global $log;
     if($cat=="physician"){
       if(!checkAccess("physician", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT data FROM physician WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT data FROM physician WHERE pid=:pid AND rowid=:id ORDER BY time DSC;");
     } elseif($cat=="nursing"){
       if(!checkAccess("nursing", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT data FROM nursing WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT data FROM nursing WHERE pid=:pid AND rowid=:id ORDER BY time DSC;");
     } elseif($cat=="reports"){
       if(!checkAccess("report", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT data FROM reports WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT data FROM reports WHERE pid=:pid AND rowid=:id ORDER BY time DSC;");
     } else{
       return(false);
     }
@@ -394,19 +394,19 @@ class DB extends SQLite3 {
     global $log;
     if($cat=="physician"){
       if(!checkAccess("physician", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,data FROM physician WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,data FROM physician WHERE pid=:pid ORDER BY time DSC;");
     } elseif($cat=="nursing"){
       if(!checkAccess("nursing", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,data FROM nursing WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,data FROM nursing WHERE pid=:pid ORDER BY time DSC;");
     } elseif($cat=="reports"){
       if(!checkAccess("report", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,data FROM reports WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,data FROM reports WHERE pid=:pid ORDER BY time DSC;");
     } elseif($cat=="info"){
       if(!checkAccess("info", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,data FROM patients WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,data FROM patients WHERE pid=:pid ORDER BY time DSC;");
     } elseif($cat=="history"){
       if(!checkAccess("history", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,history FROM patients WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,history FROM patients WHERE pid=:pid ORDER BY time DSC;");
     } else{
       return(false);
     }

@@ -18,7 +18,7 @@ $(document).ready(function(){
   });
   $("[name='time']").each(function(){
     if($(this).val()==""){
-      $(this).val(moment().format("HH:MM"));
+      $(this).val(moment().format("hh:mm"));
     }
   });
   if($("[name='drug']").length){

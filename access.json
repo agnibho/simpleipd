@@ -97,8 +97,8 @@
     },
     "report": {
         "admin": "all",
-        "visiting": "view",
-        "resident": "view",
+        "visiting": "all",
+        "resident": "all",
         "nursing": "view",
         "lab": "all",
         "clerk": "view"

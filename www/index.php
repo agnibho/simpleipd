@@ -27,7 +27,7 @@ while($arr=$reqs->fetchArray()){
   </head>
   <body>
     <div class="container">
-      <h1>SimpleIPD</h1>
+      <h1><?php echo CONFIG_TITLE;?></h1>
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Patient List</h4>

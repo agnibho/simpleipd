@@ -51,7 +51,7 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
       $form=$form."</select>";
     }
     elseif(isSet($prop->format) && $prop->format=="textarea"){
-      $form=$form."<textarea class='form-control' name='".$field."' id='".$field."'>".$value."</textarea>";
+      $form=$form."<textarea class='form-control' name='".$field."' id='".$field."'>".$data->$field."</textarea>";
     }
     elseif($field=="pid"){
       $form=$form."<input class='form-control' ".$lockpid." ".$req." type='".$type."' step='any' name='".$field."' id='".$field."' ".$value.">";
@@ -90,7 +90,7 @@ function viewData($data, $edit=null){
     unset($data->cat);
     $view="<table class='table'>";
     foreach($data as $field=>$value){
-      if($field!="form"){
+      if(!empty($value) && $field!="form"){
         if(!empty($schema->properties->$field)){
           $view=$view."<tr><td>".$schema->properties->$field->description."</td><td>".$value."</td></tr>";
         }
