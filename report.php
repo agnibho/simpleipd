@@ -41,6 +41,7 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
         <div class="card-body">
           <h4 class="card-title">Add New Report</h4>
           <?php echo $form;?>
+          <p class="text-right"><a href="attachments.php?pid=<?php echo $pid;?>&req=<?php echo $_GET["req"];?>">Upload PDF instead</p>
         </div>
       </div>
     </div>

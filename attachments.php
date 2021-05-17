@@ -15,6 +15,9 @@ if(!empty($_GET["pid"])){
     if(in_array($_FILES["upload"]["type"], ["image/jpeg", "image/jpg", "image/png", "image/gif", "application/pdf"])){
       $fname=str_replace("/", "", $pid)."-".time()."-".rand(1000,9999).".".pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
       move_uploaded_file($_FILES["upload"]["tmp_name"], "data/attachments/".$fname);
+      if(!empty($_GET["req"])){
+        $db->omitRequisition($_GET["req"]);
+      }
     }
     else{
       $error=$error."Only jpg, png, gif, pdf files are supported.";
@@ -44,6 +47,11 @@ $error=$error."</p>";
   <body>
     <div class="container">
       <?php echo getInfo($pid);?>
+      <form class="mt-3 mb-3" method="post" enctype="multipart/form-data">
+        <label for="upload">Select file to upload. JPG, PNG, GIF and PDF files are supported. Size limit: <span id="size-limit"><?php echo str_replace("M", "MB", ini_get("upload_max_filesize"));?></span><span id="upload-error"></span></label>
+        <input type="file" name="upload" id="upload" class="form-control">
+        <input type="submit" value="Upload" class="mt-2 btn btn-primary">
+      </form>
       <div id="attachments">
         <?php echo $pdfs;?>
           <div class="row">
@@ -51,11 +59,6 @@ $error=$error."</p>";
           </div>
       </div>
       <?php echo $error;?>
-      <form method="post" enctype="multipart/form-data">
-        <label for="upload">Select file to upload. JPG, PNG, GIF and PDF files are supported. Size limit: <span id="size-limit"><?php echo str_replace("M", "MB", ini_get("upload_max_filesize"));?></span><span id="upload-error"></span></label>
-        <input type="file" name="upload" id="upload" class="form-control">
-        <input type="submit" value="Upload" class="mt-2 btn btn-primary">
-      </form>
     </div>
     <?php include("lib/foot.php");?>
   </body>
