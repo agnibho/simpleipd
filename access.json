@@ -1,0 +1,130 @@
+{
+    "info": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    },
+    "diagnosis": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "summary": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "admission": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "view",
+        "clerk": "all"
+    },
+    "attachments": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    },
+    "death": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "discharge": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "history": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "laboratory": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    },
+    "nursing": {
+        "admin": "all",
+        "visiting": "view",
+        "resident": "view",
+        "nursing": "all",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "physician": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "print-discharge": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "report": {
+        "admin": "all",
+        "visiting": "view",
+        "resident": "view",
+        "nursing": "view",
+        "lab": "all",
+        "clerk": "view"
+    },
+    "requisition": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    },
+    "treatment": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "clerk": "view"
+    },
+    "view": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    }
+}

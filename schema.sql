@@ -6,7 +6,7 @@ data text
 );
 CREATE TABLE discharge(
 pid int,
-name text,
+drug text,
 dose text,
 route text,
 frequency text,
@@ -24,6 +24,7 @@ name text,
 age int,
 sex text,
 status text,
+vp text,
 diagnosis text,
 summary text,
 admission int,
@@ -68,6 +69,7 @@ addl text
 CREATE TABLE users(
 user text unique,
 usergroup text,
+department text,
 hash text,
 change boolean,
 last int

@@ -1,9 +1,7 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
+require("lib/require.php");
+if(checkAccess("report")!="all"){
+  header("Location: error.php");
   exit();
 }
 if(!empty($_GET["pid"]) && !empty($_GET["form"])){

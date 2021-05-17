@@ -1,11 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["delete"])){
@@ -19,6 +13,7 @@ if(!empty($_GET["pid"])){
   $view=$view."<table class='table'>";
   $view=$view."<tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Duration</th><th>Note</th></tr>";
   while($drug=$list->fetchArray()){
+    var_dump($drug);
     $view=$view."<tr><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button class='btn btn-warning' name='delete' value='".$drug["rowid"]."' form='delete'>Delete</button></td></tr>";
   }
   $view=$view."</table>";
@@ -39,8 +34,10 @@ if(!empty($_GET["pid"])){
           <?php echo $view;?>
         </div>
       </div>
-      <?php echo $form;?>
-      <form method="post" action="print-discharge.php?pid=<?php echo $pid;?>" class="mt-4">
+      <div <?php echo checkAccess("discharge", "form");?>>
+        <?php echo $form;?>
+      </div>
+      <form method="post" action="print-discharge.php?pid=<?php echo $pid;?>" class="mt-4" <?php echo checkAccess("discharge", "form");?>>
         <textarea class="form-control mb-2" id="discharge-note" name="discharge-note"></textarea>
         <button type="submit" class="btn btn-danger">Discharge Patient</button>
       </form>

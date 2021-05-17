@@ -8,7 +8,7 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
     $data=json_decode($db->getData($pid, $id, $cat)->fetchArray()["data"]);
   }
   elseif(!empty($pid) && $file=="forms/admission.schema.json"){
-    $data=json_decode($db->getAdmission($pid)->fetchArray()["data"]);
+    $data=json_decode($db->getAdmissionData($pid)->fetchArray()["data"]);
     $lockpid="readonly";
   }
   elseif(!empty($pid) && $file=="forms/history.schema.json"){

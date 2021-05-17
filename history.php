@@ -1,11 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["cc"])){
@@ -30,7 +24,9 @@ else{
   <body>
     <div class="container">
       <?php echo getInfo($pid);?>
-      <?php echo $form;?>
+      <div <?php echo checkAccess("history", "form");?>>
+        <?php echo $form;?>
+      </div>
     </div>
     <?php include("lib/foot.php");?>
   </body>

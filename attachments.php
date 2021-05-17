@@ -1,11 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 $error="<p>";
 $imgs="<div class='card mb-3 w-100'><div class='card-body'><div class='row'>";
 $pdfs="<div class='card mb-3'><div class='card-body'>";
@@ -47,7 +41,7 @@ $error=$error."</p>";
   <body>
     <div class="container">
       <?php echo getInfo($pid);?>
-      <form class="mt-3 mb-3" method="post" enctype="multipart/form-data">
+      <form class="mt-3 mb-3" method="post" enctype="multipart/form-data" <?php echo checkAccess("attachments", "form");?>>
         <label for="upload">Select file to upload. JPG, PNG, GIF and PDF files are supported. Size limit: <span id="size-limit"><?php echo str_replace("M", "MB", ini_get("upload_max_filesize"));?></span><span id="upload-error"></span></label>
         <input type="file" name="upload" id="upload" class="form-control">
         <input type="submit" value="Upload" class="mt-2 btn btn-primary">

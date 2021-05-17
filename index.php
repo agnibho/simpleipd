@@ -1,12 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-var_dump($_SESSION);
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 $list=$db->getPatientList();
 $showList="";
 while($arr=$list->fetchArray()){

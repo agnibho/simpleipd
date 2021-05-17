@@ -1,14 +1,7 @@
 <?php
-require("lib/functions.php");
-require("lib/db.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
+require("lib/require.php");
+if(checkAccess("admission")!="all"){
+  header("Location: error.php");
   exit();
 }
 if(!empty($_POST["pid"]) && !empty($_POST["name"])){
@@ -17,7 +10,11 @@ if(!empty($_POST["pid"]) && !empty($_POST["name"])){
   //exit();
 }
 if(!empty($_GET["pid"])){
-  $form=schema2form("forms/admission.schema.json", $_GET["pid"]);
+  $pid=$_GET["pid"];
+  if(!empty($_POST["diagnosis"]) || !empty($_POST["summary"])){
+    $db->editCase($pid, $_POST["diagnosis"], $_POST["summary"]);
+  }
+  $form=schema2form("forms/admission.schema.json", $pid);
 }
 else{
   $form=schema2form("forms/admission.schema.json");
@@ -33,7 +30,14 @@ else{
     <div class="container">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">New Patient Information</h4>
+          <h4 class="card-title">Patient Information</h4>
+          <form method="post" class="mb-4" <?php echo checkAccess("history", "form");?>>
+            <label for="case-diagnosis">Diagnosis</label>
+            <input type="text" class="form-control" name="diagnosis" id="case-diagnosis" value="<?php if(!empty($pid)) echo $db->getDiagnosis($pid)->fetchArray()["diagnosis"];?>">
+            <label for="case-summary">Summary</label>
+            <textarea type="text" class="form-control" name="summary" id="case-summary"><?php if(!empty($pid)) echo $db->getSummary($pid)->fetchArray()["summary"];?></textarea>
+            <button class="btn btn-primary mt-3" type="submit">Save</button>
+          </form>
           <?php echo $form;?>
         </div>
       </div>

@@ -51,15 +51,6 @@
         "bed": {
             "description": "Bed Number",
             "type": "string"
-        },
-        "diagnosis": {
-            "description": "Diagnosis",
-            "type": "string"
-        },
-        "summary": {
-            "description": "Summary",
-            "type": "string",
-            "format": "textarea"
         }
     },
     "required": ["pid", "name", "age", "sex", "date"]

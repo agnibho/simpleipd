@@ -1,10 +1,5 @@
 <?php
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 $list="";
 if(isSet($_GET["pid"])){
   foreach(glob("forms/report*.json") as $file){

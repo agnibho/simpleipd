@@ -1,11 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["date"]) && !empty($_POST["time"])){
@@ -19,7 +13,7 @@ if(!empty($_GET["pid"])){
     //exit();
   }
   if(isSet($_GET["id"])){
-    $form=schema2form("forms/physician.schema.json", $pid, $_GET["id"], "clinical");
+    $form=schema2form("forms/physician.schema.json", $pid, $_GET["id"], "physician");
   }
   else{
     $form=schema2form("forms/physician.schema.json");
@@ -35,7 +29,9 @@ if(!empty($_GET["pid"])){
   <body>
     <div class="container">
       <?php echo getInfo($pid);?>
-      <?php echo $form;?>
+      <div <?php echo checkAccess("physician", "form");?>>
+        <?php echo $form;?>
+      </div>
     </div>
     <?php include("lib/foot.php");?>
   </body>

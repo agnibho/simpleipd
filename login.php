@@ -1,14 +1,15 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
+require("lib/require.php");
 $error="";
 if(!empty($_GET["action"]) && $_GET["action"]=="logout"){
   $_SESSION["user"]=null;
+  $_SESSION["group"]=null;
 }
 if(!empty($_POST["username"]) && !empty($_POST["password"])){
   if($db->checkUser($_POST["username"], $_POST["password"])){
     $_SESSION["user"]=$_POST["username"];
+    $_SESSION["group"]=$db->getGroup($_SESSION["user"])->fetchArray()["usergroup"];
+    $_SESSION["department"]=$db->getDepartment($_SESSION["user"])->fetchArray()["department"];
     header("Location: index.php");
     exit();
   }

@@ -1,11 +1,5 @@
 <?php
-require("lib/db.php");
-require("lib/functions.php");
-session_start();
-if(empty($_SESSION["user"])){
-  header("Location: login.php");
-  exit();
-}
+require("lib/require.php");
 if(isSet($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["del"])){
@@ -40,7 +34,7 @@ if(isSet($_GET["pid"])){
   $reqList=$db->getRequisitions($pid);
   $list="";
   while($req=$reqList->fetchArray()){
-    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["room"]."</td><td>".date("M j, Y", $req["time"])."</td><td><button type='submit' class='btn btn-secondary' name='del' value='".$req["rowid"]."' form='delete'>Delete</button></td></tr>";
+    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["room"]."</td><td>".date("M j, Y", $req["time"])."</td><td><button type='submit' class='btn btn-secondary' name='del' value='".$req["rowid"]."' form='delete' ".checkAccess("requisition","form").">Delete</button></td></tr>";
   }
 }
 ?>
@@ -60,7 +54,7 @@ if(isSet($_GET["pid"])){
             <tr><th>Test Name</th><th>Destination</th><th>Date</th><th></th></tr>
             <?php echo $list;?>
           </table>
-          <form method="post">
+          <form method="post" <?php echo checkAccess("requisition", "form");?>>
             <div class="row">
               <div class="col">
             <select name="test">
