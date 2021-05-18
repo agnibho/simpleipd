@@ -8,8 +8,8 @@ if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["date"]) && !empty($_POST["time"]) && !empty($_POST["diagnosis"])){
     $db->setDead($pid, $_POST);
-    //header("Location: view.php?id=".$_GET["id"]);
-    //exit();
+    header("Location: view.php?pid=".$_GET["pid"]);
+    exit();
   }
   $form=schema2form("forms/death.schema.json", $pid, null, null, (object)["diagnosis"=>$db->getDiagnosis($pid)->fetchArray()["diagnosis"]]);
 }

@@ -9,8 +9,8 @@ if(!empty($_GET["pid"])){
     else{
       $db->addNursing($_POST, $pid);
     }
-    //header("Location: view.php?id=".$_GET["id"]);
-    //exit();
+    header("Location: view.php?pid=".$_GET["pid"]);
+    exit();
   }
   if(isSet($_GET["id"])){
     $form=schema2form("forms/nursing.schema.json", $pid, $_GET["id"], "nursing");

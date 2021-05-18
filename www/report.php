@@ -16,8 +16,8 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
     if(!empty($_GET["req"])){
       $db->omitRequisition($_GET["req"]);
     }
-    //header("Location: view.php?id=".$_GET["id"]);
-    //exit();
+    header("Location: view.php?pid=".$_GET["pid"]);
+    exit();
   }
   if(isSet($_GET["id"])){
     $form=schema2form("forms/".$_GET["form"].".schema.json", $pid, $_GET["id"], "reports");

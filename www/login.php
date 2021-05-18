@@ -17,7 +17,7 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
       $error="<div class='alert alert-danger'>Username or password is incorrect.</div>";
   }
 }
-//header("Location: view.php?id=".$_GET["id"]);
+//header("Location: view.php?pid=".$_GET["pid"]);
 //exit();
 ?>
 <!DOCTYPE html>

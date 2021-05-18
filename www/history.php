@@ -4,8 +4,8 @@ if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["cc"])){
     $db->updateHistory($_POST, $pid);
-    //header("Location: view.php?pid=".$pid);
-    //exit();
+    header("Location: view.php?pid=".$pid);
+    exit();
   }
 }
 if(!empty($_GET["pid"])){

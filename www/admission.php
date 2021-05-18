@@ -6,8 +6,8 @@ if(checkAccess("admission")!="all"){
 }
 if(!empty($_POST["pid"]) && !empty($_POST["name"])){
   $db->admit($_POST);
-  //header("Location: view.php?pid=".$_POST["pid"]);
-  //exit();
+  header("Location: view.php?pid=".$_POST["pid"]);
+  exit();
 }
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
