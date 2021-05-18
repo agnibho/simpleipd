@@ -22,7 +22,7 @@ function json2tex($data){
 }
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
-  $template=file_get_contents("discharge.tex");
+  $template=file_get_contents(CONFIG_ROOT."discharge.tex");
   if(!empty($_POST["discharge-note"])){
     $template=str_replace("%[note]%", $_POST["discharge-note"], $template);
   }
