@@ -21,11 +21,12 @@ $(document).ready(function(){
       $(this).val(moment().format("hh:mm"));
     }
   });
+  $("[data-toggle='popover']").popover({"placement": "top", "trigger": "focus"});
   if($("[name='drug']").length){
     $(this).prop("autocomplete","off");
     $.get("autocomplete/drugs.json", function(data){
       $("[name='drug']").each(function(){
-        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:2});
+        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:1});
       });
     });
   };
@@ -33,7 +34,7 @@ $(document).ready(function(){
     $(this).prop("autocomplete","off");
     $.get("autocomplete/route.json", function(data){
       $("[name='route']").each(function(){
-        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:1});
+        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:0});
       });
     });
   };
@@ -41,7 +42,7 @@ $(document).ready(function(){
     $(this).prop("autocomplete","off");
     $.get("autocomplete/frequency.json", function(data){
       $("[name='frequency']").each(function(){
-        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:1});
+        $(this).autocomplete({source:data, highlightClass:'text-danger',treshold:0});
       });
     });
   };
@@ -49,7 +50,7 @@ $(document).ready(function(){
     $(this).prop("autocomplete","off");
     $.get("autocomplete/investigation.json", function(data){
       $("[name='sample']").each(function(){
-        $(this).autocomplete({source:data.sample, highlightClass:'text-danger',treshold:1});
+        $(this).autocomplete({source:data.sample, highlightClass:'text-danger',treshold:0});
       });
     });
   };

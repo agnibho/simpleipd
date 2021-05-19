@@ -1,5 +1,5 @@
 {
-    "gram_positive": {
+    "gram_negative": {
         "ampicillin": "Ampicillin",
         "amoxicillin_clavulinc_acid": "Amoxicillin/Clavulinic Acid",
         "piperacillin_tazobactum": "Piperacillin/tazobactum",
@@ -20,7 +20,7 @@
         "colistin": "Colistin",
         "trimethoprim_sulphamethoxazole": "Trimethoprim/Sulfamethoxazole"
     },
-    "gram_negative": {
+    "gram_positive": {
         "cefoxitin_screen": "Cefoxitin Screen",
         "benzylpenicillin": "Benzylpenicillin",
         "oxacillin": "Oxacillin",

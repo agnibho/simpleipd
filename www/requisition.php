@@ -25,7 +25,6 @@ if(isSet($_GET["pid"])){
   foreach($inv->tests as $t){
     $testList=$testList."<option>".$t."</option>";
   }
-  $testList=$testList."<option value='culture_sensitivity'>Culture/Sensitivity</option>";
   $roomList="";
   foreach($inv->rooms as $r){
     $roomList=$roomList."<option>".$r."</option>";

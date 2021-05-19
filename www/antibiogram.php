@@ -42,20 +42,24 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
   $form="<form method='post' id='antibiogram'><input type='hidden' name='form' value='".$_GET["form"]."'></form>";
   $form=$form."<table class='table'>";
   if(!empty($data)){
+    var_dump($data->organism);
     $date="value='".$data->date."'";
-    $sample="value'".$data->sample."'";
+    $sample="value='".$data->sample."'";
+    $organism="value='".$data->organism."'";
   }
   elseif(!empty($_GET["sample"])){
     $date="";
     $sample="value='".$_GET["sample"]."'";
+    $organism="";
   }
   else{
     $date="";
     $sample="";
+    $organism="";
   }
   $form=$form."<tr><td>Date</td><td colspan='3'><input type='date' class='form-control' name='date' ".$date." form='antibiogram'></td></tr>";
   $form=$form."<tr><td>Sample</td><td colspan='3'><input type='text' class='form-control' name='sample' ".$sample." form='antibiogram' required></td></tr>";
-  $form=$form."<tr><td>Organism</td><td colspan='3'><input type='text' class='form-control' name='organism' ".$sample." form='antibiogram' required></td></tr>";
+  $form=$form."<tr><td>Organism</td><td colspan='3'><input type='text' class='form-control' name='organism' ".$organism." form='antibiogram' required></td></tr>";
   $form=$form."<tr><th>Antibiotic</th><th>MIC</th><th>Interpretation</th>";
   foreach($list as $k=>$v){
     if(!empty($data)){
@@ -66,7 +70,7 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
       $mic="";
       $interpretation="";
     }
-    $form=$form."<tr><td><input type='hidden' name='".$k."[name]' value='".$v."' form='antibiogram'><input type='text' form='antibiogram' class='form-control' name='' value='".$v."' readonly></td><td><input type='text' form='antibiogram' class='form-control' name='".$k."[mic]' ".$mic."></td><td><input type='text' form='antibiogram' class='form-control abinter' name='".$k."[interpretation]' ".$interpretation." step='any'></td></tr>";
+    $form=$form."<tr><td><input type='hidden' name='".$k."[name]' value='".$v."' form='antibiogram'><input type='text' form='antibiogram' class='form-control' name='' value='".$v."' title='".$v."' data-toggle='popover' readonly></td><td><input type='text' form='antibiogram' class='form-control' name='".$k."[mic]' ".$mic."></td><td><input type='text' form='antibiogram' class='form-control abinter' name='".$k."[interpretation]' ".$interpretation." step='any'></td></tr>";
   }
   if(!empty($data)){
     $name="value='".$data->other->name."'";

@@ -136,6 +136,7 @@ function viewAntibiogram($data, $edit){
   $view="<table class='table table-striped'>";
   $view=$view."<tr><th>Vitek Report</th><th colspan='2'>".$data->date."</th></tr>";
   $view=$view."<tr><td>Sample</td><td colspan='2'>".$data->sample."</td></tr>";
+  $view=$view."<tr><td>Organism</td><td colspan='2'>".$data->organism."</td></tr>";
   $view=$view."<tr><th>Antibiotic</th><th>MIC</th><th>Interpretation</th>";
   foreach($data as $k=>$v){
     if(is_object($v)){
