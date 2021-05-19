@@ -29,7 +29,7 @@ if(isSet($_GET["pid"])){
   foreach($inv->rooms as $r){
     $roomList=$roomList."<option>".$r."</option>";
   }
-  $roomList=$roomList."<option selected='selected'>Other</option>";
+  $roomList=$roomList."<option selected='selected'>other</option>";
 
   $reqList=$db->getRequisitions($pid);
   $list="";

@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "fluid_study",
-    "description": "Fluid Study",
+    "title": "csf_fluid_study",
+    "description": "CSF Fluid Study",
     "type": "object",
 
     "properties": {
