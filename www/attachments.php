@@ -7,7 +7,13 @@ if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_FILES)){
     if(in_array($_FILES["upload"]["type"], ["image/jpeg", "image/jpg", "image/png", "image/gif", "application/pdf"])){
-      $fname=str_replace("/", "", $pid)."-".time()."-".rand(1000,9999).".".pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
+      if(!empty($_GET["name"])){
+        $name=$_GET["name"]."-";
+      }
+      else{
+        $name="";
+      }
+      $fname=str_replace("/", "", $pid)."-".$name.time()."-".rand(1000,9999).".".pathinfo($_FILES["upload"]["name"], PATHINFO_EXTENSION);
       move_uploaded_file($_FILES["upload"]["tmp_name"], "data/attachments/".$fname);
       if(!empty($_GET["req"])){
         $db->omitRequisition($_GET["req"]);

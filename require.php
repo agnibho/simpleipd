@@ -26,7 +26,15 @@ if(!empty($_GET)){
 }
 if(!empty($_POST)){
   foreach($_POST as $k=>$v){
-    $_POST[$k]=htmlspecialchars($v);
+    if(is_array($v)){
+      foreach($v as $k2=>$v2){
+        $v[$k2]=htmlspecialchars($v2);
+      }
+      $_POST["k"]=$v;
+    }
+    else{
+      $_POST[$k]=htmlspecialchars($v);
+    }
   }
 }
 ?>

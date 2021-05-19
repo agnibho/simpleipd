@@ -15,6 +15,10 @@
             "type": "string",
             "format": "time"
         },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
         "report": {
             "description": "Report",
             "type": "string",

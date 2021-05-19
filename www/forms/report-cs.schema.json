@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "urine_cs",
-    "description": "Urine CS",
+    "title": "culture_sensitivity",
+    "description": "Culture Sensitivity",
     "type": "object",
 
     "properties": {
@@ -15,9 +15,14 @@
             "type": "string",
             "format": "time"
         },
-        "organism": {
-            "description": "Organism",
+        "sample": {
+            "description": "Sample",
             "type": "string"
+        },
+        "report": {
+            "description": "Report",
+            "type": "string",
+            "format": "textarea"
         }
     },
     "required": ["date"]

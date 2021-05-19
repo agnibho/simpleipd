@@ -1,0 +1,55 @@
+{
+    "gram_positive": {
+        "ampicillin": "Ampicillin",
+        "amoxicillin_clavulinc_acid": "Amoxicillin/Clavulinic Acid",
+        "piperacillin_tazobactum": "Piperacillin/tazobactum",
+        "cefuroxime": "Cefuroxime",
+        "cefuroxime_axetil": "Cefuroxime Axetil",
+        "ceftriaxone": "Ceftriaxone",
+        "cefoperazone_sulbactum": "Cefoperazone/Sulbactam",
+        "cefepime": "Cefepime",
+        "ertapenem": "Ertapenem",
+        "imipenem": "Imipenem",
+        "meropenem": "Meropenem",
+        "amikacin": "Amikacin",
+        "gentamicin": "Gentamicin",
+        "nalidixic_acid": "Nalidixic Acid",
+        "ciprofloxacin": "Ciprofloxacin",
+        "tigecycline": "Tigecycline",
+        "nitrofurantoin": "Nitrofurantoin",
+        "colistin": "Colistin",
+        "trimethoprim_sulphamethoxazole": "Trimethoprim/Sulfamethoxazole"
+    },
+    "gram_negative": {
+        "cefoxitin_screen": "Cefoxitin Screen",
+        "benzylpenicillin": "Benzylpenicillin",
+        "oxacillin": "Oxacillin",
+        "gentamicin_high_level": "Gentamicin High Level (synergy)",
+        "gentamicin": "Gentamicin",
+        "ciprofloxacin": "Ciprofloxacin",
+        "levofloxacin": "Levofloxacin",
+        "inducible_clindamycin": "Inducible Clindamycin Resistance",
+        "erythromycin": "Erythromycin",
+        "clindamycin": "Clindamycin",
+        "linezolid": "Linezolid",
+        "daptomycin": "Daptomycin",
+        "teicoplanin": "Teicoplanin",
+        "vancomycin": "Vancomycin",
+        "tetracycline": "Tetracycline",
+        "tigecycline": "Tigecycline",
+        "nitrofurantoin": "Nitrofurantoin",
+        "rifampicin": "Rifampicin",
+        "trimethoprim_sulphamethoxazole": "Trimethoprim/Sulfamethoxazole"
+    },
+    "fungal": {
+        "fluconazole": "Fluconazole",
+        "voriconazole": "Voriconazole",
+        "caspofungin": "Caspofungin"
+    },
+    "interpretation": {
+        "S": "S",
+        "I": "S",
+        "R": "R",
+        "+": "+"
+    }
+}

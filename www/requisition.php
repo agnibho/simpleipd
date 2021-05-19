@@ -14,7 +14,7 @@ if(isSet($_GET["pid"])){
       $test=$_POST["test"];
       $form="";
     }
-    $db->addRequisition($pid, $test, $_POST["date"], $_POST["time"], $_POST["room"], $form);
+    $db->addRequisition($pid, $test, $_POST["sample"], $_POST["date"], $_POST["time"], $_POST["room"], $form);
   }
   $inv=json_decode(file_get_contents("autocomplete/investigation.json"));
   $testList="";
@@ -25,6 +25,7 @@ if(isSet($_GET["pid"])){
   foreach($inv->tests as $t){
     $testList=$testList."<option>".$t."</option>";
   }
+  $testList=$testList."<option value='culture_sensitivity'>Culture/Sensitivity</option>";
   $roomList="";
   foreach($inv->rooms as $r){
     $roomList=$roomList."<option>".$r."</option>";
@@ -34,7 +35,7 @@ if(isSet($_GET["pid"])){
   $reqList=$db->getRequisitions($pid);
   $list="";
   while($req=$reqList->fetchArray()){
-    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["room"]."</td><td>".date("M j, Y", $req["time"])."</td><td><button type='submit' class='btn btn-secondary' name='del' value='".$req["rowid"]."' form='delete' ".checkAccess("requisition","form").">Delete</button></td></tr>";
+    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["sample"]."</td><td>".$req["room"]."</td><td>".date("M j, Y", $req["time"])."</td><td><button type='submit' class='btn btn-secondary' name='del' value='".$req["rowid"]."' form='delete' ".checkAccess("requisition","form").">Delete</button></td></tr>";
   }
 }
 ?>
@@ -51,34 +52,36 @@ if(isSet($_GET["pid"])){
           <h4 class="card-title">List of Requisitions</h4>
           <form method='post' id='delete'></form>
           <table class="table">
-            <tr><th>Test Name</th><th>Destination</th><th>Date</th><th></th></tr>
+            <tr><th>Test Name</th><th>Sample</th><th>Destination</th><th>Date</th><th></th></tr>
             <?php echo $list;?>
           </table>
+          <hr>
           <form method="post" <?php echo checkAccess("requisition", "form");?>>
             <div class="row">
               <div class="col">
-            <select name="test">
-              <?php echo $testList;?>
-            </select>
+                <select name="test">
+                  <?php echo $testList;?>
+                </select>
               </div>
               <div class="col">
-            <select name="room">
-              <?php echo $roomList;?>
-            </select>
+                <input type="text" class="form-control" name="sample" placeholder="Sample">
+              </div>
+              <div class="col">
+                <select name="room">
+                  <?php echo $roomList;?>
+                </select>
               </div>
               <div class="col">
                 <input type="date" name="date" class="form-control">
-              </div>
-              <div class="col">
                 <input type="time" name="time" class="form-control">
               </div>
               <div class="col">
-            <button class="btn btn-primary" type="submit">Submit Requisition</button>
+                <button class="btn btn-primary" type="submit">Submit Requisition</button>
               </div>
           </form>
+            </div>
         </div>
       </div>
-    </div>
-    <?php include(CONFIG_LIB."foot.php");?>
+      <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

@@ -15,7 +15,10 @@
             "type": "string",
             "format": "time"
         },
-
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
         "ldh": {
             "description": "CRP",
             "type": "number"

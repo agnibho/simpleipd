@@ -11,12 +11,17 @@ $showReqs="";
 while($arr=$reqs->fetchArray()){
   $pid=$arr["pid"];
   if(!empty($arr["form"])){
-    $test="<a href='report.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."'>".$arr["test"]."</a>";
+    if($arr["form"]=="report-cs"){
+      $test="<a href='vitek.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&src=index'>".$arr["test"]."</a>";
+    }
+    else{
+      $test="<a href='report.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&src=index'>".$arr["test"]."</a>";
+    }
   }
   else{
-    $test="<a href='report.php?pid=".$pid."&form=report-other&req=".$arr["rowid"]."'>".$arr["test"]."</a>";
+    $test="<a href='report.php?pid=".$pid."&form=report-other&req=".$arr["rowid"]."&src=index'>".$arr["test"]."</a>";
   }
-  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["room"]."</td><td>".date("M j, Y", $arr["time"])."</td><td><a href='view.php?pid=".$pid."'>".$pid."</a></td></tr>";
+  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j, Y", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr>";
 }
 ?>
 <!DOCTYPE html>
@@ -42,7 +47,7 @@ while($arr=$reqs->fetchArray()){
         <div class="card-body">
           <h4 class="card-title">Requisition List</h4>
           <table class="table">
-            <tr><th>Test Needed</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
+            <tr><th>Test Needed</th><th>Sample</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
             <?php echo $showReqs;?>
           </table>
         </div>

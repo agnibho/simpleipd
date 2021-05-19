@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "ascitic_fluid_study",
-    "description": "Ascitic Fluid Study",
+    "title": "fluid_study",
+    "description": "Fluid Study",
     "type": "object",
 
     "properties": {
@@ -14,6 +14,10 @@
             "description": "Time",
             "type": "string",
             "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
         },
         "cellCount": {
             "description": "Cell Count",

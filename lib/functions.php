@@ -91,8 +91,24 @@ function viewData($data, $edit=null){
     }
     unset($data->cat);
     $view="<table class='table'>";
+    if(!empty($schema->description)){
+      $description=$schema->description;
+    }
+    else{
+      $description="";
+    }
+    if(!empty($data->date)){
+      if(!empty($data->time)){
+        $date=$data->date." ".$data->time;
+      }
+      $date=$data->date;
+    }
+    else{
+      $date="";
+    }
+    $view=$view."<tr><th>".$description."</th><th>".$date."</th></tr>";
     foreach($data as $field=>$value){
-      if(!empty($value) && $field!="form"){
+      if(!empty($value) && $field!="form" && $field!="date" && $field!="time"){
         if(!empty($schema->properties->$field)){
           $view=$view."<tr><td>".$schema->properties->$field->description."</td><td>".$value."</td></tr>";
         }
@@ -105,7 +121,7 @@ function viewData($data, $edit=null){
       }
     }
     if(!empty($edit)){
-      $view=$view."<tr><td><a href='".$edit."'>Edit</a>";
+      $view=$view."<tr><td colspan='2'><a href='".$edit."'>Edit</a>";
     }
     $view=$view."</table>";
     return $view;
@@ -113,6 +129,25 @@ function viewData($data, $edit=null){
   else{
     return "";
   }
+}
+
+function viewAntibiogram($data, $edit){
+  $data=json_decode($data);
+  $view="<table class='table table-striped'>";
+  $view=$view."<tr><th>Vitek Report</th><th colspan='2'>".$data->date."</th></tr>";
+  $view=$view."<tr><td>Sample</td><td colspan='2'>".$data->sample."</td></tr>";
+  $view=$view."<tr><th>Antibiotic</th><th>MIC</th><th>Interpretation</th>";
+  foreach($data as $k=>$v){
+    if(is_object($v)){
+      $view=$view."<tr><td>".$v->name."</td><td>".$v->mic."</td><td>".$v->interpretation."</td></tr>";
+    }
+  }
+  if(!empty($data->note)){
+    $view=$view."<tr><td>Note</td><td colspan='2'>".$data->note."</td></tr>";
+  }
+  $view=$view."<tr><td colspan='2'><a href='".$edit."'>Edit</a></td></tr>";
+  $view=$view."</table>";
+  return $view;
 }
 
 function view_drug($file){

@@ -15,6 +15,10 @@
             "type": "string",
             "format": "time"
         },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
         "ph": {
             "description": "pH",
             "type": "number"

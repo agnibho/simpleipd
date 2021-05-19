@@ -120,7 +120,12 @@ class DB extends SQLite3 {
     if(!checkAccess("report", "dbSet")) return false;
     $stmt=$this->prepare("INSERT INTO reports (pid, time, form, data) VALUES (:pid, :time, :form, :data);");
     $stmt->bindValue(":pid", $pid);
-    $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    if(!empty($post["time"])){
+      $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    }
+    else{
+      $stmt->bindValue(":time", strtotime($post["date"]));
+    }
     $stmt->bindValue(":form", $post["form"]);
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
@@ -132,7 +137,12 @@ class DB extends SQLite3 {
     $stmt=$this->prepare("UPDATE reports SET time=:time,data=:data WHERE pid=:pid AND rowid=:id;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":id", $id);
-    $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    if(!empty($post["time"])){
+      $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
+    }
+    else{
+      $stmt->bindValue(":time", strtotime($post["date"]));
+    }
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
     $log->log($pid, "report_edited", json_encode($post));
@@ -163,12 +173,13 @@ class DB extends SQLite3 {
     $stmt->execute();
     $log->log(null, "drug_omitted", $id);
   }
-  function addRequisition($pid, $test, $date, $time, $room, $form){
+  function addRequisition($pid, $test, $sample, $date, $time, $room, $form){
     global $log;
     if(!checkAccess("requisition", "dbSet")) return false;
-    $stmt=$this->prepare("INSERT INTO requisition (pid, test, time, room, form, status) VALUES (:pid, :test, :time, :room, :form, :status);");
+    $stmt=$this->prepare("INSERT INTO requisition (pid, test, sample, time, room, form, status) VALUES (:pid, :test, :sample, :time, :room, :form, :status);");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":test", $test);
+    $stmt->bindValue(":sample", $sample);
     $stmt->bindValue(":time", strtotime($date." ".$time));
     $stmt->bindValue(":room", $room);
     $stmt->bindValue(":form", $form);
@@ -318,7 +329,7 @@ class DB extends SQLite3 {
   function getRequisitionList(){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,pid,test,room,time,form FROM requisition WHERE status=:active;");
+    $stmt=$this->prepare("SELECT rowid,pid,test,sample,room,time,form FROM requisition WHERE status=:active;");
     $stmt->bindValue(":active", "active");
     $result=$stmt->execute();
     return($result);
@@ -381,7 +392,7 @@ class DB extends SQLite3 {
       $stmt=$this->prepare("SELECT data FROM nursing WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
     } elseif($cat=="reports"){
       if(!checkAccess("report", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT data FROM reports WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT form,data FROM reports WHERE pid=:pid AND rowid=:id ORDER BY time DESC;");
     } else{
       return(false);
     }
@@ -400,7 +411,7 @@ class DB extends SQLite3 {
       $stmt=$this->prepare("SELECT rowid,data FROM nursing WHERE pid=:pid ORDER BY time DESC;");
     } elseif($cat=="reports"){
       if(!checkAccess("report", "dbGet")) return false;
-      $stmt=$this->prepare("SELECT rowid,data FROM reports WHERE pid=:pid ORDER BY time DESC;");
+      $stmt=$this->prepare("SELECT rowid,form,data FROM reports WHERE pid=:pid ORDER BY time DESC;");
     } elseif($cat=="info"){
       if(!checkAccess("info", "dbGet")) return false;
       $stmt=$this->prepare("SELECT rowid,data FROM patients WHERE pid=:pid ORDER BY time DESC;");

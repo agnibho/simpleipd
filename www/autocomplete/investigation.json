@@ -12,5 +12,15 @@
         "mycology",
         "parasitology",
         "pathology"
-    ]
+    ],
+    "sample": {
+        "blood": "blood",
+        "urine": "urine",
+        "sputum": "sputum",
+        "pus": "pus",
+        "discharge": "discharge",
+        "csf": "csf",
+        "ascitic_fluid": "ascitic_fluid",
+        "pleural_fluid": "pleural_fluid"
+    }
 }

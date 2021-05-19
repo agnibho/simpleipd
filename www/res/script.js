@@ -45,6 +45,22 @@ $(document).ready(function(){
       });
     });
   };
+  if($("[name='sample']").length){
+    $(this).prop("autocomplete","off");
+    $.get("autocomplete/investigation.json", function(data){
+      $("[name='sample']").each(function(){
+        $(this).autocomplete({source:data.sample, highlightClass:'text-danger',treshold:1});
+      });
+    });
+  };
+  if($(".abinter").length){
+    $(this).prop("autocomplete","off");
+    $.get("autocomplete/vitek.json", function(data){
+      $(".abinter").each(function(){
+        $(this).autocomplete({source:data.interpretation, highlightClass:'text-danger',treshold:0});
+      });
+    });
+  };
   if($("#discharge-note").length){
     $.get("autocomplete/discharge.json", function(data){
       $("#discharge-note").val(data.note);

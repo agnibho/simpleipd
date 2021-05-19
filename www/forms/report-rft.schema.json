@@ -15,7 +15,10 @@
             "type": "string",
             "format": "time"
         },
-
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
         "urea": {
             "description": "Urea",
             "type": "number"

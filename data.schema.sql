@@ -1,4 +1,3 @@
-
 CREATE TABLE death(
 pid int,
 time int,
@@ -42,15 +41,16 @@ data text
 CREATE TABLE reports(
 pid int,
 time int,
+sample text,
 form text,
 data text
 );
 CREATE TABLE requisition(
 pid int,
 test text,
+sample text,
 time int,
 room text,
-sample text,
 form text,
 status text
 );

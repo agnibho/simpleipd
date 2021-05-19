@@ -3,8 +3,9 @@ require(dirname(__DIR__)."/require.php");
 $list="";
 if(isSet($_GET["pid"])){
   foreach(glob("forms/report*.json") as $file){
+    $pid=$_GET["pid"];
     $form=json_decode(file_get_contents($file));
-    $list=$list."<li class='list-group-item'><a href='report.php?pid=".$_GET["pid"]."&form=".str_replace(["forms/",".schema.json"], "", $file)."'>".$form->description."</a></li>";
+    $list=$list."<li class='list-group-item'><a href='report.php?pid=".$pid."&form=".str_replace(["forms/",".schema.json"], "", $file)."'>".$form->description."</a></li>";
   }
 }
 ?>
@@ -21,6 +22,9 @@ if(isSet($_GET["pid"])){
           <h4 class="card-title">List of Tests</h4>
           <ul class="list-group">
             <?php echo $list;?>
+            <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-grampos">Vitek Report (Gram Positive)</a></li>
+            <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-gramneg">Vitek Report (Gram Negative)</a></li>
+            <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-fungal">Vitek Report (Fungal)</a></li>
           </ul>
         </div>
       </div>

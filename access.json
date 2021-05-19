@@ -126,5 +126,22 @@
         "nursing": "all",
         "lab": "all",
         "clerk": "view"
+    },
+    "vitek": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "all",
+        "lab": "all",
+        "clerk": "view"
+    },
+
+    "antibiogram": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "all",
+        "clerk": "view"
     }
 }

@@ -19,7 +19,12 @@ if(isSet($_GET["pid"])){
   }
   $reportsArray=$db->getAllData($pid, "reports");
   while($r=$reportsArray->fetchArray()){
-    array_push($reports, viewData($r["data"], "report.php?pid=".$pid."&id=".$r["rowid"]."&form=".$db->getForm($r["rowid"])->fetchArray()["form"]));
+    if(in_array($r["form"], ["report-as-grampos", "report-as-gramneg", "report-as-fungal"])){
+      array_push($reports, viewAntibiogram($r["data"], "antibiogram.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+    }
+    else{
+      array_push($reports, viewData($r["data"], "report.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+    }
   }
 }
 ?>

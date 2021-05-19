@@ -13,7 +13,6 @@ if(!empty($_GET["pid"])){
   $view=$view."<table class='table'>";
   $view=$view."<tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Duration</th><th>Note</th></tr>";
   while($drug=$list->fetchArray()){
-    var_dump($drug);
     $view=$view."<tr><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button class='btn btn-warning' name='delete' value='".$drug["rowid"]."' form='delete'>Delete</button></td></tr>";
   }
   $view=$view."</table>";
