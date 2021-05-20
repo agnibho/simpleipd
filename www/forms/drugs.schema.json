@@ -32,8 +32,8 @@
             "format": "time"
         },
         "duration": {
-            "description": "Duration",
-            "type": "integer"
+            "description": "Duration in days / Continue",
+            "type": "text"
         }
     },
     "required": ["drug", "dose", "route", "frequency", "date", "time", "duration"]
