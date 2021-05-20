@@ -23,6 +23,7 @@ else{
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <?php echo getInfo($pid);?>
       <div <?php echo checkAccess("history", "form");?>>
         <?php echo $form;?>

@@ -32,7 +32,7 @@ while($arr=$reqs->fetchArray()){
   </head>
   <body>
     <div class="container">
-      <h1><?php echo CONFIG_TITLE;?></h1>
+      <?php include(CONFIG_LIB."top.php");?>
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Patient List</h4>

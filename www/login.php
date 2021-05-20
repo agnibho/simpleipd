@@ -28,6 +28,7 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <?php echo $error;?>
       <form method="post">
         <input class="m-2 form-control" type="text" name="username" placeholder="Username" required>
@@ -35,7 +36,6 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
         <button class="m-2 btn btn-primary" type="submit">Login</button>
       </form>
     </div>
-
     <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

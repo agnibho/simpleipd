@@ -46,6 +46,7 @@ $error=$error."</p>";
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <?php echo getInfo($pid);?>
       <form class="mt-3 mb-3" method="post" enctype="multipart/form-data" <?php echo checkAccess("attachments", "form");?>>
         <label for="upload">Select file to upload. JPG, PNG, GIF and PDF files are supported. Size limit: <span id="size-limit"><?php echo str_replace("M", "MB", ini_get("upload_max_filesize"));?></span><span id="upload-error"></span></label>

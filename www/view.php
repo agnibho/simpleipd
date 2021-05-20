@@ -51,6 +51,7 @@ if(isSet($_GET["pid"])){
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <h1>Patient Data</h1>
       <div class="card">
         <div class="card-body">
@@ -127,10 +128,10 @@ if(isSet($_GET["pid"])){
               <div class="form-row">
                 <input type="hidden" name="shiftWard" value="true">
                 <div class="col">
-                  <input type="text" name="ward" class="form-control" placeholder="Ward">
+                  <input type="text" name="ward" class="form-control" placeholder="Ward" required>
                 </div>
                 <div class="col">
-                  <input type="text" name="bed" class="form-control" placeholder="Bed">
+                  <input type="text" name="bed" class="form-control" placeholder="Bed" required>
                 </div>
                 <div class="col">
                   <input type="date" name="date" class="form-control" placeholder="Date">

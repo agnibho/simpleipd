@@ -22,6 +22,7 @@ if(!empty($_GET["pid"])){
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <?php echo getInfo($pid);?>
       <?php echo str_replace("Save", "Declare Death", $form);?>
     </div>

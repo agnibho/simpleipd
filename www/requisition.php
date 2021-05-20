@@ -46,6 +46,7 @@ if(isSet($_GET["pid"])){
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">List of Requisitions</h4>

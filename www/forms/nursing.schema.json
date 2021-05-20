@@ -31,21 +31,9 @@
             "description": "Body Weight",
             "type": "string"
         },
-        "bp": {
-            "description": "Blood Pressure",
+        "temperature": {
+            "description": "Temperature",
             "type": "string"
-        },
-        "pr": {
-            "description": "Pulse",
-            "type": "integer"
-        },
-        "rr": {
-            "description": "Respiratory Rate",
-            "type": "integer"
-        },
-        "spo2": {
-            "description": "SpO2",
-            "type": "integer"
         }
     },
     "required": ["date","time"]

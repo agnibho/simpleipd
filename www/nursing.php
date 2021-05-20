@@ -28,12 +28,12 @@ if(!empty($_GET["pid"])){
   </head>
   <body>
     <div class="container">
+      <?php include(CONFIG_LIB."top.php");?>
       <?php echo getInfo($pid);?>
       <div <?php echo checkAccess("nursing", "form");?>>
         <?php echo $form;?>
       </div>
     </div>
-
     <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>
