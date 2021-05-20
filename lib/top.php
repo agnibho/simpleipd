@@ -11,7 +11,7 @@ else{
 <div class="ml-auto">
 <?php
 if(!empty($_SESSION["user"])){
-  echo '<span class="mr-2"><?php if(!empty($_SESSION["user"])) echo $_SESSION["user"];?></span>';
+  echo '<span class="mr-2">'.$_SESSION["user"].'</span>';
   echo '<a href="login?action=logout" class="btn btn-sm btn-secondary">Logout</a>';
 }
 ?>
