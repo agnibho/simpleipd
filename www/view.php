@@ -1,11 +1,26 @@
 <?php
 require(dirname(__DIR__)."/require.php");
+
 $info="";
 $physician=[];
 $nursing=[];
 $reports=[];
 if(isSet($_GET["pid"])){
   $pid=$_GET["pid"];
+
+  if(!empty($_POST["shiftWard"]) && !empty($_POST["ward"]) && !empty($_POST["bed"])){
+    $ward=$_POST["ward"];
+    $bed=$_POST["bed"];
+    $oldward=$db->getWard($pid)->fetchArray()["ward"];
+    $oldbed=$db->getBed($pid)->fetchArray()["bed"];
+    $rec="Transfer: ".$oldward."-".$oldbed." -> ".$ward."-".$bed." @ ".$_POST["date"]." ".$_POST["time"];
+    $data=json_decode($db->getAdmissionData($pid)->fetchArray()["data"]);
+    $data->ward=$ward;
+    $data->bed=$bed;
+    $data->extra_note=$data->extra_note."\n".$rec;
+    $db->admit((array) $data);
+  }
+
   $status=$db->getStatus($pid)->fetchArray()["status"];
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
@@ -107,6 +122,27 @@ if(isSet($_GET["pid"])){
                 </table>
               </div>
             </div>
+            <a href="#" id="showtransfer">Transfer</a>
+            <form method="post" id="transfer" class="d-none">
+              <div class="form-row">
+                <input type="hidden" name="shiftWard" value="true">
+                <div class="col">
+                  <input type="text" name="ward" class="form-control" placeholder="Ward">
+                </div>
+                <div class="col">
+                  <input type="text" name="bed" class="form-control" placeholder="Bed">
+                </div>
+                <div class="col">
+                  <input type="date" name="date" class="form-control" placeholder="Date">
+                </div>
+                <div class="col">
+                  <input type="time" name="time" class="form-control" placeholder="Time">
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary">Transfer</button>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
@@ -132,5 +168,12 @@ if(isSet($_GET["pid"])){
       </form>
     </div>
     <?php include(CONFIG_LIB."foot.php");?>
+<script>
+$(document).ready(function(){
+  $("#showtransfer").click(function(){
+    $("#transfer").removeClass("d-none");
+  });
+});
+</script>
   </body>
 </html>

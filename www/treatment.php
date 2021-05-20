@@ -16,12 +16,12 @@ if(!empty($_GET["pid"])){
     }
     else{
       $omit="";
-      try{
-        if($drug["start"]+$drug["duration"]*24*3600<time()){
-          $db->omitDrug($drug["rowid"]);
-          $omit="omit";
-        }
-      } catch(TypeError $e){}
+      //try{
+      //  if($drug["start"]+$drug["duration"]*24*3600<time()){
+      //    $db->omitDrug($drug["rowid"]);
+      //    $omit="omit";
+      //  }
+      //} catch(TypeError $e){}
     }
     $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td><button type='submit' class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
   }

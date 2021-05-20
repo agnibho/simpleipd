@@ -18,7 +18,7 @@ $(document).ready(function(){
   });
   $("[name='time']").each(function(){
     if($(this).val()==""){
-      $(this).val(moment().format("hh:mm"));
+      $(this).val(moment().format("HH:mm"));
     }
   });
   $("[data-toggle='popover']").popover({"placement": "top", "trigger": "focus"});
