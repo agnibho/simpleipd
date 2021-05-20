@@ -7,8 +7,13 @@ else{
   echo '<a class="navbar-brand" href="#">'.CONFIG_TITLE.'</a>';
 }
 ?>
+
 <div class="ml-auto">
-    <span class="mr-2"><?php if(!empty($_SESSION["user"])) echo $_SESSION["user"];?></span>
-    <a href="login?action=logout" class="btn btn-sm btn-secondary">Logout</a>
+<?php
+if(!empty($_SESSION["user"])){
+  echo '<span class="mr-2"><?php if(!empty($_SESSION["user"])) echo $_SESSION["user"];?></span>';
+  echo '<a href="login?action=logout" class="btn btn-sm btn-secondary">Logout</a>';
+}
+?>
   </div>
 </nav>
