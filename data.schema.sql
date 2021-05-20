@@ -63,6 +63,7 @@ frequency text,
 start int,
 end int,
 duration text,
+administer text,
 omit boolean,
 addl text
 );
