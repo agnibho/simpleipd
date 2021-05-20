@@ -6,7 +6,7 @@ if(!empty($_GET["pid"])){
     $db->omitDrug($_POST["omit"]);
   }
   elseif(!empty($_POST["drug"])){
-    $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra-note"]);
+    $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra_note"]);
   }
   $list=$db->getDrugs($pid);
   $view="";
