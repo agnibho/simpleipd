@@ -8,7 +8,7 @@ else{
 }
 ?>
 <div class="ml-auto">
-    <span class="mr-2"><?php echo $_SESSION["user"];?></span>
+    <span class="mr-2"><?php if(!empty($_SESSION["user"])) echo $_SESSION["user"];?></span>
     <a href="login?action=logout" class="btn btn-sm btn-secondary">Logout</a>
   </div>
 </nav>
