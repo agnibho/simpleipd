@@ -163,11 +163,11 @@ class DB extends SQLite3 {
     $stmt->execute();
     $log->log($pid, "drug_added", json_encode([$drug,$dose,$route,$frequency,$date,$time,$duration,$addl]));
   }
-  function omitDrug($id){
+  function omitDrug($id, $date, $time){
     global $log;
     if(!checkAccess("treatment", "dbSet")) return false;
     $stmt=$this->prepare("UPDATE treatment SET end=:end,omit=:omit WHERE rowid=:id;");
-    $stmt->bindValue(":end", time());
+    $stmt->bindValue(":end", strtotime($date." ".$time));
     $stmt->bindValue(":omit", true);
     $stmt->bindValue(":id", $id);
     $stmt->execute();

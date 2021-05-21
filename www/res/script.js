@@ -1,4 +1,11 @@
 $(document).ready(function(){
+  $(".confirm").each(function(){
+    $(this).click(function(event){
+      if(!confirm("Continue?")){
+        event.preventDefault();
+      }
+    });
+  });
   $("#upload").change(function(){
     lim=$("#size-limit").text().split("MB")[0]*1000*1000;
     if(this.files[0]["size"]>lim){

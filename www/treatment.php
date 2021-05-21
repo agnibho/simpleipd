@@ -10,11 +10,11 @@ if(!empty($_GET["pid"])){
     else{
       $given=[];
     }
-    array_push($given, time());
+    array_push($given, strtotime($_POST["date"]." ".$_POST["time"]));
     $db->giveDrug($_POST["give"], json_encode($given));
   }
   elseif(!empty($_POST["omit"])){
-    $db->omitDrug($_POST["omit"]);
+    $db->omitDrug($_POST["omit"], $_POST["date"], $_POST["time"]);
   }
   elseif(!empty($_POST["drug"])){
     $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra_note"]);
@@ -41,7 +41,7 @@ if(!empty($_GET["pid"])){
     else{
       $last="";
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button></td><td><button type='submit' class='btn btn-warning' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
+    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button></td><td><button type='submit' class='btn btn-warning confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
   }
   $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
@@ -59,8 +59,14 @@ if(!empty($_GET["pid"])){
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">Medicine List</h4>
-          <form method='post' id='omitter'></form>
-          <form method='post' id='administer'></form>
+          <form method='post' id='omitter'>
+            <input type="hidden" name="date">
+            <input type="hidden" name="time">
+          </form>
+          <form method='post' id='administer'>
+            <input type="hidden" name="date">
+            <input type="hidden" name="time">
+          </form>
           <table class="table">
             <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th>Given</th><th></th><th></th></tr>
             <?php echo $view;?>
