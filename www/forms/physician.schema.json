@@ -38,6 +38,47 @@
         "chest": {
             "description": "Chest Findings",
             "type": "string"
+        },
+        "o2_device": {
+            "description": "O2 Delivery Device",
+            "type": "string",
+            "enum": ["nasal_cannula", "face_mask", "nrbm", "hfnc", "cpap", "bipap", "mv", "other"]
+        },
+        "o2_flow": {
+            "description": "O2 Flow Requirement (L/min)",
+            "type": "integer"
+        },
+        "bipap_ipap": {
+            "description": "BIPAP IPAP",
+            "type": "integer"
+        },
+        "bipap_epap":{
+            "description": "BIPAP EPAP",
+            "type": "integer"
+        },
+        "fi02": {
+            "description": "FiO2",
+            "type": "integer"
+        },
+        "mv_mode": {
+            "description": "Mechanical Ventillator Mode",
+            "type": "string"
+        },
+        "mv_tv": {
+            "description": "MV Tidal Volume",
+            "type": "integer"
+        },
+        "mv_peep": {
+            "description": "MV PEEP",
+            "type": "integer"
+        },
+        "mv_ppeak": {
+            "description": "MV P-Peak",
+            "type": "integer"
+        },
+        "mv_pplateau": {
+            "description": "MV P-Plateau",
+            "type": "integer"
         }
     },
     "required": ["date","time"]
