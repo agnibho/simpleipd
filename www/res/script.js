@@ -19,12 +19,12 @@ $(document).ready(function(){
       $("#upload-error").text("");
     }
   });
-  $("[name='date']").each(function(){
+  $("[type='date']").each(function(){
     if($(this).val()==""){
       $(this).val(moment().format("YYYY-MM-DD"));
     }
   });
-  $("[name='time']").each(function(){
+  $("[type='time']").each(function(){
     if($(this).val()==""){
       $(this).val(moment().format("HH:mm"));
     }

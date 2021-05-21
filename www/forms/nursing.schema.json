@@ -27,9 +27,13 @@
             "description": "Output (ml)",
             "type": "integer"
         },
-        "io_duration": {
-            "description": "Intake Output Duration (hour)",
-            "type": "integer"
+        "io_from": {
+            "description": "I/O Since",
+            "type": "time"
+        },
+        "io_to": {
+            "description": "I/O Upto",
+            "type": "time"
         },
         "stool": {
             "description": "Times stool passed",
