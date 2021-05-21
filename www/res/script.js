@@ -1,3 +1,4 @@
+$.ajaxSetup({cache:false});
 $(document).ready(function(){
   $(".confirm").each(function(){
     $(this).click(function(event){

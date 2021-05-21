@@ -36,5 +36,5 @@
             "type": "text"
         }
     },
-    "required": ["drug", "dose", "route", "frequency", "date", "time"]
+    "required": ["drug", "dose", "route", "date", "time"]
 }
