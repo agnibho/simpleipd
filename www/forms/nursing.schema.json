@@ -20,20 +20,48 @@
             "type": "string"
         },
         "intake": {
-            "description": "Intake",
+            "description": "Intake (ml)",
             "type": "integer"
         },
         "output": {
-            "description": "Output",
+            "description": "Output (ml)",
+            "type": "integer"
+        },
+        "io_duration": {
+            "description": "Intake Output Duration (hour)",
+            "type": "integer"
+        },
+        "stool": {
+            "description": "Times stool passed",
             "type": "integer"
         },
         "bw": {
-            "description": "Body Weight",
+            "description": "Body Weight (kg)",
             "type": "string"
         },
         "temperature": {
-            "description": "Temperature",
+            "description": "Temperature (&deg;F)",
             "type": "string"
+        },
+        "cbg": {
+            "description": "CBG (mg/dl)",
+            "type": "integer"
+        },
+        "bp": {
+            "description": "Blood Pressure",
+            "type": "string"
+        },
+        "pr": {
+            "description": "Pulse",
+            "type": "integer"
+        },
+        "rr": {
+            "description": "Respiratory Rate",
+            "type": "integer"
+        },
+        "spo2": {
+            "description": "SpO2",
+            "type": "integer"
         }
     },
     "required": ["date","time"]
