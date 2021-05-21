@@ -175,7 +175,7 @@ class DB extends SQLite3 {
   }
   function giveDrug($id, $given){
     global $log;
-    if(!checkAccess("treatment", "dbSet")) return false;
+    if(!checkAccess("nursing", "dbSet")) return false;
     $stmt=$this->prepare("UPDATE treatment SET administer=:given WHERE rowid=:id;");
     $stmt->bindValue(":given", $given);
     $stmt->bindValue(":id", $id);
