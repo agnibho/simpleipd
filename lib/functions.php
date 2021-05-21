@@ -99,9 +99,11 @@ function viewData($data, $edit=null){
     }
     if(!empty($data->date)){
       if(!empty($data->time)){
-        $date=$data->date." ".$data->time;
+        $date=date("M d, Y h:i a", strtotime($data->date." ".$data->time));
       }
-      $date=$data->date;
+      else{
+        $date=$data->date;
+      }
     }
     else{
       $date="";
