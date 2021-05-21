@@ -2,6 +2,10 @@
 require(dirname(__DIR__)."/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
+  if(empty($_POST["intake"]) && empty($_POST["output"])){
+    if(!empty($_POST["io_from"])) $_POST["io_from"]="";
+    if(!empty($_POST["io_to"])) $_POST["io_to"]="";
+  }
   if(!empty($_POST["date"]) && !empty($_POST["time"])){
     if(!empty($_GET["id"])){
       $db->editNursing($_POST, $pid, $_GET["id"]);
