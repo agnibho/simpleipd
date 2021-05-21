@@ -56,8 +56,12 @@ $(document).ready(function(){
   if($("[name='sample']").length){
     $(this).prop("autocomplete","off");
     $.get("autocomplete/investigation.json", function(data){
+      val=$("#get-sample").text();
       $("[name='sample']").each(function(){
         $(this).autocomplete({source:data.sample, highlightClass:'text-danger',treshold:0});
+        if(val.length>0){
+          $(this).val(val);
+        }
       });
     });
   };
