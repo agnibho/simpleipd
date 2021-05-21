@@ -1,3 +1,4 @@
+config.php
 database/data.db
 database/log.db
 www/data/*

@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $(".confirm").each(function(){
     $(this).click(function(event){
-      if(!confirm("Continue?")){
+      if(!confirm("Are you sure?")){
         event.preventDefault();
       }
     });

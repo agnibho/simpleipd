@@ -1,10 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <?php
-if(!empty($_GET["pid"])){
+if(basename($_SERVER["PHP_SELF"])=="view.php"){
+  echo '<a class="navbar-brand" href="'.CONFIG_URL.'">'.CONFIG_TITLE.'</a>';
+}
+elseif(!empty($_GET["pid"])){
   echo '<a href="view.php?pid='.$_GET["pid"].'" class="navbar-brand">View Patient</a>';
 }
 else{
-  echo '<a class="navbar-brand" href="#">'.CONFIG_TITLE.'</a>';
+  echo '<a class="navbar-brand" href="'.CONFIG_URL.'">'.CONFIG_TITLE.'</a>';
 }
 ?>
 
