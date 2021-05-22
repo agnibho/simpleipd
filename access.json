@@ -1,4 +1,13 @@
 {
+    "archive": {
+        "admin": "all",
+        "visiting": "all",
+        "resident": "all",
+        "nursing": "view",
+        "lab": "view",
+        "tech": "view",
+        "clerk": "view"
+    },
     "info": {
         "admin": "all",
         "visiting": "all",

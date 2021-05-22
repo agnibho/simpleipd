@@ -1,10 +1,10 @@
 <?php
 require(dirname(__DIR__)."/require.php");
-$list=$db->getPatientList();
+$list=$db->getAdmittedPatientList();
 $showList="";
 while($arr=$list->fetchArray()){
   $pid=$arr["pid"];
-  $showList=$showList."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$arr["ward"]."-".$arr["bed"]."</td><td>".$arr["name"]."</td><td>".$arr["diagnosis"]."</tr>";
+  $showList=$showList."<tr><td><a href='view.php?pid=".$pid."'>".$pid."</a></td><td>".$arr["ward"]."-".$arr["bed"]."</td><td>".$arr["name"]."</td><td>".$arr["diagnosis"]."</td></tr>";
 }
 $reqs=$db->getRequisitionList();
 $showReqs="";
@@ -41,6 +41,7 @@ while($arr=$reqs->fetchArray()){
             <?php echo $showList;?>
           </table>
           <a class="btn btn-primary btn-lg" href="admission.php">Add New Patient</a>
+          <a href="archive.php" class="btn btn-outline-secondary float-right">Archive</a>
         </div>
       </div>
       <div class="card">

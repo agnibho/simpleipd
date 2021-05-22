@@ -22,6 +22,12 @@ if(isSet($_GET["pid"])){
   }
 
   $status=$db->getStatus($pid)->fetchArray()["status"];
+  if($status!="admitted"){
+    $archive="disabled";
+  }
+  else{
+    $archive="";
+  }
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
   $physicianArray=$db->getAllData($pid, "physician");
@@ -60,33 +66,33 @@ if(isSet($_GET["pid"])){
               <a class="btn btn-success btn-lg btn-block" href="treatment.php?pid=<?php echo $pid;?>">Treatment</a>
             </div>
             <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-primary btn-lg btn-block" href="physician.php?pid=<?php echo $pid;?>">Add Physician Note</a>
+              <a class="mb-2 btn btn-primary btn-lg btn-block <?php echo $archive;?>" href="physician.php?pid=<?php echo $pid;?>">Add Physician Note</a>
             </div>
             <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-warning btn-lg btn-block" href="nursing.php?pid=<?php echo $pid;?>">Add Nursing Note</a>
+              <a class="mb-2 btn btn-warning btn-lg btn-block <?php echo $archive;?>" href="nursing.php?pid=<?php echo $pid;?>">Add Nursing Note</a>
             </div>
             <div class="mb-2 col-md-3" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-danger btn-lg btn-block" href="requisition.php?pid=<?php echo $pid;?>">Add Requisition</a>
+              <a class="mb-2 btn btn-danger btn-lg btn-block <?php echo $archive;?>" href="requisition.php?pid=<?php echo $pid;?>">Add Requisition</a>
             </div>
           </div>
           <div class="row">
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-secondary" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
+              <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="admission.php?pid=<?php echo $pid;?>">Edit Information</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-secondary" href="history.php?pid=<?php echo $pid;?>">Edit History</a>
+              <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="history.php?pid=<?php echo $pid;?>">Edit History</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-secondary" href="laboratory.php?pid=<?php echo $pid;?>">Add Report</a>
+              <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="laboratory.php?pid=<?php echo $pid;?>">Add Report</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="btn btn-secondary" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
+              <a class="btn btn-secondary <?php echo $archive;?>" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
             </div>
-            <div <?php if($status!="admitted") echo "style='display:none'";?> class="mb-2 col-md-2" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="btn btn-secondary" href="discharge.php?pid=<?php echo $pid;?>">Discharge</a>
+            <div class="mb-2 col-md-2" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
+              <a class="btn btn-secondary <?php echo $archive;?>" href="discharge.php?pid=<?php echo $pid;?>">Discharge</a>
             </div>
-            <div <?php if($status!="admitted") echo "style='display:none'";?> class="mb-2 col-md-2" id="death" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="btn btn-secondary" href="death.php?pid=<?php echo $pid;?>">Death</a>
+            <div class="mb-2 col-md-2" id="death" <?php if($info=="") echo "style='display:none'";?>>
+              <a class="btn btn-secondary <?php echo $archive;?>" href="death.php?pid=<?php echo $pid;?>">Death</a>
             </div>
           </div>
         </div>
@@ -123,7 +129,7 @@ if(isSet($_GET["pid"])){
                 </table>
               </div>
             </div>
-            <p><a href="#" id="showtransfer">Transfer</a></p>
+            <p><a href="#" class="btn btn-outline-primary <?php echo $archive;?>" id="showtransfer">Transfer</a></p>
             <form method="post" id="transfer" class="d-none">
               <div class="form-row">
                 <input type="hidden" name="shiftWard" value="true">
@@ -144,7 +150,7 @@ if(isSet($_GET["pid"])){
                 </div>
               </div>
             </form>
-            <p><a href="printdata.php?pid=<?php echo $pid;?>">Print Data</a></p>
+            <p><a href="printdata.php?pid=<?php echo $pid;?>" class="btn btn-outline-success">Print Data</a></p>
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>

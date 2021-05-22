@@ -45,6 +45,12 @@ if(!empty($_GET["pid"])){
   }
   $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
+  if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
+    $hideForm="";
+  }
+  else{
+    $hideForm="style='display:none'";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -73,7 +79,7 @@ if(!empty($_GET["pid"])){
           </table>
         </div>
       </div>
-      <div <?php echo checkAccess("treatment","form");?>>
+      <div <?php echo $hideForm;?>>
         <?php echo $form;?>
       </div>
     </div>
