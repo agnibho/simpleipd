@@ -23,6 +23,10 @@
             "description": "RT-PCR",
             "type": "string"
         },
+        "ct": {
+            "description": "CT Value",
+            "type": "string"
+        },
         "rat": {
             "description": "RAT",
             "type": "string"
