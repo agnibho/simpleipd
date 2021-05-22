@@ -48,7 +48,12 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
     if(isSet($prop->enum)){
       $form=$form."<select class='form-control' ".$req." name='".$field."' id='".$field."'>";
       foreach($prop->enum as $opt){
-        $form=$form."<option>".$opt."</option>";
+        if($opt==$value2){
+          $form=$form."<option selected>".$opt."</option>";
+        }
+        else{
+          $form=$form."<option>".$opt."</option>";
+        }
       }
       $form=$form."</select>";
     }
