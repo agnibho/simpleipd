@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "serology",
+    "description": "Serology",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "hbsag": {
+            "description": "HBsAg",
+            "type": "string"
+        },
+        "hbeag": {
+            "description": "HBeAg",
+            "type": "string"
+        },
+        "antihcv": {
+            "description": "Anti-HCV",
+            "type": "string"
+        },
+        "antihav": {
+            "description": "Anti-HAV",
+            "type": "string"
+        },
+        "antihev": {
+            "description": "Anti-HEV",
+            "type": "string"
+        },
+        "antihsv": {
+            "description": "Anti-HSV",
+            "type": "string"
+        },
+        "dengue_ns1": {
+            "description": "Dengue NS1",
+            "type": "string"
+        },
+        "dengue_igm": {
+            "description": "Dengue IgM",
+            "type": "string"
+        },
+        "dengue_igg": {
+            "description": "Dengue IgG",
+            "type": "string"
+        },
+        "chik_igm": {
+            "description": "Chikungunya IgM",
+            "type": "string"
+        },
+        "jap_e_igm": {
+            "description": "Japanese Encephalitis IgM",
+            "type": "string"
+        },
+        "scrub_igm": {
+            "description": "Scrub Typhus IgM",
+            "type": "string"
+        },
+        "lepto_igm": {
+            "description": "Leptospira IgM",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}
