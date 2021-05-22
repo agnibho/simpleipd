@@ -30,7 +30,6 @@ if($_GET["pid"]){
   }
   $treatmentArray=$db->getDrugs($pid);
   while($t=$treatmentArray->fetchArray()){
-    var_dump($t);
     $start="";
     if(!empty($t["start"])){
       $start="from ".date("M j, Y", $t["start"]);
