@@ -64,7 +64,8 @@ $discharge=$discharge."</ol>";
   </head>
   <body>
     <div class="container">
-      <h4><?php echo CONFIG_TITLE;?></h4>
+      <h2><?php echo CONFIG_TITLE;?></h2>
+      <h4><?php echo "Patient Record";?></h4>
       <?php echo $info;?>
       <?php echo "<p><strong>Status: </strong>".$status."</p>";?>
       <?php echo $history;?>
