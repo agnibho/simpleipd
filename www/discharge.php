@@ -6,7 +6,7 @@ if(!empty($_GET["pid"])){
     $db->deleteAdvice($_POST["delete"]);
   }
   elseif(!empty($_POST["drug"])){
-    $db->addAdvice($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["duration"], $_POST["extra-note"]);
+    $db->addAdvice($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["duration"], $_POST["extra_note"]);
   }
   $list=$db->getAdvice($pid);
   $view="<form method='post' id='delete'></form>";

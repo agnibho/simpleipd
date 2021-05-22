@@ -1,5 +1,6 @@
 <?php
-define("CONFIG_URL", "/");
+define("CONFIG_URL", "");
+define("CONFIG_TZ", "UTC");
 define("CONFIG_ROOT", __DIR__."/");
 define("CONFIG_WWW", CONFIG_ROOT."www/");
 define("CONFIG_LIB", CONFIG_ROOT."lib/");

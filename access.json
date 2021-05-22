@@ -152,13 +152,21 @@
         "tech": "view",
         "clerk": "view"
     },
-
     "antibiogram": {
         "admin": "all",
         "visiting": "all",
         "resident": "all",
         "nursing": "view",
         "lab": "all",
+        "tech": "view",
+        "clerk": "view"
+    },
+    "printdata": {
+        "admin": "view",
+        "visiting": "view",
+        "resident": "view",
+        "nursing": "view",
+        "lab": "view",
         "tech": "view",
         "clerk": "view"
     }

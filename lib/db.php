@@ -280,6 +280,14 @@ class DB extends SQLite3 {
     $result=$stmt->execute();
     return($result);
   }
+  function getDeath($pid){
+    global $log;
+    if(!checkAccess("discharge", "dbGet")) return false;
+    $stmt=$this->prepare("SELECT data FROM death WHERE pid=:pid;");
+    $stmt->bindValue(":pid", $pid);
+    $result=$stmt->execute();
+    return($result);
+  }
   function getName($pid){
     global $log;
     if(!checkAccess("info", "dbGet")) return false;

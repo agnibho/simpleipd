@@ -4,6 +4,7 @@ require("lib/access.php");
 require("lib/log.php");
 require("lib/db.php");
 require("lib/functions.php");
+date_default_timezone_set(CONFIG_TZ);
 session_start();
 $page=basename($_SERVER["PHP_SELF"]);
 if($page!="login.php"){

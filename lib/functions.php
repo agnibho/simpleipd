@@ -114,7 +114,7 @@ function viewData($data, $edit=null){
     else{
       $date="";
     }
-    $view=$view."<tr><th>".$description."</th><th>".$date."</th></tr>";
+    $view=$view."<tr><th class='w-25'>".$description."</th><th>".$date."</th></tr>";
     foreach($data as $field=>$value){
       if(!empty($value) && $field!="form" && $field!="date" && $field!="time"){
         if(!empty($schema->properties->$field)){

@@ -123,7 +123,7 @@ if(isSet($_GET["pid"])){
                 </table>
               </div>
             </div>
-            <a href="#" id="showtransfer">Transfer</a>
+            <p><a href="#" id="showtransfer">Transfer</a></p>
             <form method="post" id="transfer" class="d-none">
               <div class="form-row">
                 <input type="hidden" name="shiftWard" value="true">
@@ -144,6 +144,7 @@ if(isSet($_GET["pid"])){
                 </div>
               </div>
             </form>
+            <p><a href="printdata.php?pid=<?php echo $pid;?>">Print Data</a></p>
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
