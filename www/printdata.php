@@ -74,7 +74,7 @@ $discharge=$discharge."</ol>";
       <hr>
       <?php echo $treatments;?>
       <hr>
-      <?php if($status="expired"){ echo $death; } else { echo $discharge; }?>
+      <?php if($status=="expired"){ echo $death; } else { echo $discharge; }?>
       <hr>
       <?php echo "Retrieved on: ".date("M d, Y H:i T", time());?>
     </div>
