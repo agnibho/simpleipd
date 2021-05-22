@@ -30,19 +30,20 @@ if($_GET["pid"]){
   }
   $treatmentArray=$db->getDrugs($pid);
   while($t=$treatmentArray->fetchArray()){
+    var_dump($t);
     $start="";
-    if(!empty($r["start"])){
-      $start="from ".date("M j", $t["start"]);
+    if(!empty($t["start"])){
+      $start="from ".date("M j, Y", $t["start"]);
     }
     $end="";
-    if(!empty($r["end"])){
-      $end="till ".date("M j", $t["end"]);
+    if(!empty($t["end"])){
+      $end="till ".date("M j, Y", $t["end"]);
     }
     $addl="";
-    if(!empty($r["addl"])){
+    if(!empty($t["addl"])){
       $addl="(".$t["addl"].")";
     }
-    $treatments=$treatments."<li>".$t["drug"]." ".$t["dose"]." ".$t["route"]." ".$t["frequency"]." ".$end." ".$addl;
+    $treatments=$treatments."<li>".$t["drug"]." ".$t["dose"]." ".$t["route"]." ".$t["frequency"]." ".$start." ".$end." ".$addl;
   }
   $dischargeArray=$db->getAdvice($pid);
   while($t=$dischargeArray->fetchArray()){
