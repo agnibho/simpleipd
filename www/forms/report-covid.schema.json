@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "covid",
+    "description": "COVID-19",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "rtpcr": {
+            "description": "RT-PCR",
+            "type": "string"
+        },
+        "rat": {
+            "description": "RAT",
+            "type": "string"
+        },
+        "igg": {
+            "description": "IgG",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}
