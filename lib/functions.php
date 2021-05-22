@@ -64,7 +64,13 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
     $form=$form."</div>";
 
   }
-  $form=$form."<div><label class='form-label' for='extra_note'>Extra Notes</label><textarea class='form-control' name='extra_note' id='extra_note'></textarea></div>";
+  if(!empty($data->extra_note)){
+    $extra_note=$data->extra_note;
+  }
+  else{
+    $extra_note="";
+  }
+  $form=$form."<div><label class='form-label' for='extra_note'>Extra Notes</label><textarea class='form-control' name='extra_note' id='extra_note'>".$extra_note."</textarea></div>";
   $form=$form."<button class='btn btn-primary mt-3' type='submit'>Save</button>";
   $form=$form."</form>";
   return $form;
