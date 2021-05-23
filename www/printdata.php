@@ -52,6 +52,17 @@ if($_GET["pid"]){
   while($d=$deathArray->fetchArray()){
     $death=$death.viewData($d["data"]);
   }
+  $imgs="";
+  $pdfs="";
+  foreach(glob("data/attachments/".str_replace("/", "", $pid)."-*") as $attach){
+    if(pathinfo($attach, PATHINFO_EXTENSION)=="pdf"){
+      $pdfs=$pdfs."<a href='".$attach."' target='_blank'>".pathinfo($attach, PATHINFO_BASENAME)."</a><br>";
+    }
+    else{
+      preg_match("/-([0-9]+)-/", pathinfo($attach, PATHINFO_FILENAME), $orig);
+      $imgs=$imgs."<figure><img class='w-100' src='".$attach."'><figcaption>Uploaded on: ".date("M d, Y h:i a", $orig[1])."</figcaption></figure>";
+    }
+  }
 }
 $treatments=$treatments."</ol>";
 $discharge=$discharge."</ol>";
@@ -76,8 +87,16 @@ $discharge=$discharge."</ol>";
       <?php echo $treatments;?>
       <hr>
       <?php if($status=="expired"){ echo $death; } else { echo $discharge; }?>
+      <p class="mt-5"><small><?php echo "Data Retrieved on ".date("M d, Y H:i T", time())." from ".CONFIG_URL;?></small></p>
+      <div style="page-break-before: always">
+        <h2>Attached Images</h2>
+      </div>
       <hr>
-      <?php echo "Retrieved on: ".date("M d, Y H:i T", time());?>
+      <?php echo $imgs;?>
+      <div class="d-print-none">
+        <h2>Open Attached PDFs</h2>
+        <?php echo $pdfs;?>
+      </div>
     </div>
   </body>
 </html>
