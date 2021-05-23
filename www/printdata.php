@@ -86,14 +86,14 @@ $discharge=$discharge."</ol>";
       <hr>
       <?php echo $treatments;?>
       <hr>
-      <?php if($status=="expired"){ echo $death; } else { echo $discharge; }?>
+      <?php if($status=="expired"){ echo $death; } elseif($status=="discharged") { echo $discharge; }?>
       <p class="mt-5"><small><?php echo "Data Retrieved on ".date("M d, Y H:i T", time())." from ".CONFIG_URL;?></small></p>
-      <div style="page-break-before: always">
+      <div style="page-break-before: always" <?php if($imgs=="") echo "class='d-none'";?>>
         <h2>Attached Images</h2>
+        <?php echo $imgs;?>
       </div>
       <hr>
-      <?php echo $imgs;?>
-      <div class="d-print-none">
+      <div class="d-print-none <?php if($pdfs=="") echo "d-none";?>">
         <h2>Open Attached PDFs</h2>
         <?php echo $pdfs;?>
       </div>
