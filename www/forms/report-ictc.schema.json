@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "ictc",
+    "description": "ICTC",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "report": {
+            "description": "Interpretation of Result",
+            "type": "string",
+            "enum": ["Negative", "Positive for HIV-1", "Positive for HIV-1 and HIV-2 or HIV-2 alone", "Indeterminate"]
+        }
+    },
+    "required": ["date"]
+}
