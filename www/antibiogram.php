@@ -47,9 +47,13 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
     $sample="value='".$data->sample."'";
     $organism="value='".$data->organism."'";
   }
-  elseif(!empty($_GET["sample"])){
-    $date="";
-    $sample="value='".$_GET["sample"]."'";
+  elseif(!empty($_GET["time"]) || !empty($_GET["sample"])){
+    if(!empty($_GET["time"])){
+      $date="value='".date("Y-m-d", $_GET["time"])."'";
+    }
+    if(!empty($_GET["sample"])){
+      $sample="value='".$_GET["sample"]."'";
+    }
     $organism="";
   }
   else{

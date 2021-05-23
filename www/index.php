@@ -12,10 +12,10 @@ while($arr=$reqs->fetchArray()){
   $pid=$arr["pid"];
   if(!empty($arr["form"])){
     if($arr["form"]=="report-cs"){
-      $test="<a href='vitek.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&sample=".$arr["sample"]."&src=index'>".$arr["test"]."</a>";
+      $test="<a href='vitek.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&sample=".$arr["sample"]."&time=".$arr["time"]."&src=index'>".$arr["test"]."</a>";
     }
     else{
-      $test="<a href='report.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&sample=".$arr["sample"]."&src=index'>".$arr["test"]."</a>";
+      $test="<a href='report.php?pid=".$pid."&form=".$arr["form"]."&req=".$arr["rowid"]."&sample=".$arr["sample"]."&time=".$arr["time"]."&src=index'>".$arr["test"]."</a>";
     }
   }
   else{

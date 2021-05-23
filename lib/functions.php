@@ -1,5 +1,5 @@
 <?php
-function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
+function schema2form($file, $pid=null, $id=null, $cat=null, $data=null, $time=null){
   global $db;
   $schema=json_decode(file_get_contents($file));
 
@@ -25,6 +25,14 @@ function schema2form($file, $pid=null, $id=null, $cat=null, $data=null){
     if(!empty($data->$field)){
       $value="value='".$data->$field."'";
       $value2=$data->$field;
+    }
+    elseif(!empty($time) && $field=="date"){
+      $value="value='".date("Y-m-d", $time)."'";
+      $value2=date("Y-m-d", $time);
+    }
+    elseif(!empty($time) && $field=="time"){
+      $value="value='".date("H:i", $time)."'";
+      $value2=date("H:i", $time);
     }
     else{
       $value="";
