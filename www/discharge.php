@@ -2,6 +2,11 @@
 require(dirname(__DIR__)."/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
+  if(!empty($_POST["discharge"]) && $_POST["discharge"]=="discharge"){
+    $db->setDischarged($pid);
+    header("Location: view.php?pid=".$_GET["pid"]);
+    exit();
+  }
   if(!empty($_POST["delete"])){
     $db->deleteAdvice($_POST["delete"]);
   }
@@ -37,9 +42,9 @@ if(!empty($_GET["pid"])){
       <div <?php echo checkAccess("discharge", "form");?>>
         <?php echo $form;?>
       </div>
-      <form method="post" action="print-discharge.php?pid=<?php echo $pid;?>" class="mt-4" <?php echo checkAccess("discharge", "form");?>>
-        <textarea class="form-control mb-2" id="discharge-note" name="discharge-note"></textarea>
-        <button type="submit" class="btn btn-danger">Discharge Patient</button>
+      <form method="post" class="mt-4" <?php echo checkAccess("discharge", "form");?>>
+        <input type="hidden" name="discharge" value="discharge">
+        <button type="submit" class="btn btn-danger confirm">Discharge Patient</button>
       </form>
     </div>
     <?php include(CONFIG_LIB."foot.php");?>
