@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "usg_wa",
+    "description": "USG W/A",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "liver": {
+            "description": "Liver",
+            "type": "string"
+        },
+        "gb": {
+            "description": "GB",
+            "type": "string"
+        },
+        "cbd": {
+            "description": "CBD",
+            "type": "string"
+        },
+        "pv": {
+            "description": "PV",
+            "type": "string"
+        },
+        "pancreas": {
+            "description": "Pancreas",
+            "type": "string"
+        },
+        "spleen": {
+            "description": "Spleen",
+            "type": "string"
+        },
+        "rk": {
+            "description": "RK",
+            "type": "string"
+        },
+        "lk": {
+            "description": "LK",
+            "type": "string"
+        },
+        "ub": {
+            "description": "UB",
+            "type": "string"
+        },
+        "prostate": {
+            "description": "Prostate",
+            "type": "string"
+        },
+        "ascites": {
+            "description": "Ascites",
+            "type": "string"
+        },
+        "rpln": {
+            "description": "RPLN",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

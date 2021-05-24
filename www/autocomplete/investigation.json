@@ -1,8 +1,7 @@
 {
     "tests": [
         "Chest Xray",
-        "Straight Xray Abdomen",
-        "USG W/A"
+        "Straight Xray Abdomen"
     ],
     "rooms": [
         "labmed",
@@ -14,6 +13,7 @@
         "pathology",
         "ictc",
         "suraksha_clinic",
+        "radiology",
         "ccu_lab",
         "other_govt_hospital",
         "outside_lab"
