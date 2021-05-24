@@ -57,7 +57,7 @@ if(!empty($_GET["pid"])){
 <html>
   <head>
     <?php include(CONFIG_LIB."head.php");?>
-    <title>Clinical Notes</title>
+    <title>Treatment</title>
   </head>
   <body>
     <div class="container">

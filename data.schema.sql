@@ -52,7 +52,8 @@ sample text,
 time int,
 room text,
 form text,
-status text
+status text,
+addl text
 );
 CREATE TABLE treatment(
 pid int,

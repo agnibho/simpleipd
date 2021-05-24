@@ -14,7 +14,7 @@ if(isSet($_GET["pid"])){
       $test=$_POST["test"];
       $form="";
     }
-    $db->addRequisition($pid, $test, $_POST["sample"], $_POST["date"], $_POST["time"], $_POST["room"], $form);
+    $db->addRequisition($pid, $test, $_POST["sample"], $_POST["date"], $_POST["time"], $_POST["room"], $form, $_POST["addl"]);
   }
   $inv=json_decode(file_get_contents("autocomplete/investigation.json"));
   $testList="";
@@ -26,15 +26,15 @@ if(isSet($_GET["pid"])){
     $testList=$testList."<option>".$t."</option>";
   }
   $roomList="";
+  $roomList=$roomList."<option hidden disabled selected value=''>--- Select Room ---</option>";
   foreach($inv->rooms as $r){
     $roomList=$roomList."<option>".$r."</option>";
   }
-  $roomList=$roomList."<option selected='selected'>other</option>";
-
+  $roomList=$roomList."<option>other</option>";
   $reqList=$db->getRequisitions($pid);
   $list="";
   while($req=$reqList->fetchArray()){
-    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["sample"]."</td><td>".$req["room"]."</td><td>".date("M j, Y", $req["time"])."</td><td><button type='submit' class='btn btn-secondary' name='del' value='".$req["rowid"]."' form='delete' ".checkAccess("requisition","form").">Delete</button></td></tr>";
+    $list=$list."<tr><td>".$req["test"]."</td><td>".$req["sample"]."</td><td>".$req["room"]."</td><td>".date("M j", $req["time"])."</td><td>".$req["addl"]."</td><td><button type='submit' class='btn btn-secondary confirm' name='del' value='".$req["rowid"]."' form='delete' ".checkAccess("requisition","form").">Delete</button></td></tr>";
   }
 }
 ?>
@@ -42,7 +42,7 @@ if(isSet($_GET["pid"])){
 <html>
   <head>
     <?php include(CONFIG_LIB."head.php");?>
-    <title>Laboratory</title>
+    <title>Requisitions</title>
   </head>
   <body>
     <div class="container">
@@ -52,14 +52,14 @@ if(isSet($_GET["pid"])){
           <h4 class="card-title">List of Requisitions</h4>
           <form method='post' id='delete'></form>
           <table class="table">
-            <tr><th>Test Name</th><th>Sample</th><th>Destination</th><th>Date</th><th></th></tr>
+            <tr><th>Test Name</th><th>Sample</th><th>Destination</th><th>Date</th><th>Extra note</th><th></th></tr>
             <?php echo $list;?>
           </table>
           <hr>
           <form method="post" <?php echo checkAccess("requisition", "form");?>>
             <div class="row">
               <div class="col">
-                <select name="test">
+                <select name="test" required>
                   <?php echo $testList;?>
                 </select>
               </div>
@@ -67,7 +67,7 @@ if(isSet($_GET["pid"])){
                 <input type="text" class="form-control" name="sample" placeholder="Sample">
               </div>
               <div class="col">
-                <select name="room">
+                <select name="room" required>
                   <?php echo $roomList;?>
                 </select>
               </div>
@@ -75,13 +75,13 @@ if(isSet($_GET["pid"])){
                 <input type="date" name="date" class="form-control">
                 <input type="time" name="time" class="form-control">
               </div>
-              <div class="col">
-                <button class="btn btn-primary" type="submit">Submit Requisition</button>
-              </div>
-          </form>
             </div>
+            <textarea type="text" class="form-control" name="addl" placeholder="Extra note"></textarea>
+            <button class="btn btn-primary" type="submit">Submit Requisition</button>
+          </form>
         </div>
       </div>
-      <?php include(CONFIG_LIB."foot.php");?>
+    </div>
+    <?php include(CONFIG_LIB."foot.php");?>
   </body>
 </html>

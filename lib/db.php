@@ -182,10 +182,10 @@ class DB extends SQLite3 {
     $stmt->execute();
     $log->log(null, "drug_given", $id);
   }
-  function addRequisition($pid, $test, $sample, $date, $time, $room, $form){
+  function addRequisition($pid, $test, $sample, $date, $time, $room, $form, $addl){
     global $log;
     if(!checkAccess("requisition", "dbSet")) return false;
-    $stmt=$this->prepare("INSERT INTO requisition (pid, test, sample, time, room, form, status) VALUES (:pid, :test, :sample, :time, :room, :form, :status);");
+    $stmt=$this->prepare("INSERT INTO requisition (pid, test, sample, time, room, form, status, addl) VALUES (:pid, :test, :sample, :time, :room, :form, :status, :addl);");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":test", $test);
     $stmt->bindValue(":sample", $sample);
@@ -193,6 +193,7 @@ class DB extends SQLite3 {
     $stmt->bindValue(":room", $room);
     $stmt->bindValue(":form", $form);
     $stmt->bindValue(":status", "active");
+    $stmt->bindValue(":addl", $addl);
     $stmt->execute();
     $log->log($pid, "requisition_added", json_encode([$test,$room,$form]));
   }
@@ -361,7 +362,7 @@ class DB extends SQLite3 {
   function getRequisitionList(){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,pid,test,sample,room,time,form FROM requisition WHERE status=:active ORDER BY room,test;");
+    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE status=:active ORDER BY room,test;");
     $stmt->bindValue(":active", "active");
     $result=$stmt->execute();
     return($result);

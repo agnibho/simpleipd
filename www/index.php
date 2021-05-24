@@ -21,7 +21,7 @@ while($arr=$reqs->fetchArray()){
   else{
     $test="<a href='report.php?pid=".$pid."&form=report-other&req=".$arr["rowid"]."&src=index'>".$arr["test"]."</a>";
   }
-  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j, Y", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr>";
+  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr><tr><td></td><td colspan='4'>".$arr["addl"]."</td></tr>";
 }
 ?>
 <!DOCTYPE html>
@@ -47,7 +47,7 @@ while($arr=$reqs->fetchArray()){
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Requisition List</h4>
-          <table class="table">
+          <table class="table table-striped">
             <tr><th>Test Needed</th><th>Sample</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
             <?php echo $showReqs;?>
           </table>

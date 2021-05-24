@@ -11,7 +11,11 @@
         "protozoology",
         "mycology",
         "parasitology",
-        "pathology"
+        "pathology",
+        "ictc",
+        "ccu_lab",
+        "other_govt_hospital",
+        "outside_lab"
     ],
     "sample": {
         "blood": "blood",
