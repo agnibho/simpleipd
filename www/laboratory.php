@@ -2,7 +2,7 @@
 require(dirname(__DIR__)."/require.php");
 $list="";
 if(isSet($_GET["pid"])){
-  foreach(glob("forms/report*.json") as $file){
+  foreach(glob("forms/report-*.json") as $file){
     $pid=$_GET["pid"];
     $form=json_decode(file_get_contents($file));
     if($form->title=="culture_sensitivity"){

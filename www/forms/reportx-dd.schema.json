@@ -1,0 +1,132 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "disk_diffusion",
+    "description": "Culture Sensitivity by Disk Diffusion",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "organism": {
+            "description": "Organism",
+            "type": "string"
+        },
+        "amoxyclav": {
+            "description": "Amoxyclav",
+            "type": "string"
+        },
+        "piperacillintazobactum": {
+            "description": "Piperacillin/Tazobactum",
+            "type": "string"
+        },
+        "ticarcillinclavulinic": {
+            "description": "Ticarcillin/Clavulinic Acid",
+            "type": "string"
+        },
+        "oxacillin": {
+            "description": "Oxacillin",
+            "type": "string"
+        },
+        "azithromycin": {
+            "description": "Azithromycin",
+            "type": "string"
+        },
+        "cotrimoxazole": {
+            "description": "Cotrimoxazole",
+            "type": "string"
+        },
+        "doxycycline": {
+            "description": "Doxycycline",
+            "type": "string"
+        },
+        "chloramphenicol": {
+            "description": "Chloramphenicol",
+            "type": "string"
+        },
+        "nitrofurantoin": {
+            "description": "Nitrofurantoin",
+            "type": "string"
+        },
+        "norfloxacin": {
+            "description": "Norfloxacin",
+            "type": "string"
+        },
+        "ciprofloxacin": {
+            "description": "Ciprofloxacin",
+            "type": "string"
+        },
+        "ofloxacin": {
+            "description": "Ofloxacin",
+            "type": "string"
+        },
+        "sparfloxacin": {
+            "description": "Sparfloxacin",
+            "type": "string"
+        },
+        "levofloxacin": {
+            "description": "Levofloxacin",
+            "type": "string"
+        },
+        "gatifloxacin": {
+            "description": "Gatifloxacin",
+            "type": "string"
+        },
+        "cefadroxyl": {
+            "description": "Cefadroxyl",
+            "type": "string"
+        },
+        "cefixime": {
+            "description": "Cefixime",
+            "type": "string"
+        },
+        "ceftriaxone": {
+            "description": "Ceftriaxone",
+            "type": "string"
+        },
+        "ceftazidime": {
+            "description": "Ceftazidime",
+            "type": "string"
+        },
+        "cefepime": {
+            "description": "Cefepime",
+            "type": "string"
+        },
+        "cefoperazonesulbactam": {
+            "description": "Cefoperazone/Sulbactum",
+            "type": "string"
+        },
+        "gentamicin": {
+            "description": "Gentamicin",
+            "type": "string"
+        },
+        "amikacin": {
+            "description": "Amikacin",
+            "type": "string"
+        },
+        "vancomycin": {
+            "description": "Vancomycin",
+            "type": "string"
+        },
+        "meropenem": {
+            "description": "Meropenem",
+            "type": "string"
+        },
+        "linezolid": {
+            "description": "Linezolid",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

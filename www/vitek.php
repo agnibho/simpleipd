@@ -43,6 +43,7 @@ else{
             <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-grampos<?php echo $req;?><?php echo $sample;?><?php echo $time;?><?php echo $src;?>">Vitek Report (Gram Positive)</a></li>
             <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-gramneg<?php echo $req;?><?php echo $sample;?><?php echo $time;?><?php echo $src;?>">Vitek Report (Gram Negative)</a></li>
             <li class="list-group-item"><a href="antibiogram.php?pid=<?php echo $pid;?>&form=report-as-fungal<?php echo $req;?><?php echo $sample;?><?php echo $time;?><?php echo $src;?>">Vitek Report (Fungal)</a></li>
+            <li class="list-group-item"><a href="report.php?pid=<?php echo $pid;?>&form=report-dd<?php echo $req;?><?php echo $sample;?><?php echo $time;?><?php echo $src;?>">Disk Diffusion</a></li>
           </ul>
         </div>
       </div>

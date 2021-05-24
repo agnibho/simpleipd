@@ -18,7 +18,7 @@ if(isSet($_GET["pid"])){
   }
   $inv=json_decode(file_get_contents("autocomplete/investigation.json"));
   $testList="";
-  foreach(glob("forms/report*.json") as $file){
+  foreach(glob("forms/report-*.json") as $file){
     $form=json_decode(file_get_contents($file));
     $testList=$testList."<option value='".$file."'>".$form->description."</option>";
   }
