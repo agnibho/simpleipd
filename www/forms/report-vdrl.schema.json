@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "vdrl",
+    "description": "VDRL",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "report": {
+            "description": "Report",
+            "type": "string",
+            "format": "textarea"
+        }
+    },
+    "required": ["date"]
+}

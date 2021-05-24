@@ -35,6 +35,10 @@
             "description": "Sugar",
             "type": "integer"
         },
+        "ada": {
+            "description": "ADA",
+            "type": "integer"
+        },
         "ldh": {
             "description": "LDH",
             "type": "integer"
