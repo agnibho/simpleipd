@@ -39,8 +39,20 @@
             "description": "Anti-HEV",
             "type": "string"
         },
-        "antihsv": {
-            "description": "Anti-HSV",
+        "antihbs": {
+            "description": "Anti-HBs",
+            "type": "string"
+        },
+        "antihbc": {
+            "description": "Anti-HBc",
+            "type": "string"
+        },
+        "hbvdna": {
+            "description": "HBV DNA",
+            "type": "string"
+        },
+        "hcvrna": {
+            "description": "HCV RNA",
             "type": "string"
         },
         "dengue_ns1": {
@@ -49,10 +61,6 @@
         },
         "dengue_igm": {
             "description": "Dengue IgM",
-            "type": "string"
-        },
-        "dengue_igg": {
-            "description": "Dengue IgG",
             "type": "string"
         },
         "chik_igm": {
