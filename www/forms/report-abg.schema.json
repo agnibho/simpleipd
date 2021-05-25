@@ -35,6 +35,18 @@
             "description": "HCO3",
             "type": "number"
         },
+        "ag": {
+            "description": "Anion Gap",
+            "type": "number"
+        },
+        "spo2": {
+            "description": "SpO2",
+            "type": "number"
+        },
+        "fio2": {
+            "description": "FiO2",
+            "type": "number"
+        },
         "na": {
             "description": "Na",
             "type": "number"
