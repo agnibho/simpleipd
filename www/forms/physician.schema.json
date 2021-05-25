@@ -42,7 +42,7 @@
         "o2_device": {
             "description": "O2 Delivery Device",
             "type": "string",
-            "enum": ["nasal_cannula", "face_mask", "nrbm", "hfnc", "cpap", "bipap", "mv", "other"]
+            "enum": ["no_supplemental_o2", "nasal_cannula", "face_mask", "nrbm", "hfnc", "cpap", "bipap", "mv", "other"]
         },
         "o2_flow": {
             "description": "O2 Flow Requirement (L/min)",
