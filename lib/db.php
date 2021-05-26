@@ -362,8 +362,9 @@ class DB extends SQLite3 {
   function getRequisitionList(){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE status=:active ORDER BY room,test;");
+    $stmt=$this->prepare("SELECT requisition.rowid,requisition.* FROM requisition INNER JOIN patients ON requisition.pid=patients.pid WHERE requisition.status=:active AND patients.status=:admitted ORDER BY requisition.room,requisition.test;");
     $stmt->bindValue(":active", "active");
+    $stmt->bindValue(":admitted", "admitted");
     $result=$stmt->execute();
     return($result);
   }
