@@ -13,6 +13,10 @@
             "description": "SRF ID",
             "type": "string"
         },
+        "cpms": {
+            "description": "CPMS Registration",
+            "type": "string"
+        },
         "name": {
             "description": "Name",
             "type": "string"
@@ -26,9 +30,13 @@
             "type": "string",
             "enum": ["male", "female", "others"]
         },
-        "bw": {
-            "description": "Weight",
-            "type": "integer"
+        "address": {
+            "description": "Address",
+            "type": "string"
+        },
+        "phone": {
+            "description": "Phone number",
+            "type": "string"
         },
         "date": {
             "description": "Date of Admission",
