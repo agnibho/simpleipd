@@ -3,7 +3,7 @@ require(dirname(__DIR__)."/require.php");
 if(!empty($_GET["pid"])){
   $pid=$_GET["pid"];
   if(!empty($_POST["give"])){
-    $administer=$db->getAdminister($pid)->fetchArray();
+    $administer=$db->getAdminister($_POST["give"])->fetchArray();
     if(!empty($administer["administer"])){
       $given=(array)json_decode($administer["administer"]);
     }

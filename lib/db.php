@@ -256,11 +256,11 @@ class DB extends SQLite3 {
     $result=$stmt->execute();
     return($result);
   }
-  function getAdminister($pid){
+  function getAdminister($id){
     global $log;
     if(!checkAccess("nursing", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,administer FROM treatment WHERE pid=:pid;");
-    $stmt->bindValue(":pid", $pid);
+    $stmt=$this->prepare("SELECT rowid,administer FROM treatment WHERE rowid=:id;");
+    $stmt->bindValue(":id", $id);
     $result=$stmt->execute();
     return($result);
   }
