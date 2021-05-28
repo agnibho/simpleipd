@@ -18,19 +18,19 @@ $(document).ready(function(){
     flag="";
     $.each(data, function(num, entry){
       // INTAKE-OUTPUT
-      stamp=moment(entry.date+" "+entry.time);
+      stamp=new Date(entry.date+" "+entry.time);
       if(entry.io_from!="" && entry.io_to!=""){
-        start=moment(entry.date+" "+entry.io_from);
-        end=moment(entry.date+" "+entry.io_to);
-        if(start.isValid() && end.isValid()){
-          if(end.format("X")-start.format("X")>24*60*60){
+        start=new Date(entry.date+" "+entry.io_from);
+        end=new Date(entry.date+" "+entry.io_to);
+        if(!isNaN(start.getTime()) && !isNaN(end.getTime())){
+          if(end.getTime()-start.getTime()>24*60*60*1000){
             flag=entry.date;
           }
           if(start==end){
             flag=entry.date;
           }
           if(start>end){
-            start.subtract(1, "days");
+            start.setDate(start.getDate()-1);
           }
           io.push({start: start, end: end, in: entry.intake, out: entry.output});
         }
@@ -57,11 +57,11 @@ $(document).ready(function(){
     approxOut=0;
     ioGap=0;
     io.forEach(function(i){
-      if(ioGap<(24*60*60)){
-        ioBuff=ioGap+(i.end.format("X")-i.start.format("X"));
-        if(ioBuff>(24*60*60)){
-          frac=(24-ioGap)/(ioBuff-ioGap);
-          ioGap=(24*60*60);
+      if(ioGap<(24*60*60*1000)){
+        ioBuff=ioGap+(i.end.getTime()-i.start.getTime());
+        if(ioBuff>(24*60*60*1000)){
+          frac=((24*60*60*1000)-ioGap)/(ioBuff-ioGap);
+          ioGap=(24*60*60*1000);
         }
         else{
           frac=1;
@@ -71,7 +71,7 @@ $(document).ready(function(){
         approxOut=approxOut+(Number(i.out)*frac);
         if(flag==""){
           $(".ioGap").each(function(){
-            $(this).text(ioGap/3600);
+            $(this).text(ioGap/3600000);
           });
           $("#approxIn").text(approxIn);
           $("#approxOut").text(approxOut);
@@ -86,7 +86,7 @@ $(document).ready(function(){
     // CLINICAL
     $.getJSON("chart.php?pid="+pid+"&get=physician", function(data){
       $.each(data, function(num, entry){
-        stamp=moment(entry.date+" "+entry.time);
+        stamp=new Date(entry.date+" "+entry.time);
         if(entry.pr){
           clinical.pr.push([stamp, entry.pr]);
         }
@@ -111,7 +111,7 @@ $(document).ready(function(){
     // REPORTS
     $.getJSON("chart.php?pid="+pid+"&get=reports", function(data){
       $.each(data, function(num, entry){
-        stamp=moment(entry.date+" "+entry.time);
+        stamp=new Date(entry.date+" "+entry.time);
         Object.keys(entry).forEach(function(i){
           if(entry[i] && !isNaN(entry[i])){
             if(!Array.isArray(reports[i])){
@@ -147,14 +147,14 @@ $(document).ready(function(){
     $("#clinData").html("");
     param=$("#clinVar").val();
     clinical[param].forEach(function(i){
-      $("#clinData").html($("#clinData").html()+"<tr><td>"+i[0].format("MMM D, HH:mm")+"</td><td>"+i[1]+"</td></tr>");
+      $("#clinData").html($("#clinData").html()+"<tr><td>"+i[0].toLocaleString()+"</td><td>"+i[1]+"</td></tr>");
     });
   });
   $("#reportsVar").change(function(){
     $("#reportsData").html("");
     param=$("#reportsVar").val();
     reports[param].forEach(function(i){
-      $("#reportsData").html($("#reportsData").html()+"<tr><td>"+i[0].format("MMM D, HH:mm")+"</td><td>"+i[1]+"</td></tr>");
+      $("#reportsData").html($("#reportsData").html()+"<tr><td>"+i[0].toLocaleString()+"</td><td>"+i[1]+"</td></tr>");
     });
   });
   $("#drugVar").change(function(){
@@ -162,7 +162,7 @@ $(document).ready(function(){
     $("#drugData1").html(treatment[param][0]);
     $("#drugData2").html("");
     treatment[param][1].forEach(function(i){
-      $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+moment(i*1000).format("MMM D HH:mm")+"</span>");
+      $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+new Date(i*1000).toLocaleString()+"</span>");
     });
   });
 });

@@ -1,4 +1,5 @@
 $.ajaxSetup({cache:false});
+today=new Date();
 $(document).ready(function(){
   $(".confirm").each(function(){
     $(this).click(function(event){
@@ -21,12 +22,12 @@ $(document).ready(function(){
   });
   $("[type='date']").each(function(){
     if($(this).val()==""){
-      $(this).val(moment().format("YYYY-MM-DD"));
+      $(this).val(today.getFullYear()+"-"+("0"+today.getMonth()).slice(-2)+"-"+("0"+today.getDate()).slice(-2));
     }
   });
   $("[type='time']").each(function(){
     if($(this).val()==""){
-      $(this).val(moment().format("HH:mm"));
+      $(this).val(("0"+today.getHours()).slice(-2)+":"+("0"+today.getMinutes()).slice(-2));
     }
   });
   $("[data-toggle='popover']").popover({"placement": "top", "trigger": "focus"});
