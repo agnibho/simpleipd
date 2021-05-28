@@ -1,5 +1,13 @@
-$.ajaxSetup({cache:false});
 today=new Date();
+$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+  nocache=today.toISOString().split(":");
+  if(options.url.indexOf("?")==-1){
+    options.url=options.url+"?_nocache="+nocache[0]+nocache[1];
+  }
+  else{
+    options.url=options.url+"&_nocache="+nocache[0]+nocache[1];
+  }
+});
 $(document).ready(function(){
   $(".confirm").each(function(){
     $(this).click(function(event){

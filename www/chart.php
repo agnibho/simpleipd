@@ -66,23 +66,32 @@ if(isSet($_GET["pid"])){
           </ul>
         </div>
       </div>
+      <hr>
+      <h4>Clinical Parameters</h4>
       <table class="table">
         <thead>
-          <tr><th>Time</th><th><select id="clinVar"><option disabled selected>--select--</option></select></th></tr>
+          <tr><th>Date/Time</th><th><select id="clinVar"><option disabled selected>--Select Parameter--</option></select></th></tr>
         </thead>
         <tbody id="clinData">
         </tbody>
       </table>
+      <canvas id="clinChart"></canvas>
+      <hr>
+      <h4>Reports</h4>
       <table class="table">
         <thead>
-          <tr><th>Time</th><th><select id="reportsVar"><option disabled selected>--select--</option></select></th></tr>
+          <tr><th>Date/Time</th><th><select id="reportsVar"><option disabled selected>--Select Parameter--</option></select></th></tr>
         </thead>
         <tbody id="reportsData">
         </tbody>
       </table>
+      <canvas id="reportsChart"></canvas>
+      <hr>
+      <h4>Drugs</h4>
       <table class="table">
-        <tr><td><select id="drugVar"><option disabled selected>--select--</option></select></td><td id="drugData1"></td><td id="drugData2"></td></tr>
+        <tr><td><select id="drugVar"><option disabled selected>--Select Drug--</option></select></td><td id="drugData1"></td><td id="drugData2"></td></tr>
       </table>
+      <canvas id="drugsChart"></canvas>
       <?php include(CONFIG_LIB."foot.php");?>
       <script>var pid="<?php echo $pid;?>"</script>
       <script src="res/calc.js"></script>

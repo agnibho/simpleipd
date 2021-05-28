@@ -3,17 +3,22 @@ function entrySort(i, j){
     return 0;
   }
   else if(i[0]>j[0]){
-    return -1;
+    return 1;
   }
   else{
-    return 1;
+    return -1;
   }
 }
 var io=[];
-var clinical={pr:[], rr:[], spo2:[], sbp:[], dbp:[]};
+var clinical={pr:[], rr:[], temperature:[], spo2:[], sbp:[], dbp:[]};
 var reports={};
 var treatment={};
+var clinDict={pr: "Pulse Rate", rr: "Respiratory Rate", temperature: "Temperature", spo2: "SpO2", sbp: "Systolic BP", dbp: "Diastolic BP"}
+var reportsDict={};
 $(document).ready(function(){
+  var ctx1=$("#clinChart")[0].getContext("2d");
+  var ctx2=$("#reportsChart")[0].getContext("2d");
+  var ctx3=$("#drugsChart")[0].getContext("2d");
   $.getJSON("chart.php?pid="+pid+"&get=nursing", function(data){
     flag="";
     $.each(data, function(num, entry){
@@ -41,6 +46,9 @@ $(document).ready(function(){
       }
       if(entry.rr){
         clinical.rr.push([stamp, entry.rr]);
+      }
+      if(entry.temperature){
+        clinical.temperature.push([stamp, entry.temperature]);
       }
       if(entry.spo2){
         clinical.spo2.push([stamp, entry.spo2]);
@@ -93,6 +101,9 @@ $(document).ready(function(){
         if(entry.rr){
           clinical.rr.push([stamp, entry.rr]);
         }
+        if(entry.temperature){
+          clinical.temperature.push([stamp, entry.temperature]);
+        }
         if(entry.spo2){
           clinical.spo2.push([stamp, entry.spo2]);
         }
@@ -103,30 +114,41 @@ $(document).ready(function(){
           clinical.dbp.push([stamp, entry.bp.split("/")[1]]);
         }
       });
-      clinical.pr.sort(entrySort);
       Object.keys(clinical).forEach(function(i){
-        $("#clinVar").html($("#clinVar").html()+"<option>"+i+"</option>");
+        clinical[i].sort(entrySort);
+        $("#clinVar").html($("#clinVar").html()+"<option value="+i+">"+clinDict[i]+"</option>");
       });
     });
     // REPORTS
     $.getJSON("chart.php?pid="+pid+"&get=reports", function(data){
+      ajaxArray=[];
       $.each(data, function(num, entry){
-        stamp=new Date(entry.date+" "+entry.time);
-        Object.keys(entry).forEach(function(i){
-          if(entry[i] && !isNaN(entry[i])){
-            if(!Array.isArray(reports[i])){
-              reports[i]=[];
-            }
-            reports[i].push([stamp, entry[i]]);
-          }
-        });
+        if(entry.form){
+          ajax=$.getJSON("forms/"+entry.form+".schema.json", function(data){
+            stamp=new Date(entry.date+" "+entry.time);
+            Object.keys(entry).forEach(function(i){
+              name=entry.form+"-"+i;
+              if(entry[i] && !isNaN(entry[i])){
+                if(!Array.isArray(reports[name])){
+                  reportsDict[name]=data.properties[i].description;
+                  reports[name]=[];
+                }
+                reports[name].push([stamp, entry[i]]);
+              }
+            });
+          });
+          ajaxArray.push(ajax);
+        }
       });
-      reports=Object.keys(reports).sort().reduce(function(obj, key){
+      $.when.apply($,ajaxArray).then(function(){
+        reports=Object.keys(reports).sort().reduce(function(obj, key){
           obj[key]=reports[key];
           return obj;
         },{});
-      Object.keys(reports).forEach(function(i){
-        $("#reportsVar").html($("#reportsVar").html()+"<option>"+i+"</option>");
+        Object.keys(reports).forEach(function(i){
+          reports[i].sort(entrySort);
+          $("#reportsVar").html($("#reportsVar").html()+"<option value="+i+">"+reportsDict[i]+"</option>");
+        });
       });
     });
     // TREATMENT
@@ -146,23 +168,85 @@ $(document).ready(function(){
   $("#clinVar").change(function(){
     $("#clinData").html("");
     param=$("#clinVar").val();
+    data={labels: [], datasets: [{ label:clinDict[param], data: [], fill: false, borderColor: "rgb(75, 192, 192)", tension: 0.1 }]};
     clinical[param].forEach(function(i){
+      data.labels.push(i[0].toLocaleString());
+      data.datasets[0].data.push(i[1]);
       $("#clinData").html($("#clinData").html()+"<tr><td>"+i[0].toLocaleString()+"</td><td>"+i[1]+"</td></tr>");
     });
+    try{
+      clinChart.destroy();
+    }catch(e){};
+    if(data.datasets[0].data.length>1){
+      clinChart=new Chart(ctx1, {
+        type: "line",
+        data: data
+      });
+    }
   });
   $("#reportsVar").change(function(){
     $("#reportsData").html("");
     param=$("#reportsVar").val();
+    data={labels: [], datasets: [{ label: reportsDict[param], data: [], fill: false, borderColor: "rgb(75, 192, 192)", tension: 0.1 }]};
     reports[param].forEach(function(i){
+      data.labels.push(i[0].toLocaleString());
+      data.datasets[0].data.push(i[1]);
       $("#reportsData").html($("#reportsData").html()+"<tr><td>"+i[0].toLocaleString()+"</td><td>"+i[1]+"</td></tr>");
+      try{
+        reportsChart.destroy();
+      }catch(e){};
+      if(data.datasets[0].data.length>1){
+        reportsChart=new Chart(ctx2, {
+          type: "line",
+          data: data
+        });
+      }
     });
   });
   $("#drugVar").change(function(){
     param=$("#drugVar").val();
+    data={labels: [], datasets: [{ label: param, data: [], backgroundColor: "rgb(75, 192, 192)"}]};
     $("#drugData1").html(treatment[param][0]);
     $("#drugData2").html("");
     treatment[param][1].forEach(function(i){
-      $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+new Date(i*1000).toLocaleString()+"</span>");
+      d=new Date(i*1000);
+      data.datasets[0].data.push({x:d.getFullYear()+("0"+d.getMonth()).slice(-2)+("0"+d.getDate()).slice(-2), y:(24-d.getHours())});
+      $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+d.toLocaleString()+"</span>");
     });
+    try{
+      drugsChart.destroy();
+    }catch(e){};
+    if(data.datasets[0].data.length>1){
+      drugsChart=new Chart(ctx3, {
+        type: "scatter",
+        data: data,
+        options: {
+          scales: {
+            x: {
+              type: "linear",
+              position: "top",
+              ticks: {
+                callback: function(val, index){
+                  if(Number.isInteger(val)){
+                    val=val.toString();
+                    return new Date(val.slice(0,4)+"-"+val.slice(4,6)+"-"+val.slice(6,8)).toLocaleDateString();
+                  }
+                }
+              }
+            },
+            y: {
+              suggestedMin: 0,
+              suggestedMax: 24,
+              ticks: {
+                maxTicksLimit: 24,
+                callback: function(val, index){
+                  return (24-val)+":00";
+                }
+              }
+            }
+          }
+        }
+      });
+    }
   });
 });
