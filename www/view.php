@@ -114,6 +114,9 @@ if(isSet($_GET["pid"])){
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">Lab Reports</a>
           </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" href="chart.php?pid=<?php echo $pid;?>">Charts</a>
+          </li>
         </ul>
         <div class="tab-content" id="viewtabs">
           <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
