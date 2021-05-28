@@ -209,6 +209,11 @@ $(document).ready(function(){
     $("#drugData1").html(treatment[param][0]);
     $("#drugData2").html("");
     treatment[param][1].forEach(function(i){
+      // HARDCODED FIX FOR CORRUPTED DATA DUE TO PREVIOUS BUG
+      if(i<1622230200){
+        return;
+      }
+      // PLAN TO REMOVE IN FUTURE
       d=new Date(i*1000);
       data.datasets[0].data.push({x:d.getFullYear()+("0"+d.getMonth()).slice(-2)+("0"+d.getDate()).slice(-2), y:(24-d.getHours())});
       $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+d.toLocaleString()+"</span>");
@@ -216,11 +221,13 @@ $(document).ready(function(){
     try{
       drugsChart.destroy();
     }catch(e){};
-    if(data.datasets[0].data.length>1){
+    if(data.datasets[0].data.length>0){
       drugsChart=new Chart(ctx3, {
         type: "scatter",
         data: data,
         options: {
+          pointRadius: 10,
+          pointHoverRadius: 10,
           scales: {
             x: {
               type: "linear",
