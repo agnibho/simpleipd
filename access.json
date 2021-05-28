@@ -170,6 +170,15 @@
         "tech": "view",
         "clerk": "view"
     },
+    "chart": {
+        "admin": "view",
+        "visiting": "view",
+        "resident": "view",
+        "nursing": "view",
+        "lab": "view",
+        "tech": "view",
+        "clerk": "view"
+    },
     "printdata": {
         "admin": "view",
         "visiting": "view",
