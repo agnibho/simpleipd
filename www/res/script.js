@@ -30,7 +30,7 @@ $(document).ready(function(){
   });
   $("[type='date']").each(function(){
     if($(this).val()==""){
-      $(this).val(today.getFullYear()+"-"+("0"+today.getMonth()).slice(-2)+"-"+("0"+today.getDate()).slice(-2));
+      $(this).val(today.getFullYear()+"-"+("0"+(today.getMonth()+1)).slice(-2)+"-"+("0"+today.getDate()).slice(-2));
     }
   });
   $("[type='time']").each(function(){
