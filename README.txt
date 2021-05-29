@@ -50,7 +50,7 @@ respective licenses.
   
 * Bootstrap v4.6 (https://github.com/twbs/bootstrap/blob/v4.6.0/LICENSE)
 
-* Moment.js v2.29.1 (MIT Licence)
+* Chart.js v3.3.0 (https://github.com/chartjs/Chart.js/blob/master/LICENSE.md)
 
 * Bootstrap-4-autocomplete (https://github.com/Honatas/bootstrap-4-autocomplete/blob/master/LICENSE)
 
