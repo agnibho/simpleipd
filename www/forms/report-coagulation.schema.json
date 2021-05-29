@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "coagulation",
+    "description": "Coagulation Profile",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "pt": {
+            "description": "Patient PT",
+            "type": "number"
+        },
+        "pt_ref": {
+            "description": "Control PT",
+            "type": "number"
+        },
+        "inr": {
+            "description": "INR",
+            "type": "number"
+        },
+        "aptt": {
+            "description": "APTT",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

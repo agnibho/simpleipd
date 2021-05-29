@@ -5,6 +5,7 @@
     ],
     "rooms": [
         "labmed",
+        "hematology",
         "bacteriology",
         "virology",
         "protozoology",
