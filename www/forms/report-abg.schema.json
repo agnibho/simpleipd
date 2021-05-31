@@ -58,6 +58,10 @@
         "k": {
             "description": "K",
             "type": "number"
+        },
+        "cl": {
+            "description": "Cl",
+            "type": "number"
         }
     },
     "required": ["date"]
