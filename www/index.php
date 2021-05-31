@@ -1,5 +1,8 @@
 <?php
 require(dirname(__DIR__)."/require.php");
+if(!empty($_POST["req"])){
+  $db->receiveRequisition($_POST["req"]);
+}
 $list=$db->getAdmittedPatientList();
 $showList="";
 while($arr=$list->fetchArray()){
@@ -21,7 +24,16 @@ while($arr=$reqs->fetchArray()){
   else{
     $test="<a href='report.php?pid=".$pid."&form=report-other&req=".$arr["rowid"]."&src=index'>".$arr["test"]."</a>";
   }
-  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr><tr><td></td><td colspan='4'>".$arr["addl"]."</td></tr>";
+  if($arr["status"]=="received"){
+    $received="<span class='badge badge-success'>Sample Received</span>";
+  }
+  elseif(checkAccess("report")){
+    $received="<button class='btn btn-sm btn-outline-danger confirm' form='sample' name='req' value='".$arr["rowid"]."'>Receive Sample</button>";
+  }
+  else{
+    $received="<span class='badge badge-warning'>Sample Not Received</span>";
+  }
+  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr><tr><td></td><td colspan='3'>".$arr["addl"]."</td><td>".$received."</td></tr>";
 }
 ?>
 <!DOCTYPE html>
@@ -47,6 +59,7 @@ while($arr=$reqs->fetchArray()){
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Requisition List</h4>
+          <form id="sample" method="post"></form>
           <table class="table table-striped">
             <tr><th>Test Needed</th><th>Sample</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
             <?php echo $showReqs;?>

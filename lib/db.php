@@ -192,10 +192,19 @@ class DB extends SQLite3 {
     $stmt->bindValue(":time", strtotime($date." ".$time));
     $stmt->bindValue(":room", $room);
     $stmt->bindValue(":form", $form);
-    $stmt->bindValue(":status", "active");
+    $stmt->bindValue(":status", "sent");
     $stmt->bindValue(":addl", $addl);
     $stmt->execute();
     $log->log($pid, "requisition_added", json_encode([$test,$room,$form]));
+  }
+  function receiveRequisition($id){
+    global $log;
+    if(!checkAccess("report", "dbSet")) return false;
+    $stmt=$this->prepare("UPDATE requisition SET status=:status WHERE rowid=:id;");
+    $stmt->bindValue(":status", "received");
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+    $log->log(null, "requisition_received", $id);
   }
   function omitRequisition($id){
     global $log;
@@ -267,9 +276,9 @@ class DB extends SQLite3 {
   function getRequisitions($pid){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid AND status=:status ORDER BY room;");
+    $stmt=$this->prepare("SELECT rowid,* FROM requisition WHERE pid=:pid AND status!=:status ORDER BY room;");
     $stmt->bindValue(":pid", $pid);
-    $stmt->bindValue(":status", "active");
+    $stmt->bindValue(":status", "done");
     $result=$stmt->execute();
     return($result);
   }
@@ -362,8 +371,8 @@ class DB extends SQLite3 {
   function getRequisitionList(){
     global $log;
     if(!checkAccess("requisition", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT requisition.rowid,requisition.* FROM requisition INNER JOIN patients ON requisition.pid=patients.pid WHERE requisition.status=:active AND patients.status=:admitted ORDER BY requisition.room,requisition.test;");
-    $stmt->bindValue(":active", "active");
+    $stmt=$this->prepare("SELECT requisition.rowid,requisition.* FROM requisition INNER JOIN patients ON requisition.pid=patients.pid WHERE requisition.status!=:status AND patients.status=:admitted ORDER BY requisition.room,requisition.test;");
+    $stmt->bindValue(":status", "done");
     $stmt->bindValue(":admitted", "admitted");
     $result=$stmt->execute();
     return($result);
