@@ -81,8 +81,8 @@ $(document).ready(function(){
           $(".ioGap").each(function(){
             $(this).text(ioGap/3600000);
           });
-          $("#approxIn").text(approxIn);
-          $("#approxOut").text(approxOut);
+          $("#approxIn").text(Math.round(approxIn));
+          $("#approxOut").text(Math.round(approxOut));
           $("#ioData").removeClass("d-none");
         }
         else{
