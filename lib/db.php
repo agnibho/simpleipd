@@ -37,15 +37,16 @@ class DB extends SQLite3 {
     $query->bindValue(":pid", $post["pid"]);
     $exist=$query->execute();
     if($exist->fetchArray()[0]==0){
-      $stmt=$this->prepare("INSERT INTO patients (pid,name,age,sex,status,vp,ward,bed,data) VALUES (:pid,:name,:age,:sex,:status,:vp,:ward,:bed,:data);");
+      $stmt=$this->prepare("INSERT INTO patients (pid,name,age,sex,admission,status,vp,ward,bed,data) VALUES (:pid,:name,:age,:sex,:admission,:status,:vp,:ward,:bed,:data);");
     }
     else{
-      $stmt=$this->prepare("UPDATE patients SET name=:name,age=:age,sex=:sex,ward=:ward,bed=:bed,vp=:vp,data=:data WHERE pid=:pid;");
+      $stmt=$this->prepare("UPDATE patients SET name=:name,age=:age,sex=:sex,admission=:admission,ward=:ward,bed=:bed,vp=:vp,data=:data WHERE pid=:pid;");
     }
     $stmt->bindValue(":pid", $post["pid"]);
     $stmt->bindValue(":name", $post["name"]);
     $stmt->bindValue(":age", $post["age"]);
     $stmt->bindValue(":sex", $post["sex"]);
+    $stmt->bindValue(":admission", strtotime($post["date"]." ".$post["time"]));
     $stmt->bindValue(":status", "admitted");
     $stmt->bindValue(":ward", $post["ward"]);
     $stmt->bindValue(":bed", $post["bed"]);

@@ -16,6 +16,20 @@ if(!empty($_GET["pid"])){
     header("Location: view.php?pid=".$_GET["pid"]);
     exit();
   }
+  $all=$db->getAllData($pid, "nursing");
+  $io="";
+  $lastIO="";
+  while($io=="" && $a=$all->fetchArray()){
+    $d=json_decode($a["data"]);
+    $io=$d->intake.$d->output;
+    $lastIO=$d->io_to;
+  }
+  if($lastIO==""){
+    $d=$db->getAdmission($pid)->fetchArray();
+    $dt=new DateTime();
+    $dt->setTimestamp($d["admission"]);
+    $lastIO=$dt->format("H:i");
+  }
   if(isSet($_GET["id"])){
     $form=schema2form("forms/nursing.schema.json", $pid, $_GET["id"], "nursing");
   }
@@ -31,6 +45,7 @@ if(!empty($_GET["pid"])){
     <title>Nursing Notes</title>
   </head>
   <body>
+    <input type="hidden" id="io_to_val" name="lastIO" value="<?php echo $lastIO;?>">
     <div class="container">
       <?php include(CONFIG_LIB."top.php");?>
       <?php echo getInfo($pid);?>
