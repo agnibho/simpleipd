@@ -33,6 +33,7 @@ class DB extends SQLite3 {
   function admit($post){
     global $log;
     if(!checkAccess("admission", "dbSet")) return false;
+    $post["name"]=ucwords(strtolower($post["name"]));
     $query=$this->prepare("SELECT count(rowid) FROM patients WHERE pid=:pid");
     $query->bindValue(":pid", $post["pid"]);
     $exist=$query->execute();
