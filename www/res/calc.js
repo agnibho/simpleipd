@@ -79,7 +79,7 @@ $(document).ready(function(){
         approxOut=approxOut+(Number(i.out)*frac);
         if(flag==""){
           $(".ioGap").each(function(){
-            $(this).text(ioGap/3600000);
+            $(this).text(Math.round(ioGap/3600000));
           });
           $("#approxIn").text(Math.round(approxIn));
           $("#approxOut").text(Math.round(approxOut));
