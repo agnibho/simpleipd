@@ -357,7 +357,7 @@ class DB extends SQLite3 {
   function getPatientList(){
     global $log;
     if(!checkAccess("info", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients ORDER BY pid;");
+    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients ORDER BY admission;");
     $result=$stmt->execute();
     return($result);
   }
