@@ -27,7 +27,7 @@ while($arr=$reqs->fetchArray()){
   if($arr["status"]=="received"){
     $received="<span class='badge badge-success'>Sample Received</span>";
   }
-  elseif(checkAccess("report")){
+  elseif(checkAccess("report")=="all"){
     $received="<button class='btn btn-sm btn-outline-danger confirm' form='sample' name='req' value='".$arr["rowid"]."'>Receive Sample</button>";
   }
   else{

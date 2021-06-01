@@ -6,7 +6,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "info": {
         "admin": "all",
@@ -15,7 +16,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "diagnosis": {
         "admin": "all",
@@ -24,7 +26,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "summary": {
         "admin": "all",
@@ -33,7 +36,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "admission": {
         "admin": "all",
@@ -42,7 +46,8 @@
         "nursing": "all",
         "lab": "view",
         "tech": "view",
-        "clerk": "all"
+        "clerk": "all",
+        "observer": "view"
     },
     "attachments": {
         "admin": "all",
@@ -51,7 +56,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "death": {
         "admin": "all",
@@ -60,7 +66,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "discharge": {
         "admin": "all",
@@ -69,7 +76,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "history": {
         "admin": "all",
@@ -78,7 +86,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "laboratory": {
         "admin": "all",
@@ -87,7 +96,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "nursing": {
         "admin": "all",
@@ -96,7 +106,8 @@
         "nursing": "all",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "physician": {
         "admin": "all",
@@ -105,7 +116,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "print-discharge": {
         "admin": "all",
@@ -114,7 +126,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "report": {
         "admin": "all",
@@ -123,7 +136,8 @@
         "nursing": "view",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "requisition": {
         "admin": "all",
@@ -132,7 +146,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "treatment": {
         "admin": "all",
@@ -141,7 +156,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "view": {
         "admin": "all",
@@ -150,7 +166,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "all",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "vitek": {
         "admin": "all",
@@ -159,7 +176,8 @@
         "nursing": "all",
         "lab": "all",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "antibiogram": {
         "admin": "all",
@@ -168,7 +186,8 @@
         "nursing": "view",
         "lab": "all",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "chart": {
         "admin": "view",
@@ -177,7 +196,8 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     },
     "printdata": {
         "admin": "view",
@@ -186,6 +206,7 @@
         "nursing": "view",
         "lab": "view",
         "tech": "view",
-        "clerk": "view"
+        "clerk": "view",
+        "observer": "view"
     }
 }
