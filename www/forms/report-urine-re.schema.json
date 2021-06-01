@@ -27,16 +27,32 @@
             "description": "Albumin",
             "type": "string"
         },
+        "glucose": {
+            "description": "Glucose",
+            "type": "string"
+        },
         "ketone": {
             "description": "Ketone Body",
+            "type": "string"
+        },
+        "ph": {
+            "description": "pH",
             "type": "string"
         },
         "rbc": {
             "description": "RBC cells",
             "type": "string"
         },
+        "epitheial": {
+            "description": "Epithelial Cells",
+            "type": "string"
+        },
         "pus": {
             "description": "Pus cells",
+            "type": "string"
+        },
+        "cast": {
+            "description": "Cast",
             "type": "string"
         }
     },
