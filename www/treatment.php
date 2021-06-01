@@ -41,7 +41,7 @@ if(!empty($_GET["pid"])){
     else{
       $last="";
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button></td><td><button type='submit' class='btn btn-warning confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
+    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"])."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button></td><td><button type='submit' class='btn btn-warning confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
   }
   $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
