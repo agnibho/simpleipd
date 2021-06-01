@@ -33,8 +33,7 @@ $(document).ready(function(){
       $(this).val(today.getFullYear()+"-"+("0"+(today.getMonth()+1)).slice(-2)+"-"+("0"+today.getDate()).slice(-2));
     }
   });
-  if($("#io_to_val").length){
-    console.log($("#io_to_val").val());
+  if($("#io_from").val()=="" && $("#io_to_val").length){
     $("#io_from").val($("#io_to_val").val());
   }
   $("[type='time']").each(function(){
