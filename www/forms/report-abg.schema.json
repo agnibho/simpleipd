@@ -52,15 +52,15 @@
             "type": "number"
         },
         "na": {
-            "description": "Na",
+            "description": "Sodium",
             "type": "number"
         },
         "k": {
-            "description": "K",
+            "description": "Potassium",
             "type": "number"
         },
         "cl": {
-            "description": "Cl",
+            "description": "Chloride",
             "type": "number"
         }
     },
