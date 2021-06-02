@@ -136,7 +136,7 @@ $(document).ready(function(){
               name=i+"-"+entry.form;
               if(entry[i] && !isNaN(entry[i])){
                 if(!Array.isArray(reports[name])){
-                  reportsDict[name]=data.properties[i].description;
+                  reportsDict[name]=data.properties[i].description+" ("+data.description+")";
                   reports[name]=[];
                 }
                 reports[name].push([stamp, entry[i]]);
