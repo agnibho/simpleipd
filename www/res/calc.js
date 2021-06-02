@@ -133,7 +133,7 @@ $(document).ready(function(){
           ajax=$.getJSON("forms/"+entry.form+".schema.json", function(data){
             stamp=new Date(entry.date+" "+entry.time);
             Object.keys(entry).forEach(function(i){
-              name=entry.form+"-"+i;
+              name=i+"-"+entry.form;
               if(entry[i] && !isNaN(entry[i])){
                 if(!Array.isArray(reports[name])){
                   reportsDict[name]=data.properties[i].description;
