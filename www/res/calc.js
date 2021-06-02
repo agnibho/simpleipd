@@ -221,7 +221,7 @@ $(document).ready(function(){
       }
       // PLAN TO REMOVE IN FUTURE
       d=new Date(i*1000);
-      data.datasets[0].data.push({x:d.getFullYear()+("0"+d.getMonth()).slice(-2)+("0"+d.getDate()).slice(-2), y:(24-d.getHours())});
+      data.datasets[0].data.push({x:d.getTime()/(1000*3600*24), y:(24-d.getHours())});
       $("#drugData2").html($("#drugData2").html()+" <span class='badge badge-success'>"+d.toLocaleString()+"</span>");
     });
     try{
@@ -241,8 +241,7 @@ $(document).ready(function(){
               ticks: {
                 callback: function(val, index){
                   if(Number.isInteger(val)){
-                    val=val.toString();
-                    return new Date(val.slice(0,4)+"-"+val.slice(4,6)+"-"+val.slice(6,8)).toLocaleDateString();
+                    return new Date(val*1000*3600*24).toLocaleDateString();
                   }
                 }
               }
