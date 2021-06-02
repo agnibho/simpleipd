@@ -241,7 +241,7 @@ $(document).ready(function(){
               ticks: {
                 callback: function(val, index){
                   if(Number.isInteger(val)){
-                    return new Date(val*1000*3600*24).toLocaleDateString();
+                    return new Date(val*1000*3600*24).toLocaleString();
                   }
                 }
               }
