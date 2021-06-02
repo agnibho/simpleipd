@@ -175,6 +175,15 @@ class DB extends SQLite3 {
     $stmt->execute();
     $log->log(null, "drug_omitted", $id);
   }
+  function deleteDrug($id){
+    global $log;
+    if(!checkAccess("treatment", "dbSet")) return false;
+    $stmt=$this->prepare("UPDATE treatment SET omit=:omit WHERE rowid=:id;");
+    $stmt->bindValue(":omit", -1);
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+    $log->log(null, "drug_deleted", $id);
+  }
   function giveDrug($id, $given){
     global $log;
     if(!checkAccess("nursing", "dbSet")) return false;
@@ -262,8 +271,9 @@ class DB extends SQLite3 {
   function getDrugs($pid){
     global $log;
     if(!checkAccess("treatment", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid ORDER BY omit,start;");
+    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid AND omit!=:omit ORDER BY omit,start;");
     $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":omit", -1);
     $result=$stmt->execute();
     return($result);
   }

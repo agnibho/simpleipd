@@ -16,6 +16,9 @@ if(!empty($_GET["pid"])){
   elseif(!empty($_POST["omit"])){
     $db->omitDrug($_POST["omit"], $_POST["date"], $_POST["time"]);
   }
+  elseif(!empty($_POST["delete"])){
+    $db->deleteDrug($_POST["delete"]);
+  }
   elseif(!empty($_POST["drug"])){
     $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra_note"]);
   }
@@ -26,7 +29,7 @@ if(!empty($_GET["pid"])){
       $omit="omit";
     }
     else{
-      $omit="";
+      $omit="nomit";
       //try{
       //  if($drug["start"]+$drug["duration"]*24*3600<time()){
       //    $db->omitDrug($drug["rowid"]);
@@ -47,9 +50,11 @@ if(!empty($_GET["pid"])){
     else{
       $end="";
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button></td><td><button type='submit' class='btn btn-warning confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button></td></tr>";
+    if(filter_var($drug["duration"], FILTER_VALIDATE_INT)){
+      $drug["duration"]=$drug["duration"]. " days";
+    }
+    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td></tr>";
   }
-  $view=$view."</table>";
   $form=schema2form("forms/drugs.schema.json");
   if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
     $hideForm="";
@@ -79,8 +84,12 @@ if(!empty($_GET["pid"])){
             <input type="hidden" name="date">
             <input type="hidden" name="time">
           </form>
+          <form method='post' id='delete'>
+            <input type="hidden" name="date">
+            <input type="hidden" name="time">
+          </form>
           <table class="table">
-            <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th>Given</th><th></th><th></th></tr>
+            <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th>Given</th><th></th></tr>
             <?php echo $view;?>
           </table>
         </div>

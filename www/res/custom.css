@@ -1,6 +1,9 @@
 .omit{
 	text-decoration: line-through;
 }
-.omit>td>button{
+.omit>td>button.nomit{
+	display: none;
+}
+.nomit>td>button.omit{
 	display: none;
 }
