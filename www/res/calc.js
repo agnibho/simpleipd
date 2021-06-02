@@ -10,10 +10,10 @@ function entrySort(i, j){
   }
 }
 var io=[];
-var clinical={pr:[], rr:[], temperature:[], spo2:[], sbp:[], dbp:[]};
+var clinical={pr:[], rr:[], temperature:[], spo2:[], sbp:[], dbp:[], cbg:[]};
 var reports={};
 var treatment={};
-var clinDict={pr: "Pulse Rate", rr: "Respiratory Rate", temperature: "Temperature", spo2: "SpO2", sbp: "Systolic BP", dbp: "Diastolic BP"}
+var clinDict={pr: "Pulse Rate", rr: "Respiratory Rate", temperature: "Temperature", spo2: "SpO2", sbp: "Systolic BP", dbp: "Diastolic BP", cbg: "CBG"}
 var reportsDict={};
 $(document).ready(function(){
   var ctx1=$("#clinChart")[0].getContext("2d");
@@ -58,6 +58,9 @@ $(document).ready(function(){
       }
       if(entry.bp){
         clinical.dbp.push([stamp, entry.bp.split("/")[1]]);
+      }
+      if(entry.cbg){
+        clinical.cbg.push([stamp, entry.cbg]);
       }
     });
     // INTAKE-OUTPUT
@@ -112,6 +115,9 @@ $(document).ready(function(){
         }
         if(entry.bp){
           clinical.dbp.push([stamp, entry.bp.split("/")[1]]);
+        }
+        if(entry.cbg){
+          clinical.cbg.push([stamp, entry.cbg]);
         }
       });
       Object.keys(clinical).forEach(function(i){
