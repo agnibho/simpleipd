@@ -30,8 +30,8 @@ if(isSet($_GET["pid"])){
   }
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=$db->getHistory($pid)->fetchArray()["history"];
-  if(!empty($history->onset)){
-    $diff="<tr><th>Day of illness: </th><td>".date_diff(new DateTime(), new DateTime($history->onset))->format("%a")."</td></tr>";
+  if(!empty(json_decode($history)->onset)){
+    $diff="<tr><th>Day of illness: </th><td>".date_diff(new DateTime(), new DateTime(json_decode($history)->onset))->format("%a")."</td></tr>";
   }
   else{
     $diff="";
