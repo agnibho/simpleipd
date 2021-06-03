@@ -30,6 +30,13 @@ if(isSet($_GET["pid"])){
   }
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
+  $onset=json_decode($db->getHistory($pid)->fetchArray()["history"])->onset;
+  if($onset){
+    $diff="<tr><th>Day of illness: </th><td>".date_diff(new DateTime(), new DateTime($onset))->format("%a")."</td></tr>";
+  }
+  else{
+    $diff="";
+  }
   $physicianArray=$db->getAllData($pid, "physician");
   while($c=$physicianArray->fetchArray()){
     array_push($physician, viewData($c["data"], "physician.php?pid=".$pid."&id=".$c["rowid"]));
@@ -129,6 +136,7 @@ if(isSet($_GET["pid"])){
                 <table class="table">
                   <tr><th>Diagnosis</th><td><?php echo $db->getDiagnosis($pid)->fetchArray()["diagnosis"];?></td></tr>
                   <tr><th>Summary</th><td><?php echo $db->getSummary($pid)->fetchArray()["summary"];?></td></tr>
+                  <?php echo $diff;?>
                 </table>
               </div>
             </div>
@@ -157,6 +165,7 @@ if(isSet($_GET["pid"])){
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
+            <p><a href="history.php?pid=<?php echo $pid;?>">Edit</a></p>
           </div>
           <div class="tab-pane fade" id="physician" role="tabpanel" aria-labelledby="physician-tab">
             <?php foreach($physician as $p) echo $p;?>

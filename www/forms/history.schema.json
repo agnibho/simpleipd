@@ -20,6 +20,11 @@
             "type": "string",
             "format": "textarea"
         },
+        "onset": {
+            "description": "Onset of illness",
+            "type": "string",
+            "format": "date"
+        },
         "history": {
             "description": "History",
             "type": "string",
