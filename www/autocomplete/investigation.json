@@ -1,7 +1,8 @@
 {
     "tests": [
         "Chest Xray",
-        "Straight Xray Abdomen"
+        "Straight Xray Abdomen",
+        "ECG"
     ],
     "rooms": [
         "labmed",
