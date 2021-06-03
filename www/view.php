@@ -29,14 +29,14 @@ if(isSet($_GET["pid"])){
     $archive="";
   }
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
-  $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
-  $onset=json_decode($db->getHistory($pid)->fetchArray()["history"])->onset;
-  if($onset){
-    $diff="<tr><th>Day of illness: </th><td>".date_diff(new DateTime(), new DateTime($onset))->format("%a")."</td></tr>";
+  $history=$db->getHistory($pid)->fetchArray()["history"];
+  if(!empty($history->onset)){
+    $diff="<tr><th>Day of illness: </th><td>".date_diff(new DateTime(), new DateTime($history->onset))->format("%a")."</td></tr>";
   }
   else{
     $diff="";
   }
+  $history=viewData($history);
   $physicianArray=$db->getAllData($pid, "physician");
   while($c=$physicianArray->fetchArray()){
     array_push($physician, viewData($c["data"], "physician.php?pid=".$pid."&id=".$c["rowid"]));
