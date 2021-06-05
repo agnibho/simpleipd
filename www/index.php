@@ -33,7 +33,7 @@ while($arr=$reqs->fetchArray()){
   else{
     $received="<span class='badge badge-warning'>Sample Not Received</span>";
   }
-  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid."</a></td></tr><tr><td></td><td colspan='3'>".$arr["addl"]."</td><td>".$received."</td></tr>";
+  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid." (".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"].")</a></td></tr><tr><td></td><td colspan='3'>".$arr["addl"]."</td><td>".$received."</td></tr>";
 }
 ?>
 <!DOCTYPE html>
