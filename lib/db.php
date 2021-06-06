@@ -271,7 +271,7 @@ class DB extends SQLite3 {
   function getDrugs($pid){
     global $log;
     if(!checkAccess("treatment", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid AND omit!=:omit ORDER BY omit,start;");
+    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid AND omit!=:omit ORDER BY omit,drug,start;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":omit", -1);
     $result=$stmt->execute();
