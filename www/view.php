@@ -90,9 +90,6 @@ if(isSet($_GET["pid"])){
               <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="history.php?pid=<?php echo $pid;?>">Add History</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="laboratory.php?pid=<?php echo $pid;?>">Add Report</a>
-            </div>
-            <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
               <a class="btn btn-secondary <?php echo $archive;?>" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
             </div>
             <div class="mb-2 col-md-2" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
@@ -100,6 +97,9 @@ if(isSet($_GET["pid"])){
             </div>
             <div class="mb-2 col-md-2" id="death" <?php if($info=="") echo "style='display:none'";?>>
               <a class="btn btn-secondary <?php echo $archive;?>" href="death.php?pid=<?php echo $pid;?>">Death</a>
+            </div>
+            <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
+              <a class="btn btn-secondary" href="printdata.php?pid=<?php echo $pid;?>" class="btn btn-outline-success">Print Data</a>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ if(isSet($_GET["pid"])){
                 </div>
               </div>
             </form>
-            <p><a href="printdata.php?pid=<?php echo $pid;?>" class="btn btn-outline-success">Print Data</a></p>
+            <p <?php if(!in_array($_SESSION["group"],["admin","visiting","resident"])) echo "class='d-none'";?>><a class="mb-2 btn btn-outline-success <?php echo $archive;?>" href="laboratory.php?pid=<?php echo $pid;?>">Add Report</a></p>
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
