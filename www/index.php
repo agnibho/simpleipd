@@ -33,7 +33,7 @@ while($arr=$reqs->fetchArray()){
   else{
     $received="<span class='badge badge-warning'>Sample Not Received</span>";
   }
-  $showReqs=$showReqs."<tr><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid." (".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"].")</a></td></tr><tr><td></td><td colspan='3'>".$arr["addl"]."</td><td>".$received."</td></tr>";
+  $showReqs=$showReqs."<tr class='room1' data-room='".$arr["room"]."'><td>".$test."</td><td>".$arr["sample"]."</td><td>".$arr["room"]."</td><td>".date("M j", $arr["time"])."</td><td><a href='view.php?pid=".$pid."' target='_blank'>".$pid." (".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"].")</a></td></tr><tr class='room2' data-room='".$arr["room"]."'><td></td><td colspan='3'>".$arr["addl"]."</td><td>".$received."</td></tr>";
 }
 ?>
 <!DOCTYPE html>
@@ -59,6 +59,7 @@ while($arr=$reqs->fetchArray()){
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Requisition List</h4>
+          <div id="room-filter"><button class="btn btn-secondary m-2" data-room="all">All</button></div>
           <form id="sample" method="post"></form>
           <table class="table table-striped">
             <tr><th>Test Needed</th><th>Sample</th><th>Place</th><th>Date</th><th>Patient ID</th></tr>
@@ -68,5 +69,44 @@ while($arr=$reqs->fetchArray()){
       </div>
     </div>
     <?php include(CONFIG_LIB."foot.php");?>
+<script>
+var roomList=new Set();
+$(document).ready(function(){
+  $(".room1").each(function(){
+    roomList.add($(this).data("room"));
+  });
+  roomName=roomList.entries();
+  for(const name of roomName){
+    if(name[0]){
+      $("#room-filter").html($("#room-filter").html()+"<button class='btn btn-outline-secondary m-2' data-room='"+name[0]+"'>"+name[0]+"</button>");
+    }
+  }
+  $("#room-filter").on("click", "button", function(){
+    $("#room-filter button").removeClass("btn-secondary");;
+    $("#room-filter button").addClass("btn-outline-secondary");;
+    $(this).removeClass("btn-outline-secondary");
+    $(this).addClass("btn-secondary");
+    room=$(this).data("room");
+    if(room=="all"){
+      $(".room1").show();
+      $(".room2").show();
+    }
+    else{
+      $(".room1").hide();
+      $(".room2").hide();
+      $(".room1").each(function(){
+        if($(this).data("room")==room){
+          $(this).show();
+        }
+      });
+      $(".room2").each(function(){
+        if($(this).data("room")==room){
+          $(this).show();
+        }
+      });
+    }
+  });
+});
+</script>
   </body>
 </html>
