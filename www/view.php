@@ -99,7 +99,7 @@ if(isSet($_GET["pid"])){
               <a class="btn btn-secondary <?php echo $archive;?>" href="death.php?pid=<?php echo $pid;?>">Death</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="btn btn-secondary" href="printdata.php?pid=<?php echo $pid;?>" class="btn btn-outline-success">Print Data</a>
+              <a class="btn btn-secondary" href="printdata.php?pid=<?php echo $pid;?>">Print Data</a>
             </div>
           </div>
         </div>

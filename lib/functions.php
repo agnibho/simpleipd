@@ -1,4 +1,33 @@
 <?php
+function resolveRange($arr, $val=false){
+  if($val){
+    if($val<$arr[0] || $val>$arr[1]){
+      return "text-danger";
+    }
+    else{
+      return "";
+    }
+  }
+  else{
+    $part=["","","",""];
+    if(!empty($arr[0])){
+      $part[1]=$arr[0];
+    }
+    else{
+      $part[1]="&lt;";
+    }
+    if(!empty($arr[1])){
+      $part[3]=$arr[1];
+    }
+    else{
+      $part[1]="&gt";
+    }
+    if(!empty($arr[0]) && !empty($arr[1])){
+      $part[2]="-";
+    }
+    return implode("",$part);
+  }
+}
 function schema2form($file, $pid=null, $id=null, $cat=null, $data=null, $time=null){
   global $db;
   $schema=json_decode(file_get_contents($file));
@@ -127,22 +156,38 @@ function viewData($data, $edit=null){
     else{
       $date="";
     }
-    $view=$view."<tr><th class='w-25'>".$description."</th><th>".$date."</th></tr>";
+    $view=$view."<tr><th class='w-25'>".$description."</th><th>".$date."</th>";
+    $view=$view."<th></th>";
+    $view=$view."</tr>";
     foreach($data as $field=>$value){
+      $warn="";
+      if(!empty($schema->properties->$field->range)){
+        $warn=resolveRange($schema->properties->$field->range, $value);
+      }
+      else{
+        $warn="";
+      }
       if(!empty($value) && $field!="form" && $field!="date" && $field!="time"){
         if(!empty($schema->properties->$field)){
-          $view=$view."<tr><td>".$schema->properties->$field->description."</td><td>".$value."</td></tr>";
+          $view=$view."<tr><td>".$schema->properties->$field->description."</td><td class='".$warn."'>".$value."</td>";
+          if(!empty($schema->properties->$field->range)){
+            $view=$view."<td>".resolveRange($schema->properties->$field->range)."</td>";
+          }
+          else{
+            $view=$view."<td></td>";
+          }
+          $view=$view."</tr>";
         }
         elseif($field=="extra_note"){
-          $view=$view."<tr><td>Extra Notes</td><td><pre>".$value."</pre></td></tr>";
+          $view=$view."<tr><td>Extra Notes</td><td><pre>".$value."</pre></td><td></td></tr>";
         }
         else{
-          $view=$view."<tr><td>".$field."</td><td>".$value."</td></tr>";
+          $view=$view."<tr><td>".$field."</td><td>".$value."</td><td></td></tr>";
         }
       }
     }
     if(!empty($edit)){
-      $view=$view."<tr><td colspan='2'><a href='".$edit."'>Edit</a>";
+      $view=$view."<tr><td colspan='3'><a href='".$edit."'>Edit</a>";
     }
     $view=$view."</table>";
     return $view;
