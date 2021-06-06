@@ -20,28 +20,33 @@
             "type": "string"
         },
         "hb": {
-            "description": "Hemoglobin",
-            "type": "number"
+            "description": "Hemoglobin (g/dL)",
+            "type": "number",
+            "range": [10,null]
         },
         "mcv": {
-            "description": "MCV",
-            "type": "number"
+            "description": "MCV (fl)",
+            "type": "number",
+            "range": [80,100]
         },
         "mch": {
-            "description": "MCH",
-            "type": "number"
+            "description": "MCH (pg)",
+            "type": "number",
+            "range": [27,31]
         },
         "mchc": {
-            "description": "MCHC",
-            "type": "number"
+            "description": "MCHC (g/dL)",
+            "type": "number",
+            "range": [32,36]
         },
         "rbc": {
-            "description": "RBC",
+            "description": "RBC (&times;10<sup>6</sup>)",
             "type": "number"
         },
         "wbc": {
-            "description": "WBC",
-            "type": "number"
+            "description": "WBC (&times;10<sup>3</sup>)",
+            "type": "number",
+            "range": [4,8]
         },
         "n": {
             "description": "Neutrophil",
@@ -64,8 +69,9 @@
             "type": "number"
         },
         "plt": {
-            "description": "Platelet",
-            "type": "number"
+            "description": "Platelet (&times;10<sup>3</sup>)",
+            "type": "number",
+            "range": [100,null]
         }
     },
     "required": ["date"]

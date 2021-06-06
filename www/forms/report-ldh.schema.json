@@ -20,8 +20,9 @@
             "type": "string"
         },
         "ldh": {
-            "description": "LDH",
-            "type": "number"
+            "description": "LDH (U/L)",
+            "type": "number",
+            "range": [null,150]
         }
     },
     "required": ["date"]

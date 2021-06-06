@@ -20,20 +20,24 @@
             "type": "string"
         },
         "ldl": {
-            "description": "LDL",
-            "type": "number"
+            "description": "LDL (mg/dL)",
+            "type": "number",
+            "range": [null,130]
         },
         "hdl": {
-            "description": "HDL",
-            "type": "number"
+            "description": "HDL (mg/dL)",
+            "type": "number",
+            "range": [40,null]
         },
         "tgl": {
-            "description": "Triglyceride",
-            "type": "number"
+            "description": "Triglyceride (mg/dL)",
+            "type": "number",
+            "range": [null,150]
         },
         "chol": {
-            "description": "Cholesterol",
-            "type": "number"
+            "description": "Cholesterol (mg/dL)",
+            "type": "number",
+            "range": [null,130]
         }
     },
     "required": ["date"]

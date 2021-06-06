@@ -20,24 +20,29 @@
             "type": "string"
         },
         "urea": {
-            "description": "Urea",
-            "type": "number"
+            "description": "Urea (mg/dL)",
+            "type": "number",
+            "range": [null,40]
         },
         "creat": {
-            "description": "Creatinine",
-            "type": "number"
+            "description": "Creatinine (mg/dL)",
+            "type": "number",
+            "range": [null,1]
         },
         "na": {
-            "description": "Sodium",
-            "type": "number"
+            "description": "Sodium (mEq/L)",
+            "type": "number",
+            "range": [134,146]
         },
         "k": {
-            "description": "Potassium",
-            "type": "number"
+            "description": "Potassium (mEq/L)",
+            "type": "number",
+            "range": [3.5,5]
         },
         "cl": {
-            "description": "Chloride",
-            "type": "number"
+            "description": "Chloride (mEq/L)",
+            "type": "number",
+            "range": [98,107]
         }
     },
     "required": ["date"]

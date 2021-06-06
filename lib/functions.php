@@ -1,7 +1,10 @@
 <?php
 function resolveRange($arr, $val=false){
   if($val){
-    if($val<$arr[0] || $val>$arr[1]){
+    if(!empty($arr[0]) && $val<$arr[0]){
+      return "text-danger";
+    }
+    elseif(!empty($arr[1]) && $val>$arr[1]){
       return "text-danger";
     }
     else{
@@ -14,13 +17,13 @@ function resolveRange($arr, $val=false){
       $part[1]=$arr[0];
     }
     else{
-      $part[1]="&lt;";
+      $part[0]="&lt;";
     }
     if(!empty($arr[1])){
       $part[3]=$arr[1];
     }
     else{
-      $part[1]="&gt";
+      $part[0]="&gt";
     }
     if(!empty($arr[0]) && !empty($arr[1])){
       $part[2]="-";
