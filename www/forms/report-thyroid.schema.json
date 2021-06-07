@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "lipid",
-    "description": "Lipid Profile",
+    "title": "thyroid",
+    "description": "Thyroid Profile",
     "type": "object",
 
     "properties": {
@@ -19,25 +19,25 @@
             "description": "Sample",
             "type": "string"
         },
-        "ldl": {
-            "description": "LDL (mg/dL)",
+        "tsh": {
+            "description": "TSH (&micro;IU/ml)",
             "type": "number",
-            "range": [null,100]
+            "range": [0.39,6.16]
         },
-        "hdl": {
-            "description": "HDL (mg/dL)",
+        "ft4": {
+            "description": "FT4 (ng/dL)",
             "type": "number",
-            "range": [35,80]
+            "range": [0.9,1.7]
         },
-        "tgl": {
-            "description": "Triglyceride (mg/dL)",
+        "t3": {
+            "description": "T3 (ng/ml)",
             "type": "number",
-            "range": [null,160]
+            "range": [0.52,1.85]
         },
-        "chol": {
-            "description": "Cholesterol (mg/dL)",
+        "t4": {
+            "description": "T4 (&micro;g/dl)",
             "type": "number",
-            "range": [null,200]
+            "range": [4.4,11.6]
         }
     },
     "required": ["date"]

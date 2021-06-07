@@ -22,16 +22,17 @@
         "tbr": {
             "description": "Total Bilirubin (mg/dL)",
             "type": "number",
-            "range": [null,1]
+            "range": [0.3,1.2]
         },
         "cbr": {
             "description": "Conjugated Bilirubin (mg/dL)",
-            "type": "number"
+            "type": "number",
+            "range": [0,0.25]
         },
         "alb": {
             "description": "Albumin (g/dL)",
             "type": "number",
-            "range": [3.5,null]
+            "range": [3.5,5.2]
         },
         "glob": {
             "description": "Globulin (g/dL)",
@@ -40,15 +41,19 @@
         "sgot": {
             "description": "SGOT (IU/L)",
             "type": "number",
-            "range": [null,35]
+            "range": [null,40]
         },
         "sgpt": {
             "description": "SGPT (IU/L)",
             "type": "number",
-            "range": [null,35]
+            "range": [null,45]
         },
         "alp": {
             "description": "Alkaline Phosphatase (IU/L)",
+            "type": "number"
+        },
+        "ggt": {
+            "description": "GGT (IU/L)",
             "type": "number"
         }
     },

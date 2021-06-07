@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "ldh",
-    "description": "LDH",
+    "title": "uric_acid",
+    "description": "Uric Acid",
     "type": "object",
 
     "properties": {
@@ -19,10 +19,9 @@
             "description": "Sample",
             "type": "string"
         },
-        "ldh": {
-            "description": "LDH (U/L)",
-            "type": "number",
-            "range": [225,450]
+        "ua": {
+            "description": "Uric Acid (U/L)",
+            "type": "number"
         }
     },
     "required": ["date"]
