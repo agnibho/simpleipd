@@ -20,16 +20,19 @@
             "type": "string"
         },
         "fbs": {
-            "description": "FBS",
-            "type": "number"
+            "description": "FBS (mg/dL)",
+            "type": "number",
+            "range": [79,110]
         },
         "ppbs": {
-            "description": "PPBS",
-            "type": "number"
+            "description": "PPBS (mg/dL)",
+            "type": "number",
+            "range": [null,160]
         },
         "hba1c": {
             "description": "HbA1C",
-            "type": "number"
+            "type": "number",
+            "range": [null,6]
         }
     },
     "required": ["date"]

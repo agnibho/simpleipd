@@ -1,6 +1,6 @@
 <?php
 require(dirname(__DIR__)."/require.php");
-$list=$db->getPatientList();
+$list=$db->getArchivedPatientList();
 $showList="";
 while($arr=$list->fetchArray()){
   $pid=$arr["pid"];

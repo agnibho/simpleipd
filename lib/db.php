@@ -271,7 +271,7 @@ class DB extends SQLite3 {
   function getDrugs($pid){
     global $log;
     if(!checkAccess("treatment", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid AND omit!=:omit ORDER BY omit,start;");
+    $stmt=$this->prepare("SELECT rowid,* FROM treatment WHERE pid=:pid AND omit!=:omit ORDER BY omit,drug,start;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":omit", -1);
     $result=$stmt->execute();
@@ -377,6 +377,13 @@ class DB extends SQLite3 {
     global $log;
     if(!checkAccess("info", "dbGet")) return false;
     $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis FROM patients WHERE status='admitted' ORDER BY UPPER(ward),bed;");
+    $result=$stmt->execute();
+    return($result);
+  }
+  function getArchivedPatientList(){
+    global $log;
+    if(!checkAccess("info", "dbGet")) return false;
+    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients WHERE status!='admitted' ORDER BY UPPER(ward),bed;");
     $result=$stmt->execute();
     return($result);
   }

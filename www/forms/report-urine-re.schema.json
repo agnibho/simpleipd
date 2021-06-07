@@ -41,7 +41,8 @@
         },
         "rbc": {
             "description": "RBC cells",
-            "type": "string"
+            "type": "string",
+            "range": [null,3]
         },
         "epitheial": {
             "description": "Epithelial Cells",
@@ -49,7 +50,8 @@
         },
         "pus": {
             "description": "Pus cells",
-            "type": "string"
+            "type": "string",
+            "range": [null,5]
         },
         "cast": {
             "description": "Cast",

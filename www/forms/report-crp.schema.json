@@ -20,8 +20,9 @@
             "type": "string"
         },
         "ldh": {
-            "description": "CRP",
-            "type": "number"
+            "description": "CRP (mg/L)",
+            "type": "number",
+            "range": [null,5]
         }
     },
     "required": ["date"]

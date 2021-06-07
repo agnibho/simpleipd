@@ -20,8 +20,9 @@
             "type": "string"
         },
         "ddimer": {
-            "description": "D-Dimer",
-            "type": "number"
+            "description": "D-Dimer (&micro;g/ml)",
+            "type": "number",
+            "range": [null,2]
         }
     },
     "required": ["date"]
