@@ -42,9 +42,9 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
   $form="<form method='post' id='antibiogram'><input type='hidden' name='form' value='".$_GET["form"]."'></form>";
   $form=$form."<table class='table'>";
   if(!empty($data)){
-    var_dump($data->organism);
     $date="value='".$data->date."'";
     $sample="value='".$data->sample."'";
+    $labid="value='".$data->labid."'";
     $organism="value='".$data->organism."'";
   }
   elseif(!empty($_GET["time"]) || !empty($_GET["sample"])){
@@ -59,10 +59,12 @@ if(!empty($_GET["pid"]) && !empty($_GET["form"])){
   else{
     $date="";
     $sample="";
+    $labid="";
     $organism="";
   }
   $form=$form."<tr><td>Date</td><td colspan='3'><input type='date' class='form-control' name='date' ".$date." form='antibiogram'></td></tr>";
   $form=$form."<tr><td>Sample</td><td colspan='3'><input type='text' class='form-control' name='sample' ".$sample." form='antibiogram' required></td></tr>";
+  $form=$form."<tr><td>Lab ID</td><td colspan='3'><input type='text' class='form-control' name='labid' ".$labid." form='antibiogram'></td></tr>";
   $form=$form."<tr><td>Organism</td><td colspan='3'><input type='text' class='form-control' name='organism' ".$organism." form='antibiogram' required></td></tr>";
   $form=$form."<tr><th>Antibiotic</th><th>MIC</th><th>Interpretation</th>";
   foreach($list as $k=>$v){
