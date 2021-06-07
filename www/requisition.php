@@ -20,7 +20,9 @@ if(isSet($_GET["pid"])){
   $testList="";
   foreach(glob("forms/report-*.json") as $file){
     $form=json_decode(file_get_contents($file));
-    $testList=$testList."<option value='".$file."'>".$form->description."</option>";
+    if(!in_array($form->title, ["disk_diffusion","serology"])){
+      $testList=$testList."<option value='".$file."'>".$form->description."</option>";
+    }
   }
   foreach($inv->tests as $t){
     $testList=$testList."<option>".$t."</option>";
