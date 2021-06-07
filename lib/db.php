@@ -383,7 +383,7 @@ class DB extends SQLite3 {
   function getArchivedPatientList(){
     global $log;
     if(!checkAccess("info", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis FROM patients WHERE status!='admitted' ORDER BY UPPER(ward),bed;");
+    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients WHERE status!='admitted' ORDER BY UPPER(ward),bed;");
     $result=$stmt->execute();
     return($result);
   }
