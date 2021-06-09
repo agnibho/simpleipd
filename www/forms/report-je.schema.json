@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "culture_sensitivity",
-    "description": "Culture Sensitivity",
+    "title": "japanese_encephalitis",
+    "description": "Japanese Encephalitis",
     "type": "object",
 
     "properties": {
@@ -15,18 +15,13 @@
             "type": "string",
             "format": "time"
         },
-        "labid": {
-            "description": "Lab ID",
-            "type": "string"
-        },
         "sample": {
             "description": "Sample",
             "type": "string"
         },
-        "report": {
-            "description": "Report",
-            "type": "string",
-            "format": "textarea"
+        "jap_e_igm": {
+            "description": "Japanese Encephalitis IgM",
+            "type": "string"
         }
     },
     "required": ["date"]

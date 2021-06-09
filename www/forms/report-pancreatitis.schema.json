@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "lipid",
-    "description": "Lipid Profile",
+    "title": "pancreatitis",
+    "description": "Pancreatitis Markers",
     "type": "object",
 
     "properties": {
@@ -19,25 +19,15 @@
             "description": "Sample",
             "type": "string"
         },
-        "ldl": {
-            "description": "LDL (mg/dL)",
+        "amylase": {
+            "description": "Amylase (IU/L)",
             "type": "number",
-            "range": [null,100]
+            "range": [23,85]
         },
-        "hdl": {
-            "description": "HDL (mg/dL)",
+        "lipase": {
+            "description": "Lipase (IU/L)",
             "type": "number",
-            "range": [35,80]
-        },
-        "tgl": {
-            "description": "Triglyceride (mg/dL)",
-            "type": "number",
-            "range": [null,160]
-        },
-        "chol": {
-            "description": "Cholesterol (mg/dL)",
-            "type": "number",
-            "range": [null,200]
+            "range": [0,160]
         }
     },
     "required": ["date"]

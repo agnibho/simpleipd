@@ -22,7 +22,7 @@
         "ldh": {
             "description": "CRP (mg/L)",
             "type": "number",
-            "range": [null,5]
+            "range": [null,6]
         }
     },
     "required": ["date"]

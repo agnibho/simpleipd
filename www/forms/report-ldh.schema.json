@@ -22,7 +22,7 @@
         "ldh": {
             "description": "LDH (U/L)",
             "type": "number",
-            "range": [null,150]
+            "range": [225,450]
         }
     },
     "required": ["date"]

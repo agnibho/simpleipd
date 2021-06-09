@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "hepatitis",
+    "description": "Viral Hepatitis",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "hbsag": {
+            "description": "HBsAg",
+            "type": "string"
+        },
+        "hbeag": {
+            "description": "HBeAg",
+            "type": "string"
+        },
+        "antihcv": {
+            "description": "Anti-HCV",
+            "type": "string"
+        },
+        "antihav": {
+            "description": "Anti-HAV",
+            "type": "string"
+        },
+        "antihev": {
+            "description": "Anti-HEV",
+            "type": "string"
+        },
+        "antihbs": {
+            "description": "Anti-HBs",
+            "type": "string"
+        },
+        "antihbc": {
+            "description": "Anti-HBc",
+            "type": "string"
+        },
+        "hbvdna": {
+            "description": "HBV DNA",
+            "type": "string"
+        },
+        "hcvrna": {
+            "description": "HCV RNA",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

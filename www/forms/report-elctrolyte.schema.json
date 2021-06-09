@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2020-12/schema",
-    "title": "lipid",
-    "description": "Lipid Profile",
+    "title": "electrolyte",
+    "description": "Electrolyte",
     "type": "object",
 
     "properties": {
@@ -19,25 +19,25 @@
             "description": "Sample",
             "type": "string"
         },
-        "ldl": {
-            "description": "LDL (mg/dL)",
+        "na": {
+            "description": "Sodium (mEq/L)",
             "type": "number",
-            "range": [null,100]
+            "range": [135,145]
         },
-        "hdl": {
-            "description": "HDL (mg/dL)",
+        "k": {
+            "description": "Potassium (mEq/L)",
             "type": "number",
-            "range": [35,80]
+            "range": [3.5,5]
         },
-        "tgl": {
-            "description": "Triglyceride (mg/dL)",
+        "cl": {
+            "description": "Chloride (mEq/L)",
             "type": "number",
-            "range": [null,160]
+            "range": [95,105]
         },
-        "chol": {
-            "description": "Cholesterol (mg/dL)",
+        "ca": {
+            "description": "Calcium (mg/dL)",
             "type": "number",
-            "range": [null,200]
+            "range": [8.5,10.2]
         }
     },
     "required": ["date"]

@@ -22,12 +22,17 @@
         "fbs": {
             "description": "FBS (mg/dL)",
             "type": "number",
-            "range": [79,110]
+            "range": [70,100]
         },
         "ppbs": {
             "description": "PPBS (mg/dL)",
             "type": "number",
-            "range": [null,160]
+            "range": [null,140]
+        },
+        "rbs": {
+            "description": "RBS (mg/dL)",
+            "type": "number",
+            "range": [null,200]
         },
         "hba1c": {
             "description": "HbA1C",
