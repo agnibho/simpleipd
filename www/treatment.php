@@ -73,6 +73,7 @@ if(!empty($_GET["pid"])){
   <body>
     <div class="container">
       <?php include(CONFIG_LIB."top.php");?>
+      <?php echo getInfo($pid);?>
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">Medicine List</h4>

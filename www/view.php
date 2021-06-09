@@ -105,6 +105,7 @@ if(isSet($_GET["pid"])){
         </div>
       </div>
       <div <?php if(empty($pid)) echo "style='display:none'";?>>
+        <div class="alert alert-secondary">ID: <?php echo $pid." (".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"].")"; ?></div>
         <ul class="nav nav-tabs" id="listtabs" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Info</a>
