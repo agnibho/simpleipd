@@ -90,7 +90,7 @@ if(isSet($_GET["pid"])){
               <a class="mb-2 btn btn-secondary <?php echo $archive;?>" href="history.php?pid=<?php echo $pid;?>">Add History</a>
             </div>
             <div class="mb-2 col-md-2" <?php if($info=="") echo "style='display:none'";?>>
-              <a class="btn btn-secondary <?php echo $archive;?>" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
+              <a class="btn btn-secondary" href="attachments.php?pid=<?php echo $pid;?>">Attachments</a>
             </div>
             <div class="mb-2 col-md-2" id="discharge" <?php if($info=="") echo "style='display:none'";?>>
               <a class="btn btn-secondary <?php echo $archive;?>" href="discharge.php?pid=<?php echo $pid;?>">Discharge</a>
