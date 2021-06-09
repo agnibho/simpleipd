@@ -53,7 +53,7 @@ if(!empty($_GET["pid"])){
     if(filter_var($drug["duration"], FILTER_VALIDATE_INT)){
       $drug["duration"]=$drug["duration"]. " days";
     }
-    $view=$view."<tr class='".$omit."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td></tr>";
+    $view=$view."<tr class='".$omit." drug-entry' data-drug='".$drug["drug"]."' data-dose='".$drug["dose"]."' data-route='".$drug["route"]."' data-frequency='".$drug["frequency"]."' data-duration='".$drug["duration"]."' data-addl='".$drug["addl"]."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td><td class='copier'></td></tr>";
   }
   $form=schema2form("forms/drugs.schema.json");
   if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
@@ -77,6 +77,7 @@ if(!empty($_GET["pid"])){
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">Medicine List</h4>
+          <a href="#drug-form" class="btn btn-primary float-right mb-2">Add New Drug</a>
           <form method='post' id='omitter'>
             <input type="hidden" name="date">
             <input type="hidden" name="time">
@@ -90,15 +91,34 @@ if(!empty($_GET["pid"])){
             <input type="hidden" name="time">
           </form>
           <table class="table">
-            <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th>Given</th><th></th></tr>
+            <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Start</th><th>Duration</th><th>Note</th><th>Given</th><th></th><th></th></tr>
             <?php echo $view;?>
           </table>
         </div>
       </div>
-      <div <?php echo $hideForm;?>>
+      <div <?php echo $hideForm;?> id="drug-form">
         <?php echo $form;?>
       </div>
     </div>
     <?php include(CONFIG_LIB."foot.php");?>
+<script>
+$(document).ready(function(){
+  $(".drug-entry").each(function(){
+    if($(this).find("[name=omit]").is(":visible") || $(this).find("[name=delete]").is(":visible")){
+      $(this).find(".copier").html("<button class='btn btn-outline-secondary btn-copy'>Copy</button>");
+      $(this).on("click", "td>.btn-copy", function(){
+        drugEntry=$(this).parent().parent();
+        $("#drug").val(drugEntry.data("drug"));
+        $("#dose").val(drugEntry.data("dose"));
+        $("#route").val(drugEntry.data("route"));
+        $("#frequency").val(drugEntry.data("frequency"));
+        $("#duration").val(drugEntry.data("duration"));
+        $("#addl").val(drugEntry.data("addl"));
+        window.location.hash="drug-form";
+      });
+    }
+  });
+});
+</script>
   </body>
 </html>
