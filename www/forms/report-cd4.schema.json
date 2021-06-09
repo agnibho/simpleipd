@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "cd4",
+    "description": "CD4",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "cd4": {
+            "description": "Absolute CD4 count",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}

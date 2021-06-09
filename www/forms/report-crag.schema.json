@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "crag",
+    "description": "CRAG",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "crag": {
+            "description": "Result",
+            "type": "string"
+        },
+        "titer": {
+            "description": "Titer",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}

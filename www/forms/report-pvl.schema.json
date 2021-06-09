@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "hiv_pvl",
+    "description": "HIV PVL",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "pvl": {
+            "description": "PVL",
+            "type": "string"
+        }
+    },
+    "required": ["date"]
+}
