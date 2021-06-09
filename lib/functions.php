@@ -200,7 +200,7 @@ function viewData($data, $edit=null){
   }
 }
 
-function viewAntibiogram($data, $edit){
+function viewAntibiogram($data, $edit=null){
   $data=json_decode($data);
   $view="<table class='table table-striped'>";
   $view=$view."<tr><th>Vitek Report</th><th colspan='2'>".$data->date."</th></tr>";
@@ -216,7 +216,9 @@ function viewAntibiogram($data, $edit){
   if(!empty($data->note)){
     $view=$view."<tr><td>Note</td><td colspan='2'>".$data->note."</td></tr>";
   }
-  $view=$view."<tr><td colspan='2'><a href='".$edit."'>Edit</a></td></tr>";
+  if(!empty($edit)){
+    $view=$view."<tr><td colspan='2'><a href='".$edit."'>Edit</a></td></tr>";
+  }
   $view=$view."</table>";
   return $view;
 }
