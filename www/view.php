@@ -24,9 +24,11 @@ if(isSet($_GET["pid"])){
   $status=$db->getStatus($pid)->fetchArray()["status"];
   if($status!="admitted"){
     $archive="disabled";
+    $departure=$db->getDeparture($pid)->fetchArray()["departure"];
   }
   else{
     $archive="";
+    $departure="";
   }
   $info=viewData($db->getAdmissionData($pid)->fetchArray()["data"]);
   $history=$db->getHistory($pid)->fetchArray()["history"];
@@ -128,7 +130,7 @@ if(isSet($_GET["pid"])){
         </ul>
         <div class="tab-content" id="viewtabs">
           <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-            <div class='card'><div class='card-body'>Status: <?php echo $status;?></div></div>
+            <div class='card'><div class='card-body'>Status: <?php echo $status;?><?php if(!empty($departure)) echo " (".date("M d, Y h:i a", $departure).")"; ?></div></div>
             <div class="row">
               <div class="col-md-6">
                 <?php echo $info;?>

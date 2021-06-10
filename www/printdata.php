@@ -9,6 +9,7 @@ $death="<h4>Medical Cause of Death</h4>";
 if($_GET["pid"]){
   $pid=$_GET["pid"];
   $status=$db->getStatus($pid)->fetchArray()["status"];
+  $departure=$db->getDeparture($pid)->fetchArray()["departure"];
   $info=getInfo($pid);
   $history=viewData($db->getHistory($pid)->fetchArray()["history"]);
   $physicianArray=$db->getAllData($pid, "physician");
@@ -78,7 +79,8 @@ $discharge=$discharge."</ol>";
       <h2><?php echo CONFIG_TITLE;?></h2>
       <h4><?php echo "Patient Record";?></h4>
       <?php echo $info;?>
-      <?php echo "<p><strong>Status: </strong>".$status."</p>";?>
+      <?php echo "<p><strong>Status: </strong>".$status."<br>";?>
+      <?php if(!empty($departure)) echo "(".date("M d, Y h:i a", $departure).")</p>"; ?>
       <?php echo $history;?>
       <?php foreach($physician as $p) echo $p;?>
       <?php foreach($nursing as $n) echo $n;?>

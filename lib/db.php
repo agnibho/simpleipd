@@ -267,9 +267,10 @@ class DB extends SQLite3 {
   function setDischarged($pid){
     global $log;
     if(!checkAccess("discharge", "dbSet")) return false;
-    $stmt=$this->prepare("UPDATE patients SET status=:discharged WHERE pid=:pid;");
+    $stmt=$this->prepare("UPDATE patients SET status=:discharged,departure=:time WHERE pid=:pid;");
     $stmt->bindValue(":pid", $pid);
     $stmt->bindValue(":discharged", "discharged");
+    $stmt->bindValue(":time", time());
     $stmt->execute();
     $log->log($pid, "discharged", null);
   }
@@ -281,8 +282,10 @@ class DB extends SQLite3 {
     $stmt->bindValue(":time", strtotime($post["date"].$post["time"]));
     $stmt->bindValue(":data", json_encode($post));
     $stmt->execute();
-    $stmt=$this->prepare("UPDATE patients SET status='expired' WHERE pid=:pid;");
+    $stmt=$this->prepare("UPDATE patients SET status=:expired,departure=:time WHERE pid=:pid;");
     $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":expired", "expired");
+    $stmt->bindValue(":time", time());
     $stmt->execute();
     $log->log($pid, "death_declare", json_encode($post));
   }
