@@ -44,7 +44,7 @@ if($_GET["pid"]){
     }
     $treatments=$treatments."<li>".$t["drug"]." ".$t["dose"]." ".$t["route"]." ".$t["frequency"]." ".$start." ".$end." ".$addl;
   }
-  $dischargeArray=$db->getAdvice($pid);
+  $dischargeArray=$db->getDischargeAdvice($pid);
   while($t=$dischargeArray->fetchArray()){
     $discharge=$discharge."<li>".$t["drug"]." ".$t["dose"]." ".$t["route"]." ".$t["frequency"]." for ".$t["duration"]." ".$t["addl"];
   }

@@ -75,6 +75,24 @@ class DB extends SQLite3 {
     $stmt->execute();
     $log->log($pid, "history", json_encode($post));
   }
+  function advice($post, $pid){
+    global $log;
+    if(!checkAccess("treatment", "dbSet")) return false;
+    $query=$this->prepare("SELECT count(rowid) FROM advice WHERE pid=:pid");
+    $query->bindValue(":pid", $pid);
+    $exist=$query->execute();
+    if($exist->fetchArray()[0]==0){
+      $stmt=$this->prepare("INSERT INTO advice (pid,time,data) VALUES (:pid,:time,:data);");
+    }
+    else{
+      $stmt=$this->prepare("UPDATE advice SET pid=:pid,time=:time,data=:data WHERE pid=:pid;");
+    }
+    $stmt->bindValue(":pid", $pid);
+    $stmt->bindValue(":time", time());
+    $stmt->bindValue(":data", json_encode($post));
+    $stmt->execute();
+    $log->log($pid, "advice", json_encode($post));
+  }
   function addPhysician($post, $pid){
     global $log;
     if(!checkAccess("physician", "dbSet")) return false;
@@ -294,7 +312,7 @@ class DB extends SQLite3 {
     $result=$stmt->execute();
     return($result);
   }
-  function getAdvice($pid){
+  function getDischargeAdvice($pid){
     global $log;
     if(!checkAccess("discharge", "dbGet")) return false;
     $stmt=$this->prepare("SELECT rowid,* FROM discharge WHERE pid=:pid;");
@@ -441,6 +459,14 @@ class DB extends SQLite3 {
     global $log;
     if(!checkAccess("history", "dbGet")) return false;
     $stmt=$this->prepare("SELECT history FROM patients WHERE pid=:pid;");
+    $stmt->bindValue(":pid", $pid);
+    $result=$stmt->execute();
+    return($result);
+  }
+  function getAdvice($pid){
+    global $log;
+    if(!checkAccess("treatment", "dbGet")) return false;
+    $stmt=$this->prepare("SELECT data FROM advice WHERE pid=:pid;");
     $stmt->bindValue(":pid", $pid);
     $result=$stmt->execute();
     return($result);

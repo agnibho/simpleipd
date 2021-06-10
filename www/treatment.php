@@ -19,9 +19,13 @@ if(!empty($_GET["pid"])){
   elseif(!empty($_POST["delete"])){
     $db->deleteDrug($_POST["delete"]);
   }
+  elseif(!empty($_POST["diet"])){
+    $db->advice($_POST, $pid);
+  }
   elseif(!empty($_POST["drug"])){
     $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra_note"]);
   }
+  $advice=$db->getAdvice($pid)->fetchArray()["data"];
   $list=$db->getDrugs($pid);
   $view="";
   while($drug=$list->fetchArray()){
@@ -56,6 +60,7 @@ if(!empty($_GET["pid"])){
     $view=$view."<tr class='".$omit." drug-entry' data-drug='".$drug["drug"]."' data-dose='".$drug["dose"]."' data-route='".$drug["route"]."' data-frequency='".$drug["frequency"]."' data-duration='".$drug["duration"]."' data-addl='".$drug["addl"]."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td><td class='copier'></td></tr>";
   }
   $form=schema2form("forms/drugs.schema.json");
+  $form2=schema2form("forms/advice.schema.json", null, null, null, json_decode($advice));
   if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
     $hideForm="";
   }
@@ -76,8 +81,15 @@ if(!empty($_GET["pid"])){
       <?php echo getInfo($pid);?>
       <div class="card mb-4">
         <div class="card-body">
+          <h4 class="card-title">Advice</h4>
+          <?php echo viewData($advice);?>
+          <a id="to-form-advice" href="#forms" class="btn btn-primary float-right mb-2">Edit General Measures</a>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-body">
           <h4 class="card-title">Medicine List</h4>
-          <a href="#drug-form" class="btn btn-primary float-right mb-2">Add New Drug</a>
+          <a id="to-form-drug" href="#forms" class="btn btn-primary float-right mb-2">Add New Drug</a>
           <form method='post' id='omitter'>
             <input type="hidden" name="date">
             <input type="hidden" name="time">
@@ -96,13 +108,34 @@ if(!empty($_GET["pid"])){
           </table>
         </div>
       </div>
-      <div <?php echo $hideForm;?> id="drug-form">
-        <?php echo $form;?>
+      <div <?php echo $hideForm;?>>
+        <ul class="nav nav-tabs" id="form-navs" rold="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="nav-drug" data-toggle="tab" href="#form-drug" role="tab" aria-controls="form-drug" aria-selected="true">Add Drug</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="nav-advice" data-toggle="tab" href="#form-advice" role="tab" aria-controls="form-advice" aria-selected="false">General Measures</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="forms">
+          <div class="tab-pane show active" id="form-drug" role="tabpanel" aria-labelledby="nav-drug-tab">
+            <?php echo $form;?>
+          </div>
+          <div class="tab-pane" id="form-advice" role="tabpanel" aria-labelledby="nav-advice-tab">
+            <?php echo $form2;?>
+          </div>
+        </div>
       </div>
     </div>
     <?php include(CONFIG_LIB."foot.php");?>
 <script>
 $(document).ready(function(){
+  $("#to-form-drug").click(function(){
+    $("#nav-drug").tab("show");
+  });
+  $("#to-form-advice").click(function(){
+    $("#nav-advice").tab("show");
+  });
   $(".drug-entry").each(function(){
     if($(this).find("[name=omit]").is(":visible") || $(this).find("[name=delete]").is(":visible")){
       $(this).find(".copier").html("<button class='btn btn-outline-secondary btn-copy'>Copy</button>");

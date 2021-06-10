@@ -1,3 +1,8 @@
+CREATE TABLE advice(
+pid int,
+time int,
+data text
+);
 CREATE TABLE death(
 pid int,
 time int,

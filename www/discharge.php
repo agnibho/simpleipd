@@ -13,7 +13,7 @@ if(!empty($_GET["pid"])){
   elseif(!empty($_POST["drug"])){
     $db->addAdvice($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["duration"], $_POST["extra_note"]);
   }
-  $list=$db->getAdvice($pid);
+  $list=$db->getDischargeAdvice($pid);
   $view="<form method='post' id='delete'></form>";
   $view=$view."<table class='table'>";
   $view=$view."<tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Duration</th><th>Note</th></tr>";
