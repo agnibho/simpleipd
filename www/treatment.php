@@ -31,6 +31,12 @@ if(!empty($_GET["pid"])){
   }
   $list=$db->getDrugs($pid);
   $view="";
+  if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
+    $hideEdit="";
+  }
+  else{
+    $hideEdit="style='display:none'";
+  }
   while($drug=$list->fetchArray()){
     if($drug["omit"]){
       $omit="omit";
@@ -60,16 +66,10 @@ if(!empty($_GET["pid"])){
     if(filter_var($drug["duration"], FILTER_VALIDATE_INT)){
       $drug["duration"]=$drug["duration"]. " days";
     }
-    $view=$view."<tr class='".$omit." drug-entry' data-drug='".$drug["drug"]."' data-dose='".$drug["dose"]."' data-route='".$drug["route"]."' data-frequency='".$drug["frequency"]."' data-duration='".$drug["duration"]."' data-addl='".$drug["addl"]."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td><td class='copier'></td></tr>";
+    $view=$view."<tr class='".$omit." drug-entry' data-drug='".$drug["drug"]."' data-dose='".$drug["dose"]."' data-route='".$drug["route"]."' data-frequency='".$drug["frequency"]."' data-duration='".$drug["duration"]."' data-addl='".$drug["addl"]."'><td>".$drug["drug"]."</td><td>".$drug["dose"]."</td><td>".$drug["route"]."</td><td>".$drug["frequency"]."</td><td>".date("M j", $drug["start"]).$end."</td><td>".$drug["duration"]."</td><td>".$drug["addl"]."</td><td>".$last."</td><td><button type='submit' ".$hideEdit." class='btn btn-success nomit confirm' name='give' value='".$drug["rowid"]."' form='administer' ".$omit." ".checkAccess("nursing", "form").">Give</button><button type='submit' ".$hideEdit." class='btn btn-warning nomit confirm' name='omit' value='".$drug["rowid"]."' form='omitter' ".$omit." ".checkAccess("treatment", "form").">Omit</button><button type='submit' ".$hideEdit." class='btn btn-secondary omit confirm' name='delete' value='".$drug["rowid"]."' form='delete' ".$omit." ".checkAccess("treatment", "form").">Delete</button></td><td class='copier'></td></tr>";
   }
   $form=schema2form("forms/drugs.schema.json");
   $form2=schema2form("forms/advice.schema.json", null, null, null, json_decode($advice));
-  if(checkAccess("treatment")=="all" && $db->getStatus($pid)->fetchArray()["status"]=="admitted"){
-    $hideForm="";
-  }
-  else{
-    $hideForm="style='display:none'";
-  }
 }
 ?>
 <!DOCTYPE html>
@@ -86,13 +86,13 @@ if(!empty($_GET["pid"])){
         <div class="card-body">
           <h4 class="card-title">Advice</h4>
           <?php echo viewData($advice);?>
-          <a id="to-form-advice" href="#forms" class="btn btn-primary float-right mb-2">Edit General Measures</a>
+          <a id="to-form-advice" href="#forms" class="btn btn-primary float-right mb-2" <?php echo $hideEdit; ?>>Edit General Measures</a>
         </div>
       </div>
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">Medicine List</h4>
-          <a id="to-form-drug" href="#forms" class="btn btn-primary float-right mb-2">Add New Drug</a>
+          <a id="to-form-drug" href="#forms" class="btn btn-primary float-right mb-2" <?php echo $hideEdit; ?>>Add New Drug</a>
           <form method='post' id='omitter'>
             <input type="hidden" name="date">
             <input type="hidden" name="time">
@@ -111,7 +111,7 @@ if(!empty($_GET["pid"])){
           </table>
         </div>
       </div>
-      <div <?php echo $hideForm;?>>
+      <div <?php echo $hideEdit;?>>
         <ul class="nav nav-tabs" id="form-navs" rold="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" id="nav-drug" data-toggle="tab" href="#form-drug" role="tab" aria-controls="form-drug" aria-selected="true">Add Drug</a>
