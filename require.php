@@ -22,19 +22,19 @@ if($page!="login.php" && $page!="index.php"){
 }
 if(!empty($_GET)){
   foreach($_GET as $k=>$v){
-    $_GET[$k]=htmlspecialchars($v);
+    $_GET[$k]=htmlspecialchars(trim($v));
   }
 }
 if(!empty($_POST)){
   foreach($_POST as $k=>$v){
     if(is_array($v)){
       foreach($v as $k2=>$v2){
-        $v[$k2]=htmlspecialchars($v2);
+        $v[$k2]=htmlspecialchars(trim($v2));
       }
       $_POST["k"]=$v;
     }
     else{
-      $_POST[$k]=htmlspecialchars($v);
+      $_POST[$k]=htmlspecialchars(trim($v));
     }
   }
 }
