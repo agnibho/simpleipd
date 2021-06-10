@@ -53,12 +53,6 @@ if(isSet($_GET["pid"])){
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">List of Requisitions</h4>
-          <form method='post' id='delete'></form>
-          <table class="table">
-            <tr><th>Test Name</th><th>Sample</th><th>Destination</th><th>Date</th><th>Extra note</th><th></th></tr>
-            <?php echo $list;?>
-          </table>
-          <hr>
           <form method="post" <?php echo checkAccess("requisition", "form");?>>
             <div class="row">
               <div class="col">
@@ -82,6 +76,12 @@ if(isSet($_GET["pid"])){
             <textarea type="text" class="form-control" name="addl" placeholder="Extra note"></textarea>
             <button class="btn btn-primary" type="submit">Submit Requisition</button>
           </form>
+          <hr>
+          <form method='post' id='delete'></form>
+          <table class="table">
+            <tr><th>Test Name</th><th>Sample</th><th>Destination</th><th>Date</th><th>Extra note</th><th></th></tr>
+            <?php echo $list;?>
+          </table>
         </div>
       </div>
     </div>
