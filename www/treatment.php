@@ -25,7 +25,10 @@ if(!empty($_GET["pid"])){
   elseif(!empty($_POST["drug"])){
     $db->addDrug($pid, $_POST["drug"], $_POST["dose"], $_POST["route"], $_POST["frequency"], $_POST["date"], $_POST["time"], $_POST["duration"], $_POST["extra_note"]);
   }
-  $advice=$db->getAdvice($pid)->fetchArray()["data"];
+  $advice=$db->getAdvice($pid)->fetchArray();
+  if(!empty($advice["data"])){
+    $advice=$advice["data"];
+  }
   $list=$db->getDrugs($pid);
   $view="";
   while($drug=$list->fetchArray()){
