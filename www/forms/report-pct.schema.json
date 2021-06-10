@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "title": "pct",
+    "description": "Procalcitonin",
+    "type": "object",
+
+    "properties": {
+        "date": {
+            "description": "Date",
+            "type": "string",
+            "format": "date"
+        },
+        "time": {
+            "description": "Time",
+            "type": "string",
+            "format": "time"
+        },
+        "sample": {
+            "description": "Sample",
+            "type": "string"
+        },
+        "pct": {
+            "description": "Procalcitonin (ng/ml)",
+            "type": "number"
+        }
+    },
+    "required": ["date"]
+}
