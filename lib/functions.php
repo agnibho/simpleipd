@@ -220,6 +220,9 @@ function viewAntibiogram($data, $edit=null){
   $data=json_decode($data);
   $view="<table class='table table-striped'>";
   $view=$view."<tr><th>Vitek Report</th><th colspan='2'>".$data->date."</th></tr>";
+  if(!empty($data->rdate)){
+    $view=$view."<tr><td>Reported on</td><td colspan='2'>".$data->rdate."</td></tr>";
+  }
   $view=$view."<tr><td>Sample</td><td colspan='2'>".$data->sample."</td></tr>";
   $view=$view."<tr><td>Lab ID</td><td colspan='2'>".$data->labid."</td></tr>";
   $view=$view."<tr><td>Organism</td><td colspan='2'>".$data->organism."</td></tr>";
