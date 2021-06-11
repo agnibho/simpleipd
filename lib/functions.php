@@ -159,9 +159,25 @@ function viewData($data, $edit=null){
     else{
       $date="";
     }
+    if(!empty($data->rdate)){
+      if(!empty($data->rtime)){
+        $rdate=date("M d, Y h:i a", strtotime($data->rdate." ".$data->rtime));
+      }
+      else{
+        $rdate=$data->rdate;
+      }
+    }
+    else{
+      $rdate="";
+    }
     $view=$view."<tr><th class='w-25'>".$description."</th><th>".$date."</th>";
     $view=$view."<th></th>";
     $view=$view."</tr>";
+    if(!empty($rdate)){
+      $view=$view."<tr><td class='w-25'>Reported</td><td>".$rdate."</td>";
+      $view=$view."<td></td>";
+      $view=$view."</tr>";
+    }
     foreach($data as $field=>$value){
       $warn="";
       if(!empty($schema->properties->$field->range)){
@@ -170,7 +186,7 @@ function viewData($data, $edit=null){
       else{
         $warn="";
       }
-      if(!empty($value) && $field!="form" && $field!="date" && $field!="time"){
+      if(!empty($value) && $field!="form" && $field!="date" && $field!="time" && $field!="rdate" && $field!="rtime"){
         if(!empty($schema->properties->$field)){
           $view=$view."<tr><td>".$schema->properties->$field->description."</td><td class='".$warn."'>".$value."</td>";
           if(!empty($schema->properties->$field->range)){
