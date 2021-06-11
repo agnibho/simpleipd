@@ -79,6 +79,10 @@
         "mv_pplateau": {
             "description": "MV P-Plateau",
             "type": "integer"
+        },
+        "bw": {
+            "description": "Body Weight (kg)",
+            "type": "string"
         }
     },
     "required": ["date","time"]

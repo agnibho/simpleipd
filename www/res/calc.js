@@ -132,6 +132,9 @@ $(document).ready(function(){
         if(entry.cbg){
           clinical.cbg.push([stamp, entry.cbg]);
         }
+        if(entry.bw){
+          clinical.bw.push([stamp, entry.bw]);
+        }
       });
       Object.keys(clinical).forEach(function(i){
         clinical[i].sort(entrySort);
@@ -164,9 +167,14 @@ $(document).ready(function(){
           obj[key]=reports[key];
           return obj;
         },{});
-        crclVal=crcl(reports["creat-report-rft"].slice(-1)[0][1], clinical.bw.slice(-1)[0][1], $("#info-age").text(), $("#info-sex").text());
+        try{
+          crclVal=crcl(reports["creat-report-rft"].slice(-1)[0][1], clinical.bw.slice(-1)[0][1], $("#info-age").text(), $("#info-sex").text());
+        }
+        catch(e){
+          crclVal=null;
+        }
         if(crclVal){
-          $("#crcl").text("Creatinine Clearance: "+crclVal.toFixed(1));
+          $("#crcl").text("Creatinine Clearance: "+crclVal.toFixed(1)+" mL/min");
         }
         Object.keys(reports).forEach(function(i){
           reports[i].sort(entrySort);
