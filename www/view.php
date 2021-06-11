@@ -41,19 +41,39 @@ if(isSet($_GET["pid"])){
   $history=viewData($history);
   $physicianArray=$db->getAllData($pid, "physician");
   while($c=$physicianArray->fetchArray()){
-    array_push($physician, viewData($c["data"], "physician.php?pid=".$pid."&id=".$c["rowid"]));
+    if($status=="admitted"){
+      array_push($physician, viewData($c["data"], "physician.php?pid=".$pid."&id=".$c["rowid"]));
+    }
+    else{
+      array_push($physician, viewData($c["data"]));
+    }
   }
   $nursingArray=$db->getAllData($pid, "nursing");
   while($c=$nursingArray->fetchArray()){
-    array_push($nursing, viewData($c["data"], "nursing.php?pid=".$pid."&id=".$c["rowid"]));
+    if($status=="admitted"){
+      array_push($nursing, viewData($c["data"], "nursing.php?pid=".$pid."&id=".$c["rowid"]));
+    }
+    else{
+      array_push($nursing, viewData($c["data"]));
+    }
   }
   $reportsArray=$db->getAllData($pid, "reports");
   while($r=$reportsArray->fetchArray()){
     if(in_array($r["form"], ["report-as-grampos", "report-as-gramneg", "report-as-fungal"])){
-      array_push($reports, viewAntibiogram($r["data"], "antibiogram.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+      if($status=="admitted"){
+        array_push($reports, viewAntibiogram($r["data"], "antibiogram.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+      }
+      else{
+        array_push($reports, viewAntibiogram($r["data"]));
+      }
     }
     else{
-      array_push($reports, viewData($r["data"], "report.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+      if($status=="admitted"){
+        array_push($reports, viewData($r["data"], "report.php?pid=".$pid."&id=".$r["rowid"]."&form=".$r["form"]));
+      }
+      else{
+        array_push($reports, viewData($r["data"]));
+      }
     }
   }
 }
@@ -168,7 +188,7 @@ if(isSet($_GET["pid"])){
           </div>
           <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
             <?php echo $history;?>
-            <p><a href="history.php?pid=<?php echo $pid;?>">Edit</a></p>
+            <p><a class="btn btn-outline-primary <?php echo $archive;?>" href="history.php?pid=<?php echo $pid;?>">Edit History</a></p>
           </div>
           <div class="tab-pane fade" id="physician" role="tabpanel" aria-labelledby="physician-tab">
             <?php foreach($physician as $p) echo $p;?>
