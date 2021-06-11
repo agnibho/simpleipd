@@ -125,9 +125,9 @@ function getInfo($pid){
   global $db;
   $info="<table class='table'>";
   $info=$info."<tr><td>ID</td><td>".$pid."</td></tr>";
-  $info=$info."<tr><td>Name</td><td>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
-  $info=$info."<tr><td>Age</td><td>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
-  $info=$info."<tr><td>Sex</td><td>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
+  $info=$info."<tr><td>Name</td><td id='info-name'>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
+  $info=$info."<tr><td>Age</td><td id='info-age'>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
+  $info=$info."<tr><td>Sex</td><td id='info-sex'>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
   $info=$info."<tr><td>Bed</td><td>".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"]."</td></tr>";
   $info=$info."<tr><td>Diagnosis</td><td>".$db->getDiagnosis($pid)->fetchArray()["diagnosis"]."</td></tr>";
   $info=$info."</table>";

@@ -66,6 +66,11 @@ if(isSet($_GET["pid"])){
           </ul>
         </div>
       </div>
+      <div class="card">
+        <div class="card-body">
+          <p id="crcl"></p>
+        </div>
+      </div>
       <hr>
       <h4>Clinical Parameters</h4>
       <table class="table">

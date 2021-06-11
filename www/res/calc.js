@@ -9,11 +9,21 @@ function entrySort(i, j){
     return -1;
   }
 }
+function crcl(cr, bw, age, sex){
+  if(sex=="female"){
+    factor=0.85;
+  }
+  else{
+    factor=1;
+  }
+  crcl=((140-age)*bw*factor)/(72*cr);
+  return(crcl);
+}
 var io=[];
-var clinical={pr:[], rr:[], temperature:[], spo2:[], sbp:[], dbp:[], cbg:[]};
+var clinical={pr:[], rr:[], temperature:[], spo2:[], sbp:[], dbp:[], cbg:[], bw:[]};
 var reports={};
 var treatment={};
-var clinDict={pr: "Pulse Rate", rr: "Respiratory Rate", temperature: "Temperature", spo2: "SpO2", sbp: "Systolic BP", dbp: "Diastolic BP", cbg: "CBG"}
+var clinDict={pr: "Pulse Rate", rr: "Respiratory Rate", temperature: "Temperature", spo2: "SpO2", sbp: "Systolic BP", dbp: "Diastolic BP", cbg: "CBG", bw: "Body Weight"}
 var reportsDict={};
 $(document).ready(function(){
   var ctx1=$("#clinChart")[0].getContext("2d");
@@ -61,6 +71,9 @@ $(document).ready(function(){
       }
       if(entry.cbg){
         clinical.cbg.push([stamp, entry.cbg]);
+      }
+      if(entry.bw){
+        clinical.bw.push([stamp, entry.bw]);
       }
     });
     // INTAKE-OUTPUT
@@ -151,6 +164,10 @@ $(document).ready(function(){
           obj[key]=reports[key];
           return obj;
         },{});
+        crclVal=crcl(reports["creat-report-rft"].slice(-1)[0][1], clinical.bw.slice(-1)[0][1], $("#info-age").text(), $("#info-sex").text());
+        if(crclVal){
+          $("#crcl").text("Creatinine Clearance: "+crclVal.toFixed(1));
+        }
         Object.keys(reports).forEach(function(i){
           reports[i].sort(entrySort);
           $("#reportsVar").html($("#reportsVar").html()+"<option value="+i+">"+reportsDict[i]+"</option>");
