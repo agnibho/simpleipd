@@ -150,7 +150,8 @@ $(document).ready(function(){
         $("#frequency").val(drugEntry.data("frequency"));
         $("#duration").val(drugEntry.data("duration"));
         $("#addl").val(drugEntry.data("addl"));
-        window.location.hash="drug-form";
+        $("#nav-drug").tab("show");
+        window.location.hash="form-drug";
       });
     }
   });
