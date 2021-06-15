@@ -29,6 +29,10 @@
             "description": "Sample",
             "type": "string"
         },
+        "pcv": {
+            "description": "PCV",
+            "type": "number"
+        },
         "hb": {
             "description": "Hemoglobin (g/dL)",
             "type": "number",
