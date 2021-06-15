@@ -125,9 +125,9 @@ function getInfo($pid){
   global $db;
   $info="<table class='table'>";
   $info=$info."<tr><td>ID</td><td>".$pid."</td></tr>";
-  $info=$info."<tr><td>Name</td><td>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
-  $info=$info."<tr><td>Age</td><td>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
-  $info=$info."<tr><td>Sex</td><td>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
+  $info=$info."<tr><td>Name</td><td id='info-name'>".$db->getName($pid)->fetchArray()["name"]."</td></tr>";
+  $info=$info."<tr><td>Age</td><td id='info-age'>".$db->getAge($pid)->fetchArray()["age"]."</td></tr>";
+  $info=$info."<tr><td>Sex</td><td id='info-sex'>".$db->getSex($pid)->fetchArray()["sex"]."</td></tr>";
   $info=$info."<tr><td>Bed</td><td>".$db->getWard($pid)->fetchArray()["ward"]."-".$db->getBed($pid)->fetchArray()["bed"]."</td></tr>";
   $info=$info."<tr><td>Diagnosis</td><td>".$db->getDiagnosis($pid)->fetchArray()["diagnosis"]."</td></tr>";
   $info=$info."</table>";
@@ -159,9 +159,25 @@ function viewData($data, $edit=null){
     else{
       $date="";
     }
+    if(!empty($data->rdate)){
+      if(!empty($data->rtime)){
+        $rdate=date("M d, Y h:i a", strtotime($data->rdate." ".$data->rtime));
+      }
+      else{
+        $rdate=$data->rdate;
+      }
+    }
+    else{
+      $rdate="";
+    }
     $view=$view."<tr><th class='w-25'>".$description."</th><th>".$date."</th>";
     $view=$view."<th></th>";
     $view=$view."</tr>";
+    if(!empty($rdate)){
+      $view=$view."<tr><td class='w-25'>Reported</td><td>".$rdate."</td>";
+      $view=$view."<td></td>";
+      $view=$view."</tr>";
+    }
     foreach($data as $field=>$value){
       $warn="";
       if(!empty($schema->properties->$field->range)){
@@ -170,7 +186,7 @@ function viewData($data, $edit=null){
       else{
         $warn="";
       }
-      if(!empty($value) && $field!="form" && $field!="date" && $field!="time"){
+      if(!empty($value) && $field!="form" && $field!="date" && $field!="time" && $field!="rdate" && $field!="rtime"){
         if(!empty($schema->properties->$field)){
           $view=$view."<tr><td>".$schema->properties->$field->description."</td><td class='".$warn."'>".$value."</td>";
           if(!empty($schema->properties->$field->range)){
@@ -204,6 +220,9 @@ function viewAntibiogram($data, $edit=null){
   $data=json_decode($data);
   $view="<table class='table table-striped'>";
   $view=$view."<tr><th>Vitek Report</th><th colspan='2'>".$data->date."</th></tr>";
+  if(!empty($data->rdate)){
+    $view=$view."<tr><td>Reported on</td><td colspan='2'>".$data->rdate."</td></tr>";
+  }
   $view=$view."<tr><td>Sample</td><td colspan='2'>".$data->sample."</td></tr>";
   $view=$view."<tr><td>Lab ID</td><td colspan='2'>".$data->labid."</td></tr>";
   $view=$view."<tr><td>Organism</td><td colspan='2'>".$data->organism."</td></tr>";

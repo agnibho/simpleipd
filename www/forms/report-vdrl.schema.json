@@ -6,12 +6,22 @@
 
     "properties": {
         "date": {
-            "description": "Date",
+            "description": "Sample Date",
             "type": "string",
             "format": "date"
         },
         "time": {
-            "description": "Time",
+            "description": "Sample Time",
+            "type": "string",
+            "format": "time"
+        },
+        "rdate": {
+            "description": "Report Date",
+            "type": "string",
+            "format": "date"
+        },
+        "rtime": {
+            "description": "Report Time",
             "type": "string",
             "format": "time"
         },
