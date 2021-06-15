@@ -39,6 +39,7 @@ else{
             <textarea type="text" class="form-control" name="summary" id="case-summary"><?php if(!empty($pid)) echo $db->getSummary($pid)->fetchArray()["summary"];?></textarea>
             <button class="btn btn-primary mt-3" type="submit">Save</button>
           </form>
+          <div class="alert alert-danger"><strong>Admission ID can NOT be changed</strong> after entry. Hence, make abolutely sure that you enter the correct admission ID before saving.</div>
           <?php echo $form;?>
         </div>
       </div>
