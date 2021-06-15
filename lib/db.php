@@ -404,7 +404,7 @@ class DB extends SQLite3 {
   function getArchivedPatientList(){
     global $log;
     if(!checkAccess("info", "dbGet")) return false;
-    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients WHERE status!='admitted' ORDER BY departure,admission;");
+    $stmt=$this->prepare("SELECT pid,ward,bed,name,diagnosis,status FROM patients WHERE status!='admitted' ORDER BY admission;");
     $result=$stmt->execute();
     return($result);
   }
